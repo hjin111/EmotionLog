@@ -22,10 +22,10 @@ public interface DiaryMapper {
 	public void insertSelectKey(DiaryVO diary);
 //	
 	// 2. read(select) 처리
-	public DiaryVO read(DiaryVO diary);
+	public DiaryVO read(Long dno);
 //	
 //	// 3. delete 처리
-	public int delete(DiaryVO diary);
+	public int delete(Long dno);
 //	
 	// 4.update 처리
 	public int update(DiaryVO diary);
