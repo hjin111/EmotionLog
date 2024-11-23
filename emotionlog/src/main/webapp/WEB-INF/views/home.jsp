@@ -11,4 +11,5 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>
+	<li><a href="/api/diary/list">board list</a>
 </html>
