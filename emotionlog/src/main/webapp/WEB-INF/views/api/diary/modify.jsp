@@ -87,53 +87,47 @@
 
 				<!-- 다양한 상황을 처리하기 위해서 form 태그 이용~~ -->
 				<form id='form' action="/api/diary/modify" method="post">
-			<%-- 		<input type='hidden' id='dno' name='dno'
-						value='<c:out value="${board.dno}"/>'> --%>
 
 					<div class="panel panel-default">
 
-						<div class="panel-heading">Board Read Page</div>
+						<div class="panel-heading">diary Read Page</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<!-- register.jsp 에 있던 <form>태그는 조회페이지에서는 그다지 필요하지 않으므로 제거~! -->
 							<div class="form-group">
 								<label>dno</label> <input class="form-control" name='dno'
-									value='<c:out value="${board.dno}"/>' readonly="readonly">
+									value='<c:out value="${diary.dno}"/>' readonly="readonly">
 							</div>
 
 							<div class="form-group">
 								<label>Title</label> <input class="form-control" name='title'
-									value='<c:out value="${board.title}"/>' readonly="readonly">
+									value='<c:out value="${diary.title}"/>' readonly="readonly">
 							</div>
 
 							<div class="form-group">
 								<label>Text area</label>
 								<textarea class="form-control" rows="3" name='content'
-									readonly="readonly"><c:out value="${board.content}" /></textarea>
+									readonly="readonly"><c:out value="${diary.content}" /></textarea>
 							</div>
 							<div class="form-group">
 								<label>emotion_status</label>
 								<textarea class="form-control" rows="1" name='emotion_status'
-									readonly="readonly"><c:out value="${board.emotion_status}" /></textarea>
+									readonly="readonly"><c:out value="${diary.emotion_status}" /></textarea>
 							</div>
-							<%-- 		<div class="form-group">
-								<label>Writer</label> <input class="form-control" name='writer'
-									value='<c:out value="${board.writer}"/>' readonly="readonly">
-							</div> --%>
 
 
 							<div class="form-group">
-								<label>RegDate</label> <input class="form-control"
-									name='regdate'
-									value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.regdate}"/>'
+								<label>RegDate</label> 
+								<input class="form-control" id = 'regdate' name='regdate'
+									value='<fmt:formatDate pattern="yyyy/MM/dd" value="${diary.regdate}"/>'
 									readonly="readonly">
 							</div>
-							<c:if test="${not empty board.update_date}">
+							<c:if test="${not empty diary.update_date}">
 
 								<div class="form-group">
 									<label>Update Date</label> <input class="form-control"
 										name='update_date'
-										value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.update_date}"/>'
+										value='<fmt:formatDate pattern="yyyy/MM/dd" value="${diary.update_date}"/>'
 										readonly="readonly">
 								</div>
 							</c:if>
@@ -179,10 +173,10 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 			formObj.attr("action","/api/diary/list").attr("method","get");    
 		} 
 		
-			else if (operation === 'modify') {
+		else if (operation === 'modify') {
 
 
-			 }
+		 }
  		formObj.submit(); // 마지막에 직접 submit() 수행
 	});
  });

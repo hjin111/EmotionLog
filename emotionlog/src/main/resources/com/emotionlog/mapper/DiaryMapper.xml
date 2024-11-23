@@ -29,7 +29,7 @@
 		
 		<![CDATA[
 		INSERT INTO diary (DNO, TITLE, CONTENT, REGDATE,UPDATE_DATE, EMOTION_STATUS, ENABLED,USERNAME)
-		VALUES (#{dno}, #{title}, #{content},SYSDATE,SYSDATE,#{emotion_status}, '1',#{username})
+		VALUES (#{dno}, #{title}, #{content},#{regdate},#{regdate},#{emotion_status}, '1',#{username})
 		]]>
 	</insert>
 	
