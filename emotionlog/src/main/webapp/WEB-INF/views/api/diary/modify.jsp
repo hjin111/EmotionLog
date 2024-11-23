@@ -86,9 +86,9 @@
 			<div class="col-md-8">
 
 				<!-- 다양한 상황을 처리하기 위해서 form 태그 이용~~ -->
-				<form id='operForm' action="/api/diary/modify" method="post">
-					<input type='hidden' id='dno' name='dno'
-						value='<c:out value="${board.dno}"/>'>
+				<form id='form' action="/api/diary/modify" method="post">
+			<%-- 		<input type='hidden' id='dno' name='dno'
+						value='<c:out value="${board.dno}"/>'> --%>
 
 					<div class="panel panel-default">
 
@@ -111,6 +111,11 @@
 								<textarea class="form-control" rows="3" name='content'
 									readonly="readonly"><c:out value="${board.content}" /></textarea>
 							</div>
+							<div class="form-group">
+								<label>emotion_status</label>
+								<textarea class="form-control" rows="1" name='emotion_status'
+									readonly="readonly"><c:out value="${board.emotion_status}" /></textarea>
+							</div>
 							<%-- 		<div class="form-group">
 								<label>Writer</label> <input class="form-control" name='writer'
 									value='<c:out value="${board.writer}"/>' readonly="readonly">
@@ -119,17 +124,19 @@
 
 							<div class="form-group">
 								<label>RegDate</label> <input class="form-control"
-									name='regDate'
+									name='regdate'
 									value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.regdate}"/>'
 									readonly="readonly">
 							</div>
+							<c:if test="${not empty board.update_date}">
 
-							<div class="form-group">
-								<label>Update Date</label> <input class="form-control"
-									name='updateDate'
-									value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.updateDate}"/>'
-									readonly="readonly">
-							</div>
+								<div class="form-group">
+									<label>Update Date</label> <input class="form-control"
+										name='update_date'
+										value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.update_date}"/>'
+										readonly="readonly">
+								</div>
+							</c:if>
 
 							<button type='submit' data-oper='modify' class="btn btn-default">Modify</button>
 							<button type='submit' data-oper='remove' class="btn btn-danger">Remove</button>
@@ -159,7 +166,7 @@
 <script>
 $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
 	 let formObj = $("form");  // jQuery 선택자를 사용하여 HTML 페이지에서 <form> 요소를 선택하고, 이를 변수에 할당
-	 	
+
 	$('button').on("click",function(e){
 		e.preventDefault(); // 기본 동작을 막기(폼제출방지,페이지이동방지,기타기본동작방지)
 		let operation = $(this).data("oper"); // javascript 에서는 <button>태그의 'data-oper' 속성을 이용해서 원하는 기능을 동작하도록 처리
@@ -169,25 +176,14 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 			formObj.attr("action","/api/diary/remove")
 		}else if(operation === 'list'){
 			// move to list
-			formObj.attr("action","/api/diary/list").attr("method","get");
-/* 			// 수정/삭제 페이지에서 목록 페이지로 이동
-			// form 태그에서 필요한 부분만 잠시 복사(clone)해서 보관
-			let pageNumTag = $("input[name='pageNum']").clone();
-			let amountTag = $("input[name='amount']").clone();
-			let typeTag = $("input[name='type']").clone();
-			let keywordTag = $("input[name='keyword']").clone();
-			// form 태그내의 모든 내용은 지워버리고			
-			formObj.empty();
-			// 다시 필요한 태그만 추가해서 /board/list를 호출하는 형태
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(typeTag);
-			formObj.append(keywordTag);
- */		    } else if (operation === 'modify') {
-			     formObj.attr("action", "/api/diary/modify").attr("method", "post");
-			 }
+			formObj.attr("action","/api/diary/list").attr("method","get");    
+		} 
+		
+			else if (operation === 'modify') {
 
-		formObj.submit(); // 마지막에 직접 submit() 수행
+
+			 }
+ 		formObj.submit(); // 마지막에 직접 submit() 수행
 	});
  });
 

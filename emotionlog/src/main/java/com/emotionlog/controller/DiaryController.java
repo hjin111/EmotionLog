@@ -37,7 +37,7 @@ public class DiaryController {
 	 */
 	@GetMapping("/list")
 	public String list(@RequestParam(value = "date", required = false) String date,Model model, HttpSession session) {
-		session.setAttribute("username" , 1L);
+		session.setAttribute("username" , 3L);
 		try {
 			log.info("list.......");
 	        // 세션에서 userid 값 가져오기
@@ -77,7 +77,7 @@ public class DiaryController {
 
 	        // getlist.....
 			DiaryVO diary = new DiaryVO();
-			diary.setUsername(1L);
+			diary.setUsername(2L);
 			// Date 객체로 변환
 			Date date_regdate = c.getTime();
 		    diary.setRegdate(date_regdate); 
@@ -163,22 +163,23 @@ public class DiaryController {
 	
 	// 4. 수정 처리와 테스트
 	@PostMapping("/modify")
-	public String modify(DiaryVO diary, Model model,RedirectAttributes rttr) {
+	public String modify(DiaryVO diary,RedirectAttributes rttr) {
 		try {
-			log.info("modify:" + diary);
+			log.info("modify called:" + diary);
 			
 			if(service.modify(diary)) {
 				rttr.addFlashAttribute("result","success");
 			}
 			// 수정 처리후 이동
-//			rttr.addAttribute("pageNum",cri.getPageNum());
+//			rttr.addAttribute("dno",diary.getDno());
 //			rttr.addAttribute("amount",cri.getAmount());
 //			rttr.addAttribute("type",cri.getType());
 //			rttr.addAttribute("keyword",cri.getKeyword());
 //			
-	        System.out.println("Modify Request: " + diary);
-	        model.addAttribute("diary", diary);
-
+//	        System.out.println("Modify Request: " + diary);
+//	        model.addAttribute("diary", diary);
+            // After modifying, redirect to list page
+            System.out.println("Modify Request: " + diary);
 			return "redirect:/api/diary/list" ;//+ cri.getListLink();
 		} catch (Exception e) {
 			e.printStackTrace();

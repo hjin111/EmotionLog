@@ -39,7 +39,7 @@ public class DiaryServiceTests {
 		DiaryVO diary = new DiaryVO();
 		diary.setTitle("새로 작성하는 제목2");
 		diary.setContent("새로 작성하는 내용2");
-		diary.setEmotionStatus("슬픔");
+		diary.setEmotion_status("슬픔");
 		diary.setUsername(1L);
 
 		service.register(diary);
@@ -79,7 +79,7 @@ public class DiaryServiceTests {
 		diary.setDno(3L);
 		diary.setTitle("수정된 제목");
 		diary.setContent("수정된 내용");
-		diary.setEmotionStatus("슬픔");
+		diary.setEmotion_status("슬픔");
 		
 		log.info("MODIFY RESULT: "+service.modify(diary));
 	}

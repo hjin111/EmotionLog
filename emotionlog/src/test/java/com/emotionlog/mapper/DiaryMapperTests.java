@@ -43,7 +43,7 @@ public class DiaryMapperTests {
 		diary.setDno(11L);
 		diary.setTitle("새로 작성하는 제목2");
 		diary.setContent("새로 작성하는 내용2");
-		diary.setEmotionStatus("슬픔");
+		diary.setEmotion_status("슬픔");
 		diary.setUsername(1L);
 		
 		mapper.insert(diary);
@@ -58,7 +58,7 @@ public class DiaryMapperTests {
 		DiaryVO diary = new DiaryVO();
 		diary.setTitle("새로 작성하는 제목2");
 		diary.setContent("새로 작성하는 내용2");
-		diary.setEmotionStatus("슬픔");
+		diary.setEmotion_status("슬픔");
 		diary.setUsername(1L);
 		
 		mapper.insertSelectKey(diary);
@@ -93,7 +93,7 @@ public class DiaryMapperTests {
 		diary.setDno(2L);
 		diary.setTitle("수정된 제목");
 		diary.setContent("수정된 내용");
-		diary.setEmotionStatus("슬픔");
+		diary.setEmotion_status("슬픔");
 		
 		int count = mapper.update(diary);
 		log.info("UPDATE COUNT:" + count);
