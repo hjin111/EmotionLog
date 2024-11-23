@@ -1,16 +1,16 @@
 package com.emotionlog.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,28 +32,33 @@ public class DiaryController {
 	/**
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-22
-	 * 내용      : 1. 목록에 대한 처리와 테스트
-	 * updated   : 2024-11-23 박혜정 뭐 수정함
+	 * 내용      : 목록에 대한 처리
 	 */
 	@GetMapping("/list")
-	public String list(@RequestParam(value = "date", required = false) String date,Model model, HttpSession session) {
-		session.setAttribute("username" , 3L);
+	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate,@RequestParam(value = "regdate", required = false) String regdate,@RequestParam(value = "username", required = false) Long username,Model model) {
 		try {
-			log.info("list.......");
-	        // 세션에서 userid 값 가져오기
-	        Long username = (Long) session.getAttribute("username"); // 세션에 저장된 userid
-	        if (username == null) {
-	            throw new IllegalArgumentException("userid is not available in the session");
-	        }
-	        if (date == null) {
-	            // 오늘 날짜를 "yyyy-MM" 형식으로 설정
+			// 회원 아이디 부분
+			username = 2L;
+			log.info("여기다아아아아앙아1"+ selectedDate);
+			log.info("여기다아아아아앙아2"+ regdate);
+	        
+			String pickdate = null;
+			if (selectedDate == null && regdate == null ) { // 처음 pickdate
+	        	log.info("date 가 널이 지롱 ~~~~~~ㅎㅎㅎㅎㅎ");
 	            LocalDate today = LocalDate.now();
-	            date = today.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+	            pickdate = today.format(DateTimeFormatter.ofPattern("yyyy/MM"));
 	        }
-	        log.info("Received date: " + date);
-
-	        // 입력받은 date 파싱 (예: 2024-11)
-	        String[] parts = date.split("-");
+			else if(selectedDate != null && regdate == null) { // selectedDate
+				pickdate = selectedDate;
+			}
+			else if(selectedDate == null && regdate != null) { // regdate
+				pickdate= regdate;
+			}
+			
+			
+			
+	        // 입력받은 date 파싱 (예: 2024/11)
+	        String[] parts = pickdate.split("/");
 	        int year = Integer.parseInt(parts[0]);
 	        int month = Integer.parseInt(parts[1]);
 
@@ -71,13 +76,13 @@ public class DiaryController {
 	        model.addAttribute("month", month);
 	        model.addAttribute("dayOfWeek", dayOfWeek);
 	        model.addAttribute("endDay", endDay);
-	        model.addAttribute("pick_date", date); // date도 추가
-		    log.info("date어디야야아아아앙"+date);
+	        model.addAttribute("pick_date", pickdate); // date도 추가
+	        model.addAttribute("username", username);
 
 
 	        // getlist.....
 			DiaryVO diary = new DiaryVO();
-			diary.setUsername(2L);
+			diary.setUsername(username);
 			// Date 객체로 변환
 			Date date_regdate = c.getTime();
 		    diary.setRegdate(date_regdate); 
@@ -87,7 +92,6 @@ public class DiaryController {
 		        if (d.getRegdate() != null) {
 		        	log.info("regdate type: " + d.getRegdate().getClass().getName());
 		        }
-		        log.info("개짜증난다널임?");
 
 		    }
 		    model.addAttribute("diary",dia);
@@ -128,82 +132,84 @@ public class DiaryController {
 //		}
 //	}
 //	
-//	//2. 등록 처리와 테스트
-//	// addFlashAttribute 의 경우 일회성으로만 데이터를 전달, 보관된 데이터는 단 한번만 사용할수 있게 보관
-//	@PostMapping("/register")
-//	public String register(BoardVO board, RedirectAttributes rttr) {
-//		try {
-//			log.info("register: "+board);
-//			service.register(board);
-//			rttr.addFlashAttribute("result",board.getBno()); // 값 유지 하기 위해서 RedirectAttributes -> 세션 사용
-//			return "redirect:/board/list"; // 새로운 화면으로 ,url 재이동
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-//	
-//	// 게시물의 등록 작업은 POST 방식으로 처리하지만, 화면에서 입력을 받아야하므로
-//	// GET방식으로 입력 페이지를 볼 수 있도록~
-//	@GetMapping("/register")
-//	public void register() {
-//		
-//	}
-//	
-//	// 3. 조회 처리와 테스트
-	@GetMapping({"/get","/modify"})
-	public void get (@RequestParam("dno") Long dno, Model model) {
+	//2. 등록 처리와 테스트
+	// addFlashAttribute 의 경우 일회성으로만 데이터를 전달, 보관된 데이터는 단 한번만 사용할수 있게 보관
+	@PostMapping("/register")
+	public String register(DiaryVO diary, RedirectAttributes rttr) {
 		try {
-			log.info("/get");
-			model.addAttribute("board",service.get(dno));   
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// 4. 수정 처리와 테스트
-	@PostMapping("/modify")
-	public String modify(DiaryVO diary,RedirectAttributes rttr) {
-		try {
-			log.info("modify called:" + diary);
-			
-			if(service.modify(diary)) {
-				rttr.addFlashAttribute("result","success");
-			}
-			// 수정 처리후 이동
-//			rttr.addAttribute("dno",diary.getDno());
-//			rttr.addAttribute("amount",cri.getAmount());
-//			rttr.addAttribute("type",cri.getType());
-//			rttr.addAttribute("keyword",cri.getKeyword());
-//			
-//	        System.out.println("Modify Request: " + diary);
-//	        model.addAttribute("diary", diary);
-            // After modifying, redirect to list page
-            System.out.println("Modify Request: " + diary);
-			return "redirect:/api/diary/list" ;//+ cri.getListLink();
+			log.info("register: "+diary);
+			service.register(diary);
+			rttr.addFlashAttribute("result",diary.getDno()); // 값 유지 하기 위해서 RedirectAttributes -> 세션 사용
+			return "redirect:/api/diary/list"; // 새로운 화면으로 ,url 재이동
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 	
-	// 5. 삭제 처리와 테스트
+	// 게시물의 등록 작업은 POST 방식으로 처리하지만, 화면에서 입력을 받아야하므로
+	// GET방식으로 입력 페이지를 볼 수 있도록~
+	@GetMapping("/register")
+	public void register(@RequestParam("regdate") String regdate,@RequestParam("username") Long username,Model model) {
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date regdate_df = dateFormat.parse(regdate);  // Date 객체로 변환
+
+			model.addAttribute("regdate",regdate_df);
+			model.addAttribute("username",username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	/**
+	 * 작성자    : 박혜정
+	 * 작성일    : 2024-11-23
+	 * 내용      : 조회 처리
+	 */
+	@GetMapping({"/get","/modify"})
+	public void get (@RequestParam("dno") Long dno, Model model) {
+		try {
+			model.addAttribute("diary",service.get(dno));   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 작성자    : 박혜정
+	 * 작성일    : 2024-11-23
+	 * 내용      : 수정 처리
+	 */
+	@PostMapping("/modify")
+	public String modify(@ModelAttribute DiaryVO diary,RedirectAttributes rttr) {
+		try {
+			if(service.modify(diary)) {
+				rttr.addFlashAttribute("result","success");
+			}
+
+            System.out.println("Modify Request: " + diary);
+			return "redirect:/api/diary/list" ;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 작성자    : 박혜정
+	 * 작성일    : 2024-11-23
+	 * 내용      : 삭제 처리
+	 */
 	@PostMapping("/remove")
 	public String remove(@RequestParam("dno") Long dno, RedirectAttributes rttr) {
 		try {
-			log.info("remove...."+dno);
 			if(service.remove(dno)) {
 				rttr.addFlashAttribute("result","success");
 			}
 			
-			// 삭제 처리후 이동
-//			rttr.addAttribute("pageNum",cri.getPageNum());
-//			rttr.addAttribute("amount",cri.getAmount());
-//			rttr.addAttribute("type",cri.getType());
-//			rttr.addAttribute("keyword",cri.getKeyword());
-//			
-			// UriComponentsBuilder 사용 
-			return "redirect:/api/diary/list" ;//+ cri.getListLink();
+			return "redirect:/api/diary/list" ;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

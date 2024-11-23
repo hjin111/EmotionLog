@@ -87,8 +87,7 @@
 			
 			
 			<form id="actionForm" action="/api/diary/list" method="get">
-
-			</form>
+ 			</form>
 			
 
             <table class="table table-bordered calendar-table">
@@ -134,12 +133,31 @@
 					                    <%--날짜 출력 --%>
 					                    <c:otherwise>
 					                        <td>
+							                    <c:set var="hasEntry" value="false" />
+                        						<c:set var="currentRegdate" value="${year}-${month}-${date}" />
+						                        <c:set var="currentDno" value="" />
+						                        <c:set var="currentUsername" value="${username}" />
+						                       
+						                        <c:forEach var="entry" items="${diary}">
+						                            <fmt:formatDate value="${entry.regdate}" pattern="dd" var="formattedDate"/>
+						                            <c:if test="${formattedDate == date}">
+						                                <c:set var="hasEntry" value="true" />
+						                                <c:set var="currentRegdate" value="${entry.regdate}"/>
+						                                <c:set var="currentDno" value="${entry.dno}" />
+						                            </c:if>
+						                        </c:forEach>
+																                        
 					                        	<%--조회 페이지 이동 --%>
 												<div class="calendar-card move" 
-													 data-dno="<c:forEach var='entry' items='${diary}'><fmt:formatDate value='${entry.regdate}' pattern='dd' var='formattedDate'/><c:if test='${formattedDate == date}'>${entry.dno}</c:if></c:forEach>">
+												     data-dno="${currentDno}" 
+												     data-has-entry="${hasEntry}"
+												     data-regdate="${currentRegdate}"
+												     data-username ="${currentUsername}">
+										            
 										            <div class ="cart-header">
 										               ${date} <!-- 날짜 출력 -->										            
 										            </div>
+										            
 										            <div class="card-text">
 										                <ul>
 														    <!-- diaryList에서 현재 날짜와 같은 제목 출력 -->
@@ -152,6 +170,7 @@
 														    </c:forEach>
 										                </ul>
 										            </div>
+										        
 										        </div>
 							        			<c:set var="date" value="${date + 1}" />
 					                        </td>
@@ -180,38 +199,69 @@
     // 버튼 클릭 이벤트 처리    
     $(document).on("click", ".move", function (e) {
         e.preventDefault(); // 기본 동작(페이지 이동) 막기
-        const actionForm = $("#actionForm"); // 미리 정의된 form 태그
-        const dno = $(this).data("dno"); // 클릭된 요소의 data-dno 값 가져오기
 
-        // 기존에 존재하는 input[name='dno'] 제거 (중복 방지)
-        actionForm.find("input[name='dno']").remove();
+        let hasEntry = $(this).data("has-entry");
+        let regdate = $(this).data("regdate"); // 해당 카드의 diary.regdate 정보 가져오기
+        let dno = $(this).data("dno"); // 클릭된 요소의 data-dno 값 가져오기
+        let username = $(this).data("username"); // 클릭된 요소의 data-dno 값 가져오기
+        let actionForm = $("#actionForm"); // 미리 정의된 form 태그
+        alert("Has Entry: " + hasEntry);
+        alert("Register date: " + regdate);
+        alert("dno: " + dno);
+        alert("username: " + username);
 
-        // 새로운 input 태그 생성 및 추가
-        actionForm.append("<input type='hidden' name='dno' value='" + dno + "'>");
+        console.log("Form action: ", actionForm.attr("action"));
+        console.log("Form method: ", actionForm.attr("method"));
 
-        // form의 action 설정
-        actionForm.attr("action", "/api/diary/get"); // 서버의 디테일 페이지로 변경
+        if(hasEntry){
+            // 일기가 있는 경우
+            // 기존에 존재하는 input[name='dno'] 제거 (중복 방지)
+            actionForm.find("input[name='dno']").remove();
 
-        // form 제출
-        actionForm.submit();
+            // 새로운 input 태그 생성 및 추가
+            actionForm.append("<input type='hidden' name='dno' value='" + dno + "'>");
+
+            // form의 action 설정
+            actionForm.attr("action", "/api/diary/get"); // 서버의 디테일 페이지로 변경
+
+            // form 제출
+            actionForm.submit();
+        }
+        else{
+        	// 일기가 없는 경우, 등록 페이지 이동
+        	// 일기가 없는 경우, 등록 페이지 이동 (POST 요청)
+            actionForm.find("input[name='regdate']").remove(); // 중복 방지를 위해 기존 regdate 제거
+            actionForm.find("input[name='username']").remove(); // 중복 방지를 위해 기존 username 제거
+
+            // 새로운 input 태그 생성 및 추가
+            actionForm.append("<input type='hidden' name='regdate' value='" + regdate + "'>");
+            actionForm.append("<input type='hidden' name='username' value='" + username + "'>");
+
+            // form의 action 설정
+            actionForm.attr("action", "/api/diary/register");
+
+            // form 제출
+            actionForm.submit();
+        }
+
     });
 
 
     $(document).ready(function () {
         $('#date-picker').datepicker({
-            format: "yyyy-mm",
+            format: "yyyy/mm",
             minViewMode: 1,
             language: "ko",
             autoclose: true
         }).on('changeDate', function () {
             const selectedDate = $('#date-picker').val(); // 선택된 날짜 (예: 2024-11)
-            console.log("Selected Date: ", selectedDate);
+            let username = $(this).data("username"); // 클릭된 요소의 data-dno 값 가져오기
 
             // AJAX 요청 보내기
             $.ajax({
                 url: '/api/diary/list', // 서버에서 데이터를 가져올 URL
                 type: 'GET',
-                data: { date: selectedDate },
+                data: { selectedDate: selectedDate },
                 success: function (response) {
                     // 서버에서 받은 데이터로 달력 업데이트
                     $('#calendar-container').html(response);

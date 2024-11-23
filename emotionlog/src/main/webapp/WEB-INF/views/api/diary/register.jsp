@@ -84,43 +84,38 @@
 	<div class="container my-4">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-
-				<!-- 다양한 상황을 처리하기 위해서 form 태그 이용~~ -->
-				<form id='operForm' action="/api/diary/modify" method="get">
-					<input type='hidden' id='dno' name='dno' value='<c:out value="${diary.dno}"/>'>
-					<input type='hidden' id='regdate' name='regdate' value='<fmt:formatDate value="${diary.regdate}" pattern="yyyy/MM/dd" />'>
-				</form>
-
 				<div class="panel panel-default">
-
 					<div class="panel-heading">diary Read Page</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<!-- register.jsp 에 있던 <form>태그는 조회페이지에서는 그다지 필요하지 않으므로 제거~! -->
-						<div class="form-group">
-							<label>dno</label> <input class="form-control" name='dno'
-								value='<c:out value="${diary.dno}"/>' readonly="readonly">
-						</div>
-
-						<div class="form-group">
-							<label>Title</label> <input class="form-control" name='title'
-								value='<c:out value="${diary.title}"/>' readonly="readonly">
-						</div>
-
-						<div class="form-group">
-							<label>Text area</label>
-							<textarea class="form-control" rows="3" name='content'
-								readonly="readonly"><c:out value="${diary.content}" /></textarea>
-						</div>
-						<div class="form-group">
-							<label>emotion_status</label>
-							<textarea class="form-control" rows="1" name='emotion_status'
-								readonly="readonly"><c:out value="${diary.emotion_status}" /></textarea>
-						</div>
-
-					<button data-oper='modify' class="btn btn-default">Modify</button>
-					<button data-oper='list' class="btn btn-info">List</button> 
-
+    					<form id="registerForm" action="/api/diary/register" method="post">
+    						<input type='hidden' id='username' name='username' value="<c:out value="${username}" />">
+    				
+	
+							<div class="form-group">
+					            <label>date</label>
+					            <input type="text" id='regdate' name="regdate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${regdate}"/>'  readonly="readonly" class="form-control" required>
+					        </div>
+					        
+					        <div class="form-group">
+					            <label>Title:</label>
+					            <input type="text" name="title" class="form-control" required>
+					        </div>
+	
+							<div class="form-group">
+								<label>Text area</label>
+								<textarea class="form-control" rows="3" name='content'/></textarea>
+							</div>
+							<div class="form-group">
+								<label>emotion_status</label>
+								<textarea class="form-control" rows="1" name='emotion_status' /></textarea>
+							</div>
+	
+		                 	<button type="submit" class="btn btn-default">Submit Button</button>
+                			<button type="reset" class="btn btn-default">Reset Button</button>
+                			<button type='submit' data-oper='list' class="btn btn-info">List</button>
+                			
+					    </form>
 					</div>
 					<!-- end panel-body -->
 
@@ -143,23 +138,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script>
-$(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
+let formObj = $("#registerForm");  // 올바른 선택자: id 기반 선택 (등록폼의 아이디를 #registerForm으로 선택)
 
-	  var operForm = $("#operForm");
+$('button').on("click",function(e){
+	e.preventDefault(); // 기본 동작을 막기(폼제출방지,페이지이동방지,기타기본동작방지)
+	let operation = $(this).data("oper"); // javascript 에서는 <button>태그의 'data-oper' 속성을 이용해서 원하는 기능을 동작하도록 처리
+	console.log(operation);
+	
 
-	  // 사용자가 수정 버튼을 누르는 경우에는 bno 값을 같이 전달하고 <form> 태그를 submit 시켜서 처리
-	  $("button[data-oper='modify']").on("click",function(e){
-		  operForm.attr("action","/api/diary/modify").submit();
-	  });
-	  
-	  // 아무런 데이터가 필요하지 않으므로 , <form> 태그 내에 bno 태그를 지우고 submit을 통해서 리스트 페이지로 이동
-	  $("button[data-oper='list']").on("click",function(e){
-		  operForm.find("#dno").remove();
-		  operForm.attr("action","/api/diary/list")
-		  operForm.submit();
-	  });
-});
-
+	if (operation === 'list') {
+		// move to list
+		formObj.attr("action", "/api/diary/list").attr("method", "get");
+	}
+	formObj.submit(); // 마지막에 직접 submit() 수행
+	});
 </script>
 </body>
 </html>
