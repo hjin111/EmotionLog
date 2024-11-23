@@ -112,6 +112,11 @@
 							<textarea class="form-control" rows="3" name='content'
 								readonly="readonly"><c:out value="${board.content}" /></textarea>
 						</div>
+						<div class="form-group">
+							<label>emotion_status</label>
+							<textarea class="form-control" rows="1" name='emotion_status'
+								readonly="readonly"><c:out value="${board.emotion_status}" /></textarea>
+						</div>
 						<%-- 		<div class="form-group">
 								<label>Writer</label> <input class="form-control" name='writer'
 									value='<c:out value="${board.writer}"/>' readonly="readonly">

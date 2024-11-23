@@ -18,7 +18,7 @@
 	<insert id="insert" parameterType="com.emotionlog.domain.DiaryVO">
 		<![CDATA[
 		INSERT INTO diary (DNO, TITLE, CONTENT, REGDATE,UPDATE_DATE, EMOTION_STATUS, ENABLED,USERNAME)
-		VALUES (#{dno}, #{title}, #{content} ,SYSDATE ,SYSDATE,#{emotionStatus}, '1',#{username})
+		VALUES (#{dno}, #{title}, #{content} ,SYSDATE ,SYSDATE,#{emotion_status}, '1',#{username})
 		]]>
 	</insert>
 
@@ -29,7 +29,7 @@
 		
 		<![CDATA[
 		INSERT INTO diary (DNO, TITLE, CONTENT, REGDATE,UPDATE_DATE, EMOTION_STATUS, ENABLED,USERNAME)
-		VALUES (#{dno}, #{title}, #{content},SYSDATE,SYSDATE,#{emotionStatus}, '1',#{username})
+		VALUES (#{dno}, #{title}, #{content},SYSDATE,SYSDATE,#{emotion_status}, '1',#{username})
 		]]>
 	</insert>
 	
@@ -48,7 +48,7 @@
 		update diary
 		set	   title      			= #{title},
 			   content    			= #{content},
-			   EMOTION_STATUS     	= #{emotionStatus},
+			   EMOTION_STATUS     	= #{emotion_status},
 			   UPDATE_DATE = sysdate
 	    where  dno = #{dno} and enabled ='1'
 	</update>

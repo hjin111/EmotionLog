@@ -10,8 +10,8 @@ public class DiaryVO {
 	private String title;
 	private String content;
 	private Date regdate;
-	private Date updateDate;
-	private String emotionStatus;
+	private Date update_date;
+	private String emotion_status;
 	private String enabled;
 	private Long username;
 }
