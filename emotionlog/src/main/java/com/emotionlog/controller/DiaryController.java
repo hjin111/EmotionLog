@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emotionlog.domain.DiaryVO;
 import com.emotionlog.service.DiaryService;
@@ -91,7 +93,7 @@ public class DiaryController {
 		    model.addAttribute("diary",dia);
 
 	        // AJAX 요청에 응답할 JSP 반환
-	        return "api/diary/list"; // JSP의 특정 부분만 반환
+	        return "/api/diary/list"; // JSP의 특정 부분만 반환
 			
 			
 			
@@ -149,59 +151,61 @@ public class DiaryController {
 //	}
 //	
 //	// 3. 조회 처리와 테스트
-//	@GetMapping({"/get","/modify"})
-//	public void get (@RequestParam("bno") Long bno,@ModelAttribute("cri") Criteria cri, Model model) {
-//		try {
-//			log.info("/get");
-//			model.addAttribute("board",service.get(bno));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	// 4. 수정 처리와 테스트
-//	@PostMapping("/modify")
-//	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-//		try {
-//			log.info("modify:" + board);
+	@GetMapping({"/get","/modify"})
+	public void get (@RequestParam("dno") Long dno, Model model) {
+		try {
+			log.info("/get");
+			model.addAttribute("board",service.get(dno));   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 4. 수정 처리와 테스트
+	@PostMapping("/modify")
+	public String modify(DiaryVO diary, Model model,RedirectAttributes rttr) {
+		try {
+			log.info("modify:" + diary);
+			
+			if(service.modify(diary)) {
+				rttr.addFlashAttribute("result","success");
+			}
+			// 수정 처리후 이동
+//			rttr.addAttribute("pageNum",cri.getPageNum());
+//			rttr.addAttribute("amount",cri.getAmount());
+//			rttr.addAttribute("type",cri.getType());
+//			rttr.addAttribute("keyword",cri.getKeyword());
 //			
-//			if(service.modify(board)) {
-//				rttr.addFlashAttribute("result","success");
-//			}
-//			// 수정 처리후 이동
-////			rttr.addAttribute("pageNum",cri.getPageNum());
-////			rttr.addAttribute("amount",cri.getAmount());
-////			rttr.addAttribute("type",cri.getType());
-////			rttr.addAttribute("keyword",cri.getKeyword());
-////			
-//			// UriComponentsBuilder 사용 
-//			return "redirect:/board/list" + cri.getListLink();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-//	
-//	// 5. 삭제 처리와 테스트
-//	@PostMapping("/remove")
-//	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-//		try {
-//			log.info("remove...."+bno);
-//			if(service.remove(bno)) {
-//				rttr.addFlashAttribute("result","success");
-//			}
+	        System.out.println("Modify Request: " + diary);
+	        model.addAttribute("diary", diary);
+
+			return "redirect:/api/diary/list" ;//+ cri.getListLink();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	// 5. 삭제 처리와 테스트
+	@PostMapping("/remove")
+	public String remove(@RequestParam("dno") Long dno, RedirectAttributes rttr) {
+		try {
+			log.info("remove...."+dno);
+			if(service.remove(dno)) {
+				rttr.addFlashAttribute("result","success");
+			}
+			
+			// 삭제 처리후 이동
+//			rttr.addAttribute("pageNum",cri.getPageNum());
+//			rttr.addAttribute("amount",cri.getAmount());
+//			rttr.addAttribute("type",cri.getType());
+//			rttr.addAttribute("keyword",cri.getKeyword());
 //			
-//			// 삭제 처리후 이동
-////			rttr.addAttribute("pageNum",cri.getPageNum());
-////			rttr.addAttribute("amount",cri.getAmount());
-////			rttr.addAttribute("type",cri.getType());
-////			rttr.addAttribute("keyword",cri.getKeyword());
-////			
-//			// UriComponentsBuilder 사용 
-//			return "redirect:/board/list" + cri.getListLink();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+			// UriComponentsBuilder 사용 
+			return "redirect:/api/diary/list" ;//+ cri.getListLink();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

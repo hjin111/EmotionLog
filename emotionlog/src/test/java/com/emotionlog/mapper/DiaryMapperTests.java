@@ -70,12 +70,8 @@ public class DiaryMapperTests {
 	// 3. 조회 작업의 구현과 테스트
 	@Test
 	public void testRead() {
-		// 존재하는 게시물 번호로 테스트
-		
-		DiaryVO diary = new DiaryVO();
-		diary.setDno(2L);
 
-		mapper.read(diary);
+		mapper.read(2L);
 		
 		//log.info(diary);
 	}
@@ -84,9 +80,7 @@ public class DiaryMapperTests {
 	@Ignore
 	@Test
 	public void testDelete() {
-		DiaryVO diary = new DiaryVO();
-		diary.setDno(12L);
-		log.info("DELETE COUNT:" + mapper.delete(diary));
+		log.info("DELETE COUNT:" + mapper.delete(12L));
 	}
 	
 	// 4. update 처리

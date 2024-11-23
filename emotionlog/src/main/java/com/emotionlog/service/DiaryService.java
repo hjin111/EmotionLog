@@ -10,10 +10,10 @@ public interface DiaryService {
 	public void register(DiaryVO diary) throws Exception;
 	
 	// 조회 작업의 구현
-	public DiaryVO get(DiaryVO diary) throws Exception;
+	public DiaryVO get(Long dno) throws Exception;
 	
 	// 삭제 구현
-	public boolean remove (DiaryVO diary) throws Exception;
+	public boolean remove (Long dno) throws Exception;
 	
 	// 수정 구현
 	public boolean modify(DiaryVO diary) throws Exception;

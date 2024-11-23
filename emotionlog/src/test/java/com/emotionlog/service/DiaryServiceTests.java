@@ -61,19 +61,15 @@ public class DiaryServiceTests {
 	// 3. 조회 작업의 구현 과 테스트
 	@Test
 	public void testGet() throws Exception {
-		DiaryVO diary = new DiaryVO();
-		diary.setDno(2L);
-		log.info(service.get(diary));
+		log.info(service.get(2L));
 	}
-	
+	 
 	// 4. 삭제 구현과 테스트
 	// 3. delete 처리
 	@Test
 	public void testDelete() throws Exception {
 		// 게시물 번호의 존재 여부를 확인하고 테스트할 것
-		DiaryVO diary = new DiaryVO();
-		diary.setDno(11L);
-		log.info("REMOVE RESULT: "+service.remove(diary));
+		log.info("REMOVE RESULT: "+service.remove(11L));
 	}
 	
 	// 4. 수정 구현과 테스트

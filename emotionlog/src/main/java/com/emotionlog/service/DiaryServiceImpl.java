@@ -35,18 +35,18 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	// 3. 조회 작업의 구현과 테스트
 	@Override
-	public DiaryVO get(DiaryVO diary) throws Exception {
+	public DiaryVO get(Long dno) throws Exception {
 		log.info("read......");
-		return mapper.read(diary); 
+		return mapper.read(dno); 
 	}
 	
 	// 4. 삭제 구현과 테스트
 	@Override
-	public boolean remove(DiaryVO diary) throws Exception {
-		log.info("remove...."+diary);
+	public boolean remove(Long dno) throws Exception {
+		log.info("remove...."+dno);
 		
-		if( mapper.delete(diary) == 0) 
-			throw new RuntimeException(diary.getDno()+"번 게시물이 삭제되지 않음");
+		if( mapper.delete(dno) == 0) 
+			throw new RuntimeException(dno+"번 게시물이 삭제되지 않음");
 		return true;
 	}
 	

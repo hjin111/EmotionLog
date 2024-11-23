@@ -84,6 +84,13 @@
 <div class="container my-4">
     <div class="row justify-content-center">
         <div class="col-md-8" id="calendar-container">
+			
+			
+			<form id="actionForm" action="/api/diary/list" method="get">
+
+			</form>
+			
+
             <table class="table table-bordered calendar-table">
                 <thead>
                     <tr class="bg-light">
@@ -98,10 +105,9 @@
                 </thead>
                 <tbody>
 
-					<!-- JSP 내에서 변수 출력 -->
-					<input type="text" id="date-picker" class="form-control" value="${pick_date}" />
-
-					<h1 class="text-left">Emotion_log : ${year}-${month}</h1>
+				  
+				   <input type="text" id="date-picker" class="form-control" value="${pick_date}" />
+				   <h1 class="text-left">Emotion_log : ${year}-${month}</h1>
 					                    
                    <c:set var="date" value="1" />
                    <c:forEach var="row" begin="0" end="5">
@@ -129,8 +135,8 @@
 					                    <c:otherwise>
 					                        <td>
 					                        	<%--조회 페이지 이동 --%>
-												<c:set var="ymd" value="${year}-${month}-${date}" />
-												<div class="calendar-card" onclick="handleClick('${ymd}')">
+												<div class="calendar-card move" 
+													 data-dno="<c:forEach var='entry' items='${diary}'><fmt:formatDate value='${entry.regdate}' pattern='dd' var='formattedDate'/><c:if test='${formattedDate == date}'>${entry.dno}</c:if></c:forEach>">
 										            <div class ="cart-header">
 										               ${date} <!-- 날짜 출력 -->										            
 										            </div>
@@ -171,20 +177,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script>
-    // 버튼 클릭 이벤트 처리
-    function handleClick(day) {
-        //alert(day + "일 버튼이 클릭되었습니다!");
-        const da = new Date(day); // String을 Date로 변환
-        alert(da); // Date 형태로 출력
-  		
-/*         e.preventDefault();
-		 //  게시물의 제목을 클릭하면 form 태그에 추가로 bno값을 전송하기 위해서 input 태그를 만들어 추가
- 		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
-		 // form 태그의 action을 '/board/get'으로 변경
-		actionForm.attr("action","/board/get");// <-- 여기서 action이 변경됨(동적)
-		actionForm.submit(); */
-        
-    }
+    // 버튼 클릭 이벤트 처리    
+    $(document).on("click", ".move", function (e) {
+        e.preventDefault(); // 기본 동작(페이지 이동) 막기
+        const actionForm = $("#actionForm"); // 미리 정의된 form 태그
+        const dno = $(this).data("dno"); // 클릭된 요소의 data-dno 값 가져오기
+
+        // 기존에 존재하는 input[name='dno'] 제거 (중복 방지)
+        actionForm.find("input[name='dno']").remove();
+
+        // 새로운 input 태그 생성 및 추가
+        actionForm.append("<input type='hidden' name='dno' value='" + dno + "'>");
+
+        // form의 action 설정
+        actionForm.attr("action", "/api/diary/get"); // 서버의 디테일 페이지로 변경
+
+        // form 제출
+        actionForm.submit();
+    });
+
 
     $(document).ready(function () {
         $('#date-picker').datepicker({
