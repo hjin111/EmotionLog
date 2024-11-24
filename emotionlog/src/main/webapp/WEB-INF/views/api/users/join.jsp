@@ -31,6 +31,14 @@
             <option value="F">여성</option>
         </select>
     </div>
+    <!-- 권한 설정 -->
+    <div>
+    	<label for="authority">Role</label>
+    	<select id="authority" name="authority">
+    		<option value="ROLE_USER">일반회원</option>
+    		<option value="ROLE_ADMIN">관리자</option>
+    	</select>
+    </div>
     <div>
         <button type="submit">회원가입</button>
     </div>

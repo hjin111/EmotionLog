@@ -30,8 +30,8 @@ public class UsersController {
 
     // 회원가입 요청 처리
     @PostMapping("/join")
-    public String registerUser(@ModelAttribute UsersVO user, Model model) throws Exception {
-        service.join(user);
+    public String registerUser(@ModelAttribute UsersVO user, String authority) throws Exception {
+        service.join(user, authority);
         return "redirect:/api/users/login"; 
     }
     
