@@ -90,27 +90,41 @@
 					<div class="panel-body">
     					<form id="registerForm" action="/api/diary/register" method="post">
     						<input type='hidden' id='username' name='username' value="<c:out value="${username}" />">
-    				
-	
+							
+							<br/>    				
+							<!-- 등록일 -->
 							<div class="form-group">
-					            <label>date</label>
+					            <label>등록일</label>
 					            <input type="text" id='regdate' name="regdate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${regdate}"/>'  readonly="readonly" class="form-control" required>
 					        </div>
 					        
+					        <!-- 제목 -->
 					        <div class="form-group">
-					            <label>Title:</label>
+					            <label>제목</label>
 					            <input type="text" name="title" class="form-control" required>
 					        </div>
 	
+							<!-- 내용 -->
 							<div class="form-group">
-								<label>Text area</label>
+								<label>내용</label>
 								<textarea class="form-control" rows="3" name='content'/></textarea>
 							</div>
-							<div class="form-group">
-								<label>emotion_status</label>
-								<textarea class="form-control" rows="1" name='emotion_status' /></textarea>
+							
+							<!-- 감정 -->
+							<div class ="dropdown">
+								<label>감정</label><br/>				
+								<select name = 'emotion_status'>
+									<option value="" <c:out value="${diary.emotion_status == null?'selected':'' }"/>>--</option>
+	               					<option value="joy" <c:out value="${diary.emotion_status eq 'joy'?'selected':'' }"/>>기쁨</option>
+	               					<option value="anger" <c:out value="${diary.emotion_status eq 'anger'?'selected':'' }"/>>분노</option>
+	               					<option value="sad" <c:out value="${diary.emotion_status eq 'sad'?'selected':'' }"/>>슬픔</option>
+	               					<option value="fun" <c:out value="${diary.emotion_status eq 'fun'?'selected':'' }"/>>즐거움</option>
+	               					<option value="love" <c:out value="${diary.emotion_status eq 'love'?'selected':'' }"/>>사랑</option>
+	               					<option value="hate" <c:out value="${diary.emotion_status eq 'hate'?'selected':'' }"/>>증오</option>
+								</select>
 							</div>
-	
+							<br/>
+							
 		                 	<button type="submit" class="btn btn-default">Submit Button</button>
                 			<button type="reset" class="btn btn-default">Reset Button</button>
                 			<button type='submit' data-oper='list' class="btn btn-info">List</button>

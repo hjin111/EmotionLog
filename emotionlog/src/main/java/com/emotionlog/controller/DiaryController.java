@@ -52,17 +52,28 @@ public class DiaryController {
 			log.info("*************************************3"+ regdateFromModel);
 	        
 	        String pickdate = null;
+	        // 원래 문자열을 LocalDate로 파싱
+	        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	        // "yyyy/MM" 형식으로 포맷팅
+	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy/MM");
+
+	        
 	        if (selectedDate == null && regdate == null && (regdateFromModel == null || regdateFromModel.equals(""))) {
 	            // 초기 pickdate 설정
 	            LocalDate today = LocalDate.now();
 	            pickdate = today.format(DateTimeFormatter.ofPattern("yyyy/MM"));
 	        } else if (selectedDate != null) {
-	            pickdate = selectedDate;
+	        	pickdate = selectedDate;
 	        } else if (regdate != null) {
-	            pickdate = regdate;
+	            LocalDate date = LocalDate.parse(regdate, inputFormatter);
+	            String formattedDate = date.format(outputFormatter);
+	            pickdate = formattedDate;
 	        } else if (regdateFromModel != null && !regdateFromModel.equals("")) {	                       
-	            pickdate = regdateFromModel;
+	            LocalDate date = LocalDate.parse(regdateFromModel, inputFormatter);
+	            String formattedDate = date.format(outputFormatter);
+	            pickdate = formattedDate;
 	        }
+			
 			
 	        // 입력받은 date 파싱 (예: 2024/11)
 	        String[] parts = pickdate.split("/");
@@ -195,7 +206,8 @@ public class DiaryController {
 				// SimpleDateFormat 사용하여 Date를 String으로 변환
 		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		        String formattedDate = dateFormat.format(diary.getRegdate());
-				rttr.addFlashAttribute("regdate", formattedDate);			}
+				rttr.addFlashAttribute("regdate", formattedDate);			
+			}
 
             System.out.println("Modify Request: " + diary);
 			return "redirect:/api/diary/list" ;
