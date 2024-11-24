@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emotionlog.mapper.UsersMapper">
+	<insert id="insert">
+		<selectKey keyProperty="username" order="BEFORE" resultType="long">
+			select seq_users.nextval from dual
+		</selectKey>
+		
+		insert into users (username, name, birthday, phone_number, password, gender)
+		values (#{username}, #{name}, #{birthday}, #{phone_number}, #{password}, #{gender})
+		
+	</insert>
+</mapper>
