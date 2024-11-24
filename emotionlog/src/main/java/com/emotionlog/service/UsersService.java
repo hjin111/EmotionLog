@@ -5,5 +5,5 @@ import com.emotionlog.domain.UsersVO;
 public interface UsersService {
 
 	// 회원가입 
-	public void join(UsersVO user) throws Exception;
+	 public void join(UsersVO user, String authority) throws Exception;
 }
