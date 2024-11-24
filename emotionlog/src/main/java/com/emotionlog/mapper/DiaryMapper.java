@@ -1,5 +1,6 @@
-/*
- *  이름 : 박혜정
+/**
+ * 작성자    : 박혜정
+ * 작성일    : 2024-11-22
  */
 
 package com.emotionlog.mapper;

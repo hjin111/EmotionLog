@@ -85,7 +85,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				<div class="panel panel-default">
-					<div class="panel-heading">diary Read Page</div>
+					<div class="panel-heading">diary Register Page</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
     					<form id="registerForm" action="/api/diary/register" method="post">
@@ -144,7 +144,6 @@ $('button').on("click",function(e){
 	e.preventDefault(); // 기본 동작을 막기(폼제출방지,페이지이동방지,기타기본동작방지)
 	let operation = $(this).data("oper"); // javascript 에서는 <button>태그의 'data-oper' 속성을 이용해서 원하는 기능을 동작하도록 처리
 	console.log(operation);
-	
 
 	if (operation === 'list') {
 		// move to list

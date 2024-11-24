@@ -171,8 +171,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 		}else if(operation === 'list'){
 			// move to list
 			formObj.attr("action","/api/diary/list").attr("method","get");    
-		} 
-		
+		} 	
 		else if (operation === 'modify') {
 
 
