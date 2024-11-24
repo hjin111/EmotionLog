@@ -5,6 +5,7 @@
 <%@page import="java.util.TimeZone"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -74,11 +75,6 @@
         max-height: calc(100% - 30px); /* 날짜 번호를 제외한 높이 제한 */
     }
 </style>
-
-
-
-
-
 </head>
 <body>
 	<div class="container my-4">
@@ -96,30 +92,45 @@
 					<div class="panel-heading">diary Read Page</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<!-- register.jsp 에 있던 <form>태그는 조회페이지에서는 그다지 필요하지 않으므로 제거~! -->
+	
+						<br/>
+						<!-- 일자 -->							
 						<div class="form-group">
-							<label>dno</label> <input class="form-control" name='dno'
-								value='<c:out value="${diary.dno}"/>' readonly="readonly">
-						</div>
+				            <label>일자</label>
+				            <input type="text" id='regdate' name="regdate" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${diary.regdate}"/>'  readonly="readonly" class="form-control" required>
+				        </div>
 
+						<!-- 제목 -->
 						<div class="form-group">
-							<label>Title</label> <input class="form-control" name='title'
+							<label>제목</label> <input class="form-control" name='title'
 								value='<c:out value="${diary.title}"/>' readonly="readonly">
 						</div>
 
+						<!-- 내용 -->
 						<div class="form-group">
-							<label>Text area</label>
+							<label>내용</label>
 							<textarea class="form-control" rows="3" name='content'
 								readonly="readonly"><c:out value="${diary.content}" /></textarea>
 						</div>
-						<div class="form-group">
-							<label>emotion_status</label>
-							<textarea class="form-control" rows="1" name='emotion_status'
-								readonly="readonly"><c:out value="${diary.emotion_status}" /></textarea>
+						
+						<!-- 감정 -->
+						<div class ="dropdown">
+							<label>감정</label><br/>				
+							<select name = 'emotion_status' disabled>
+								<option value="" <c:out value="${diary.emotion_status == null?'selected':'' }"/>>--</option>
+               					<option value="joy" <c:out value="${diary.emotion_status eq 'joy'?'selected':'' }"/>>기쁨</option>
+               					<option value="anger" <c:out value="${diary.emotion_status eq 'anger'?'selected':'' }"/>>분노</option>
+               					<option value="sad" <c:out value="${diary.emotion_status eq 'sad'?'selected':'' }"/>>슬픔</option>
+               					<option value="fun" <c:out value="${diary.emotion_status eq 'fun'?'selected':'' }"/>>즐거움</option>
+               					<option value="love" <c:out value="${diary.emotion_status eq 'love'?'selected':'' }"/>>사랑</option>
+               					<option value="hate" <c:out value="${diary.emotion_status eq 'hate'?'selected':'' }"/>>증오</option>
+							</select>
 						</div>
 
-					<button data-oper='modify' class="btn btn-default">Modify</button>
-					<button data-oper='list' class="btn btn-info">List</button> 
+						
+						<br/>
+						<button data-oper='modify' class="btn btn-default">Modify</button>
+						<button data-oper='list' class="btn btn-info">List</button> 
 
 					</div>
 					<!-- end panel-body -->
