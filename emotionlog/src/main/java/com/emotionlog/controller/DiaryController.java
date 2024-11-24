@@ -30,32 +30,39 @@ public class DiaryController {
 	private DiaryService service;
 	
 	/**
+	 * 메소드명  : list (GET)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-22
 	 * 내용      : 목록에 대한 처리
 	 */
 	@GetMapping("/list")
-	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate,@RequestParam(value = "regdate", required = false) String regdate,@RequestParam(value = "username", required = false) Long username,Model model) {
+	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate
+					  ,@RequestParam(value = "regdate", required = false) String regdate
+					  ,@ModelAttribute(value = "regdate") String regdateFromModel
+					  ,@RequestParam(value = "username", required = false) Long username
+					  ,Model model) {
 		try {
+			
 			// 회원 아이디 부분
 			username = 2L;
-			log.info("여기다아아아아앙아1"+ selectedDate);
-			log.info("여기다아아아아앙아2"+ regdate);
+			
+			// pick date 설정 부분
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@1"+ selectedDate);
+			log.info("*************************************2"+ regdate);
+			log.info("*************************************3"+ regdateFromModel);
 	        
-			String pickdate = null;
-			if (selectedDate == null && regdate == null ) { // 처음 pickdate
-	        	log.info("date 가 널이 지롱 ~~~~~~ㅎㅎㅎㅎㅎ");
+	        String pickdate = null;
+	        if (selectedDate == null && regdate == null && (regdateFromModel == null || regdateFromModel.equals(""))) {
+	            // 초기 pickdate 설정
 	            LocalDate today = LocalDate.now();
 	            pickdate = today.format(DateTimeFormatter.ofPattern("yyyy/MM"));
+	        } else if (selectedDate != null) {
+	            pickdate = selectedDate;
+	        } else if (regdate != null) {
+	            pickdate = regdate;
+	        } else if (regdateFromModel != null && !regdateFromModel.equals("")) {	                       
+	            pickdate = regdateFromModel;
 	        }
-			else if(selectedDate != null && regdate == null) { // selectedDate
-				pickdate = selectedDate;
-			}
-			else if(selectedDate == null && regdate != null) { // regdate
-				pickdate= regdate;
-			}
-			
-			
 			
 	        // 입력받은 date 파싱 (예: 2024/11)
 	        String[] parts = pickdate.split("/");
@@ -76,15 +83,16 @@ public class DiaryController {
 	        model.addAttribute("month", month);
 	        model.addAttribute("dayOfWeek", dayOfWeek);
 	        model.addAttribute("endDay", endDay);
-	        model.addAttribute("pick_date", pickdate); // date도 추가
+	        model.addAttribute("pick_date", pickdate);
+	        
+	        // username
 	        model.addAttribute("username", username);
 
 
-	        // getlist.....
+	        // diary
 			DiaryVO diary = new DiaryVO();
 			diary.setUsername(username);
-			// Date 객체로 변환
-			Date date_regdate = c.getTime();
+			Date date_regdate = c.getTime();			// Date 객체로 변환
 		    diary.setRegdate(date_regdate); 
 		    List<DiaryVO> dia = service.getList(diary);
 		    log.info(dia);
@@ -110,29 +118,12 @@ public class DiaryController {
 		}
 	}
 	
-//	// 페이징 처리!!
-//	@GetMapping("/list")
-//	public void list(Criteria cri ,Model model) {
-//		try {
-//			log.info("list......."+cri);
-//			model.addAttribute("list",service.getList(cri));
-//			// BoardController 에서는 PageDTO 를 사용할 수 있또록 Model에 담아서 화면에 전달해줄 필요가 있씁니당~
-//			// 페이징 처리를 위한 클래스 설계
-////			model.addAttribute("pageMaker",new PageDTO(cri,123)); // 전체페이지 123
-//			
-//			// 전체 페이지 개수
-//			int total = service.getTotal(cri);
-//			log.info("total: "+total);
-//			model.addAttribute("pageMaker",new PageDTO(cri,total));
-//		} catch (Exception e) {
-//			// 유저에게 보여줄 메시지 리턴
-//			// 이동 할 곳도 지정할수도
-//			e.printStackTrace();
-//			
-//		}
-//	}
-//	
-	//2. 등록 처리와 테스트
+	/**
+	 * 메소드명  : register (POST)
+	 * 작성자    : 박혜정
+	 * 작성일    : 2024-11-23
+	 * 내용      : 등록 처리 
+	 */ 
 	// addFlashAttribute 의 경우 일회성으로만 데이터를 전달, 보관된 데이터는 단 한번만 사용할수 있게 보관
 	@PostMapping("/register")
 	public String register(DiaryVO diary, RedirectAttributes rttr) {
@@ -140,6 +131,12 @@ public class DiaryController {
 			log.info("register: "+diary);
 			service.register(diary);
 			rttr.addFlashAttribute("result",diary.getDno()); // 값 유지 하기 위해서 RedirectAttributes -> 세션 사용
+	        // SimpleDateFormat 사용하여 Date를 String으로 변환
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	        String formattedDate = dateFormat.format(diary.getRegdate());
+			rttr.addFlashAttribute("regdate", formattedDate);
+			log.info("regdate!!!!!!!!!!!!: "+diary.getRegdate());
+
 			return "redirect:/api/diary/list"; // 새로운 화면으로 ,url 재이동
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -147,6 +144,12 @@ public class DiaryController {
 		}
 	}
 	
+	/**
+	 * 메소드명  : register (GET)
+	 * 작성자    : 박혜정
+	 * 작성일    : 2024-11-23
+	 * 내용      : 등록 처리
+	 */
 	// 게시물의 등록 작업은 POST 방식으로 처리하지만, 화면에서 입력을 받아야하므로
 	// GET방식으로 입력 페이지를 볼 수 있도록~
 	@GetMapping("/register")
@@ -164,9 +167,10 @@ public class DiaryController {
 	
 
 	/**
+	 * 메소드명  : get (GET)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
-	 * 내용      : 조회 처리
+	 * 내용      : 조회 처리 
 	 */
 	@GetMapping({"/get","/modify"})
 	public void get (@RequestParam("dno") Long dno, Model model) {
@@ -178,6 +182,7 @@ public class DiaryController {
 	}
 
 	/**
+	 * 메소드명  : modify (POST)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 수정 처리
@@ -187,7 +192,10 @@ public class DiaryController {
 		try {
 			if(service.modify(diary)) {
 				rttr.addFlashAttribute("result","success");
-			}
+				// SimpleDateFormat 사용하여 Date를 String으로 변환
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		        String formattedDate = dateFormat.format(diary.getRegdate());
+				rttr.addFlashAttribute("regdate", formattedDate);			}
 
             System.out.println("Modify Request: " + diary);
 			return "redirect:/api/diary/list" ;
@@ -198,16 +206,20 @@ public class DiaryController {
 	}
 	
 	/**
+	 * 메소드명  : remove (POST)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 삭제 처리
 	 */
 	@PostMapping("/remove")
-	public String remove(@RequestParam("dno") Long dno, RedirectAttributes rttr) {
+	public String remove(@ModelAttribute DiaryVO diary, RedirectAttributes rttr) {
 		try {
-			if(service.remove(dno)) {
+			if(service.remove(diary.getDno())) {
 				rttr.addFlashAttribute("result","success");
-			}
+				// SimpleDateFormat 사용하여 Date를 String으로 변환
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		        String formattedDate = dateFormat.format(diary.getRegdate());
+				rttr.addFlashAttribute("regdate", formattedDate);			}
 			
 			return "redirect:/api/diary/list" ;
 		} catch (Exception e) {
