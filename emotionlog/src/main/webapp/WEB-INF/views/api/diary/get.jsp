@@ -88,7 +88,6 @@
 				</form>
 
 				<div class="panel panel-default">
-
 					<div class="panel-heading">diary Read Page</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
@@ -134,13 +133,34 @@
 
 					</div>
 					<!-- end panel-body -->
-
 				</div>
-
 				<!-- end panel-body -->
 
-
+				<br/>
+				<!-- 댓글 -->
+				<div class ="panel panel-default">
+					<div class = "panel-heading">
+						<i class="fa fa-comments fa-fw"></i> Reply
+					</div>
+					
+					<div class ="panel-body">
+						<ul class ="chat">
+							<li class= "left clearfix" data-rno ='12'>
+								<div>
+									<div class ="header">
+										<strong class ="primary-font">user00</strong>
+										<small class ="pull-right text-muted">2018/01/01 13:13</small>
+									</div>
+									<p>Good job!</p>
+								</div>
+							</li>	
+						</ul>
+					</div>
+				</div>
+				<!-- 댓글 끝 -->
 			</div>
+			
+
 		</div>
 	</div>
 
@@ -153,10 +173,61 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
+<script type ="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
 
-	  var operForm = $("#operForm");
+	 console.log("===================");
+	 console.log("JS TEST");
+	 let dnoValue = '<c:out value ="${diary.dno}"/>';
+	 
+	 // for replyService add test
+	/*  replyService.add(
+		{reply:"JS TEST", replyer: "tester", dno:dnoValue}
+		,
+		function(result){
+			alert("RESULT:"+result);
+		}
+	 ); */
+
+	 // for replyService list test
+/* 	 replyService.getList({dno:dnoValue,page:1},function(list){
+		 for(let i = 0 , len = list.length||0; i <len; i++){
+			 console.log(list[i]);
+		 }
+	 }); */
+	 
+	 // for replyService delete test
+/* 	 replyService.remove(3,
+		function(count){
+			 console.log(count);
+			 if(count === "success"){
+				 alert("REMOVED");
+			 }
+	 	},
+		function(err){
+	 		alert('ERROR');
+	 	}
+	 ); */
+	 
+	 // for replyService modify test
+/* 	 replyService.update(
+		 {
+			 rno   : 22,
+			 dno   : dnoValue,
+			 reply : "Modified Reply..." 
+		 },
+		 function(result){
+			alert("수정 완료...");	 
+		 }
+	 ); */
+	 
+	 // for replyService get test
+/* 	 replyService.get(10,function(data){
+		 console.log(data);
+	 }) */
+	 
+	  let operForm = $("#operForm");
 
 	  // 사용자가 수정 버튼을 누르는 경우에는 bno 값을 같이 전달하고 <form> 태그를 submit 시켜서 처리
 	  $("button[data-oper='modify']").on("click",function(e){
