@@ -74,6 +74,14 @@
         overflow-y: auto; /* 내용이 넘치면 스크롤 */
         max-height: calc(100% - 30px); /* 날짜 번호를 제외한 높이 제한 */
     }
+    
+    .chat li {
+        border-bottom: 2px dotted grey; /* 빨간 줄 추가 */
+        padding-bottom: 10px; /* 줄과 텍스트 간격 추가 */
+        margin-bottom: 10px; /* 줄 아래 간격 추가 */
+    }
+
+
 </style>
 </head>
 <body>
@@ -138,24 +146,16 @@
 
 				<br/>
 				<!-- 댓글 -->
-				<div class ="panel panel-default">
-					<div class = "panel-heading">
-						<i class="fa fa-comments fa-fw"></i> Reply
-					</div>
-					
-					<div class ="panel-body">
-						<ul class ="chat">
-							<li class= "left clearfix" data-rno ='12'>
-								<div>
-									<div class ="header">
-										<strong class ="primary-font">user00</strong>
-										<small class ="pull-right text-muted">2018/01/01 13:13</small>
-									</div>
-									<p>Good job!</p>
-								</div>
-							</li>	
-						</ul>
-					</div>
+				<div class="card">
+				    <div class="card-header">
+				        <i class="fa fa-comments fa-fw"></i> Reply
+				    </div>
+				
+				    <div class="card-body">
+				        <ul class="chat list-unstyled">
+				            <!-- 댓글이 여기에 동적으로 추가됩니다 -->
+				        </ul>
+				    </div>
 				</div>
 				<!-- 댓글 끝 -->
 			</div>
@@ -180,52 +180,55 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 	 console.log("===================");
 	 console.log("JS TEST");
 	 let dnoValue = '<c:out value ="${diary.dno}"/>';
+	 let replyUL = $(".chat");
 	 
-	 // for replyService add test
-	/*  replyService.add(
-		{reply:"JS TEST", replyer: "tester", dno:dnoValue}
-		,
-		function(result){
-			alert("RESULT:"+result);
-		}
-	 ); */
+    // 요소를 찾았는지 확인
+    if (replyUL.length === 0) {
+        console.error("Error: <ul class='chat'> 요소를 찾을 수 없습니다. HTML 구조를 확인하세요.");
+        return;
+    }
+    else{
+    	console.log("있음!!!!")
+    }
+	 showList(1);
+	 
+	 function showList(page) {
+	        replyService.getList({ dno: dnoValue, page: page || 1 }, function(list) {
+	            console.log("받은 댓글 리스트: ", list); // 응답 데이터 확인
 
-	 // for replyService list test
-/* 	 replyService.getList({dno:dnoValue,page:1},function(list){
-		 for(let i = 0 , len = list.length||0; i <len; i++){
-			 console.log(list[i]);
-		 }
-	 }); */
-	 
-	 // for replyService delete test
-/* 	 replyService.remove(3,
-		function(count){
-			 console.log(count);
-			 if(count === "success"){
-				 alert("REMOVED");
-			 }
-	 	},
-		function(err){
-	 		alert('ERROR');
-	 	}
-	 ); */
-	 
-	 // for replyService modify test
-/* 	 replyService.update(
-		 {
-			 rno   : 22,
-			 dno   : dnoValue,
-			 reply : "Modified Reply..." 
-		 },
-		 function(result){
-			alert("수정 완료...");	 
-		 }
-	 ); */
-	 
-	 // for replyService get test
-/* 	 replyService.get(10,function(data){
-		 console.log(data);
-	 }) */
+	            let str = "";
+	            if (list == null || list.length == 0) {
+	                replyUL.html(""); // 댓글이 없는 경우 비움
+	                return;
+	            }
+
+	            for (let i = 0, len = list.length; i < len; i++) {
+	                console.log(i)
+	            	console.log("댓글 내용: ", list[i]); // 각 댓글 데이터 확인
+	                
+	                // replyDate 값을 사람이 읽을 수 있는 형식으로 변환
+	                let replyDate = list[i].reply_date ? new Date(list[i].reply_date).toLocaleString() : "N/A";
+	
+	                console.log("날짜: ", replyDate); // 각 댓글 데이터 확인
+	             	// 문자열 연결 연산자 사용
+	                str += '<li class="clearfix mb-2" data-rno="' + list[i].rno + '">' +
+			                    '<div>' +
+			                        '<div class="d-flex justify-content-between align-items-center">' +
+			                            '<strong class="fw-bold">' + list[i].replyer + '</strong>' +
+			                            '<small class="text-muted">' + replyDate + '</small>' +
+			                        '</div>' +
+			                        '<p>' + list[i].reply + '</p>' +
+			                    '</div>' +
+	              		  '</li>';
+	            }
+	            console.log("생성된 HTML:", str);
+
+
+
+	            replyUL.html(str); // 댓글을 <ul>에 추가
+	        });
+	    }
+
 	 
 	  let operForm = $("#operForm");
 
