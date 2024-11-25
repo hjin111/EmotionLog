@@ -149,6 +149,7 @@
 				<div class="card">
 				    <div class="card-header">
 				        <i class="fa fa-comments fa-fw"></i> Reply
+  						<button id="addReplyBtn" class="btn btn-primary btn-sm float-end">New Reply</button>
 				    </div>
 				
 				    <div class="card-body">
@@ -173,28 +174,54 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
+<!-- 모달 시작 -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">REPLY MODAL</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group mb-3">
+          <label for="reply">Reply</label>
+          <input class="form-control" id="reply" name="reply" value="NEW REPLY!!!!">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="replyer">Replyer</label>
+          <input class="form-control" id="replyer" name="replyer" value="replyer">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="replyDate">Reply Date</label>
+          <input class="form-control" id="replyDate" name="reply_date" value="reply_date">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
+        <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
+        <button id="modalRegisterBtn" type="button" class="btn btn-info">Register</button>
+        <button id="modalCloseBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 모달 끝 -->
 <script type ="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
 
-	 console.log("===================");
-	 console.log("JS TEST");
+
 	 let dnoValue = '<c:out value ="${diary.dno}"/>';
 	 let replyUL = $(".chat");
-	 
-    // 요소를 찾았는지 확인
-    if (replyUL.length === 0) {
-        console.error("Error: <ul class='chat'> 요소를 찾을 수 없습니다. HTML 구조를 확인하세요.");
-        return;
-    }
-    else{
-    	console.log("있음!!!!")
-    }
+
+	 // 댓글 리스트 보여주기
 	 showList(1);
-	 
 	 function showList(page) {
 	        replyService.getList({ dno: dnoValue, page: page || 1 }, function(list) {
-	            console.log("받은 댓글 리스트: ", list); // 응답 데이터 확인
 
 	            let str = "";
 	            if (list == null || list.length == 0) {
@@ -204,7 +231,6 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 
 	            for (let i = 0, len = list.length; i < len; i++) {
 	                console.log(i)
-	            	console.log("댓글 내용: ", list[i]); // 각 댓글 데이터 확인
 	                
 	                // replyDate 값을 사람이 읽을 수 있는 형식으로 변환
 	                let replyDate = list[i].reply_date ? new Date(list[i].reply_date).toLocaleString() : "N/A";
@@ -221,15 +247,85 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 			                    '</div>' +
 	              		  '</li>';
 	            }
-	            console.log("생성된 HTML:", str);
-
-
-
 	            replyUL.html(str); // 댓글을 <ul>에 추가
 	        });
-	    }
-
+	 } // end showList
 	 
+	 // 모달 : 새로운 댓글의 추가버튼 이벤트 처리
+	 let modal = $(".modal");
+	 let modalInputReply = modal.find("input[name='reply']");
+	 let modalInputReplyer = modal.find("input[name='replyer']");
+	 let modalInputReplyDate = modal.find("input[name='reply_date']");
+	 
+	 let modalModBtn = $("#modalModBtn");
+	 let modalRemoveBtn = $("#modalRemoveBtn");
+	 let modalRegisterBtn = $("#modalRegisterBtn");
+	 
+	 // 사용자가 'New Reply' 버튼을 클릭하면 입력에 필요없는 항목들은 안보이게 처리하고, 모달창을 보이게 합니다.
+	 $("#addReplyBtn").on("click",function(e){
+		 modal.find("input").val("");
+		 modalInputReplyDate.closest("div").hide();
+		 modal.find("button[id!='modalCloseBtn']").hide();
+		 
+		 modalRegisterBtn.show();
+		 
+		 $(".modal").modal("show");
+	 });
+	 
+	 // 댓글 등록 및 목록 갱신
+	 modalRegisterBtn.on("click",function(e){
+		let reply = {
+				reply   : modalInputReply.val(),
+				replyer : modalInputReplyer.val(),
+				dno     : dnoValue
+		};
+		replyService.add(reply, function(result){
+			alert(result);
+			modal.find("input").val("");
+			modal.modal("hide");
+			
+			showList(1);
+		});
+	 });
+	 // 특정 댓글의 클릭 이벤트 처리, 댓글 조회 클릭 이벤트 처리
+	 $(".chat").on("click","li",function(e){
+		 let rno = $(this).data("rno");
+		 replyService.get(rno,function(reply){
+			 modalInputReply.val(reply.reply);
+			 modalInputReplyer.val(reply.replyer);
+			 modalInputReplyDate.val(new Date(reply.reply_date).toLocaleString()).attr("readonly","readonly");
+			 modal.data("rno",reply.rno);
+			 
+			 modal.find("button[id!='modalCloseBtn']").hide();
+			 modalModBtn.show();
+			 modalRemoveBtn.show();
+			 
+			 $(".modal").modal("show");
+		 })
+	 });
+	 
+	 // 댓글의 수정 이벤트 처리
+	 modalModBtn.on("click",function(e){
+		 let reply ={rno:modal.data("rno"), reply: modalInputReply.val()};
+		 replyService.update(reply,function(result){
+			 alert(result);
+			 modal.modal("hide");
+			 showList(1);
+		 });
+	 });
+	 
+	 // 댓글의 삭제 이벤트 처리
+	 modalRemoveBtn.on("click",function(e){
+		 let rno = modal.data("rno");
+	 	 replyService.remove(rno,function(result){
+	 		 alert(result);
+	 		 modal.modal("hide");
+	 		 showList(1);
+	 	 });
+	 });
+	
+	 
+	  // 폼태그 처리	 
 	  let operForm = $("#operForm");
 
 	  // 사용자가 수정 버튼을 누르는 경우에는 bno 값을 같이 전달하고 <form> 태그를 submit 시켜서 처리
