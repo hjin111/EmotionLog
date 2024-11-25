@@ -12,5 +12,7 @@ public interface UsersMapper {
 	// 회원가입 - 권한 입력
 	public void insertAuthority(@Param("username") Long username, 
 			@Param("authority") String authority);
+	
+	
 
 }
