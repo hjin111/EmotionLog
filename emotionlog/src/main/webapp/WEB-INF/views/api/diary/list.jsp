@@ -85,11 +85,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8" id="calendar-container">
 			
-			
+			<!-- form -->
 			<form id="actionForm" action="/api/diary/list" method="get">
  			</form>
 			
-
+			<!-- table -->
             <table class="table table-bordered calendar-table">
                 <thead>
                     <tr class="bg-light">
@@ -182,7 +182,36 @@
 					</c:forEach>
                 </tbody>
             </table>
-        </div>
+
+			<!-- Modal 추가 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						
+						<div class="modal-header">
+			                <!-- 닫기 버튼 수정 -->
+			                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<!-- /.modal-header -->
+						<div class="modal-body">처리가 완료되었습니다.</div>
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+			                <!-- 버튼 속성 수정 -->
+			                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+<!-- 			                <button type="button" class="btn btn-primary">Save changes</button>-->						
+						</div>
+						<!-- /.modal-footer -->
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+
+			</div>
     </div>
 </div>
 
@@ -196,6 +225,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script>
+$(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
+	 
+	// 모달을 위한 result 값
+	 let result = '<c:out value="${result}"/>';
+	 console.info("리저트 결과값!!!!!: "+result);
+	
+	// 모달
+	 checkModal(result);
+	 
+	 history.replaceState({},null,null);
+	 
+	 // 모달
+	 function checkModal(result){
+		 if(result == '' || history.state){
+			 return;
+		 }
+		 if(parseInt(result)>0){
+			 $(".modal-body").html("게시글 "+parseInt(result)+" 번이 등록되었습니다.");
+		 }// remove 일경우 성공시 "success"가 반환된다!
+		 $("#myModal").modal("show"); // aria-hidden = false 
+	 }
+	 
+	 
     // 버튼 클릭 이벤트 처리    
     $(document).on("click", ".move", function (e) {
         e.preventDefault(); // 기본 동작(페이지 이동) 막기
@@ -272,7 +324,7 @@
             });
         });
     });
-
+});
 
 </script>
 </body>
