@@ -164,7 +164,9 @@ public class DiaryController {
 	// 게시물의 등록 작업은 POST 방식으로 처리하지만, 화면에서 입력을 받아야하므로
 	// GET방식으로 입력 페이지를 볼 수 있도록~
 	@GetMapping("/register")
-	public void register(@RequestParam("regdate") String regdate,@RequestParam("username") Long username,Model model) {
+	public void register(@RequestParam("regdate") String regdate
+						,@RequestParam("username") Long username
+						,Model model) {
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date regdate_df = dateFormat.parse(regdate);  // Date 객체로 변환
