@@ -25,9 +25,10 @@ public class UsersMapperTests {
 	public void testInsert( ) {
 		
 		UsersVO user = new UsersVO();
-		user.setName("user6");
-		user.setPhone_number("010-1234-5678");
-	    user.setPassword("pw66");
+		user.setUsername(14L);
+		user.setName("user14");
+		user.setPhone_number("010-1233-5678");
+	    user.setPassword("pw1414");
 	    user.setGender('M');
         user.setBirthday("1995-11-20"); 
         

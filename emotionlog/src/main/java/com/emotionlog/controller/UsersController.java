@@ -30,14 +30,19 @@ public class UsersController {
 
     // 회원가입 요청 처리
     @PostMapping("/join")
-    public String registerUser(@ModelAttribute UsersVO user, String authority) throws Exception {
+    public String usersJoin(@ModelAttribute UsersVO user, String authority) throws Exception {
         service.join(user, authority);
         return "redirect:/api/users/login"; 
     }
+    
     
     @GetMapping("/login")
     public String loginForm() {
         return "/api/users/login";
     }
+    
+    // 로그인 요청 처리
+    
+    
 
 }
