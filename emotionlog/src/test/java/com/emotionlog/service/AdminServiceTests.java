@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.emotionlog.domain.DiaryCountsVO;
+import com.emotionlog.domain.QnAVO;
 import com.emotionlog.mapper.AdminMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -47,6 +48,12 @@ public class AdminServiceTests {
             assertTrue("작성된 일기 수는 음수일 수 없습니다.", diaryCounts.getDailyCount() >= 0);
         }
         
+	}
+	
+	@Test
+	public void testGetQnaList() throws Exception {
+	    List<QnAVO> qnaList = service.getQnaList();
+	    log.info("QnA List: " + qnaList);
 	}
 
 	
