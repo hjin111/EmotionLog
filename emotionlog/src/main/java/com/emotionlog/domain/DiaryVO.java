@@ -1,3 +1,8 @@
+/**
+ * 작성자    : 박혜정
+ * 작성일    : 2024-11-22
+ */
+
 package com.emotionlog.domain;
 
 import java.util.Date;
@@ -13,5 +18,7 @@ public class DiaryVO {
 	private Date update_date;
 	private String emotion_status;
 	private String enabled;
-	private Long username;
+	private String username;
+	
+
 }

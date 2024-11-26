@@ -1,3 +1,8 @@
+/**
+ * 작성자    : 박혜정
+ * 작성일    : 2024-11-22
+ */
+
 package com.emotionlog.mapper;
 
 import java.util.Date;
@@ -27,7 +32,7 @@ public class DiaryMapperTests {
 	@Test
 	public void testGetList() {
 		DiaryVO diary = new DiaryVO();
-		diary.setUsername(1L);
+		diary.setUsername("1");
 	    diary.setRegdate(new Date()); // 오늘 날짜
 		
 		
@@ -44,7 +49,7 @@ public class DiaryMapperTests {
 		diary.setTitle("새로 작성하는 제목2");
 		diary.setContent("새로 작성하는 내용2");
 		diary.setEmotion_status("슬픔");
-		diary.setUsername(1L);
+		diary.setUsername("1");
 		
 		mapper.insert(diary);
 		
@@ -59,7 +64,7 @@ public class DiaryMapperTests {
 		diary.setTitle("새로 작성하는 제목2");
 		diary.setContent("새로 작성하는 내용2");
 		diary.setEmotion_status("슬픔");
-		diary.setUsername(1L);
+		diary.setUsername("1");
 		
 		mapper.insertSelectKey(diary);
 		

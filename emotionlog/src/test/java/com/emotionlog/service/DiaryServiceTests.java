@@ -1,3 +1,8 @@
+/**
+ * 작성자    : 박혜정
+ * 작성일    : 2024-11-22
+ */
+
 package com.emotionlog.service;
 
 import static org.junit.Assert.assertNotNull;
@@ -40,7 +45,7 @@ public class DiaryServiceTests {
 		diary.setTitle("새로 작성하는 제목2");
 		diary.setContent("새로 작성하는 내용2");
 		diary.setEmotion_status("슬픔");
-		diary.setUsername(1L);
+		diary.setUsername("1");
 
 		service.register(diary);
 		
@@ -52,7 +57,7 @@ public class DiaryServiceTests {
 	@Test
 	public void testGetList() throws Exception {
 		DiaryVO diary = new DiaryVO();
-		diary.setUsername(1L);
+		diary.setUsername("1");
 	    diary.setRegdate(new Date()); // 오늘 날짜
 	    
 		service.getList(diary).forEach(dia -> log.info(dia));

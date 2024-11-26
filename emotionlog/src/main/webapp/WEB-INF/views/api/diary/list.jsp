@@ -6,90 +6,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>EmotionLog_list</title>
-    <!-- 부트스트랩 CSS 추가 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<style>
-    /* 전체 달력 중앙 정렬 */
-    .calendar-wrapper {
-        display: flex;
-        justify-content: center; /* 가로 중앙 정렬 */
-        align-items: center;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    /* 테이블 스타일 */
-    .calendar-table {
-        table-layout: fixed;
-        width: auto;
-        margin: 0 auto; /* 테이블 자체 중앙 정렬 */
-    }
-
-    .calendar-table th,
-    .calendar-table td {
-        text-align: center; /* 날짜 번호 중앙 정렬 */
-        vertical-align: top; /* 내용 위쪽 정렬 */
-        height: 150px; /* 셀 높이 고정 */
-        width: 150px; /* 셀 너비 고정 */
-    }
-
-    .calendar-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* 카드 내부 내용 위쪽 정렬 */
-        align-items: flex-start; /* 텍스트 왼쪽 정렬 */
-        height: 100%;
-        width: 100%;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #f8f9fa;
-        padding: 10px;
-        overflow: hidden;
-    }
-    
-    
-    .calendar-card .date {
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center; /* 날짜 번호는 중앙 정렬 */
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    .calendar-card .card-text {
-        font-size: 14px;
-        line-height: 1.5;
-        text-align: left; /* 텍스트 왼쪽 정렬 */
-        overflow-wrap: break-word;
-        word-break: break-word;
-        overflow-y: auto; /* 내용이 넘치면 스크롤 */
-        max-height: calc(100% - 30px); /* 날짜 번호를 제외한 높이 제한 */
-    }
-</style>
+<%@include file="../includes/header.jsp" %>
 
 
-
-
-
-</head>
-<body>
 <div class="container my-4">
     <div class="row justify-content-center">
         <div class="col-md-8" id="calendar-container">
 			
-			
+			<!-- form -->
 			<form id="actionForm" action="/api/diary/list" method="get">
  			</form>
 			
-
+			<!-- table -->
             <table class="table table-bordered calendar-table">
                 <thead>
                     <tr class="bg-light">
@@ -164,8 +92,9 @@
 														    <c:forEach var="diary" items="${diary}">
 														        <!-- diary.regdate를 yyyy-MM-dd 형식으로 변환 -->
 														        <fmt:formatDate value="${diary.regdate}" pattern="dd" var="formattedDate" />														        
-								 						        <c:if test="${formattedDate == date}">
+																<c:if test="${formattedDate + 0 == date + 0}">
 														            <li>${diary.title}</li>
+														            <li>${diary.emotion_status}</li>
 														        </c:if> 
 														    </c:forEach>
 										                </ul>
@@ -182,7 +111,35 @@
 					</c:forEach>
                 </tbody>
             </table>
-        </div>
+
+			<!-- Modal 추가 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						
+						<div class="modal-header">
+			                <!-- 닫기 버튼 수정 -->
+			                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<!-- /.modal-header -->
+						<div class="modal-body">처리가 완료되었습니다.</div>
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+			                <!-- 버튼 속성 수정 -->
+			                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+<!-- 			                <button type="button" class="btn btn-primary">Save changes</button>-->						
+						</div>
+						<!-- /.modal-footer -->
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+			</div>
     </div>
 </div>
 
@@ -196,6 +153,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script>
+$(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
+	 
+	// 모달을 위한 result 값
+	 let result = '<c:out value="${result}"/>';
+	 console.info("리저트 결과값!!!!!: "+result);
+	
+	// 모달
+	 checkModal(result);
+	 
+	 history.replaceState({},null,null);
+	 
+	 // 모달
+	 function checkModal(result){
+		 if(result == '' || history.state){
+			 return;
+		 }
+		 if(parseInt(result)>0){
+			 $(".modal-body").html("게시글 "+parseInt(result)+" 번이 등록되었습니다.");
+		 }// remove 일경우 성공시 "success"가 반환된다!
+		 $("#myModal").modal("show"); // aria-hidden = false 
+	 }
+	 
+	 
     // 버튼 클릭 이벤트 처리    
     $(document).on("click", ".move", function (e) {
         e.preventDefault(); // 기본 동작(페이지 이동) 막기
@@ -228,7 +208,6 @@
             actionForm.submit();
         }
         else{
-        	// 일기가 없는 경우, 등록 페이지 이동
         	// 일기가 없는 경우, 등록 페이지 이동 (POST 요청)
             actionForm.find("input[name='regdate']").remove(); // 중복 방지를 위해 기존 regdate 제거
             actionForm.find("input[name='username']").remove(); // 중복 방지를 위해 기존 username 제거
@@ -272,7 +251,7 @@
             });
         });
     });
-
+});
 
 </script>
 </body>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emotionlog.mapper.ReplyMapper">
+
+	<!-- 등록(create) -->
+	<insert id ="insert">
+		insert into reply(rno,dno,reply,replyer)
+		values(seq_reply.nextval,#{dno},#{reply},#{replyer})
+	</insert>
+	
+	<!-- 조회(read) -->
+	<select id = "read" resultType ="com.emotionlog.domain.ReplyVO">
+		select * from reply where rno = #{rno}
+	</select>
+	
+	<!-- 삭제(delete) -->
+	<delete id ="delete">
+		delete from reply where rno = #{rno}
+	</delete>
+	
+	<!-- 수정(update) -->
+	<update id ="update">
+		update reply
+		set reply =#{reply},
+			update_date = sysdate
+			where rno = #{rno}
+	</update>
+	
+	<!-- 페이징 처리 -->
+	<select id="getListWithPaging" resultType="com.emotionlog.domain.ReplyVO">
+		<![CDATA[
+		select rno, dno, reply, replyer, reply_date, update_date 
+		from (
+			select /*+INDEX(reply idx_reply) */ 
+				rownum rn, rno, dno, reply, replyer, reply_date, update_date
+			from reply
+			where 1=1
+			and dno = #{dno} 
+			and rno >0
+			and rownum <= #{cri.pageNum} * #{cri.amount}		
+		)
+		where rn > (#{cri.pageNum}-1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<!-- 댓글의 숫자 파악 -->
+	<select id ="getCountByDno" resultType="int">
+		<![CDATA[
+			select count(rno) from reply where dno = #{dno}
+		]]>
+	</select>
+</mapper>
