@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.emotionlog.domain.AboardVO;
 import com.emotionlog.domain.DiaryCountsVO;
 import com.emotionlog.domain.QboardVO;
 import com.emotionlog.domain.UsersVO;
@@ -41,6 +42,12 @@ public class AdminServiceImpl implements AdminService {
 	public QboardVO getQboardDetails(Long qno) throws Exception {
 		
 		return mapper.getQboardDetails(qno);
+	}
+
+	@Override
+	public AboardVO getAnwser(Long qno) throws Exception {
+		
+		return mapper.getAnswer(qno);
 	}
 
 

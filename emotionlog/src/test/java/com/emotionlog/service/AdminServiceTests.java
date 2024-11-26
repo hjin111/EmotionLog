@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.emotionlog.domain.AboardVO;
 import com.emotionlog.domain.DiaryCountsVO;
 import com.emotionlog.domain.QboardVO;
 
@@ -56,5 +57,12 @@ public class AdminServiceTests {
 	public void testGetQboardDetails() throws Exception {
 		Long qno = 2L;
 		QboardVO vo = service.getQboardDetails(qno);
+	}
+	
+	@Test
+	public void testGetAnswer() throws Exception {
+		Long qno = 1L;
+		AboardVO vo = service.getAnwser(qno);
+		log.info(vo);
 	}
 }

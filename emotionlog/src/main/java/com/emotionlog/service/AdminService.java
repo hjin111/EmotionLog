@@ -2,6 +2,7 @@ package com.emotionlog.service;
 
 import java.util.List;
 
+import com.emotionlog.domain.AboardVO;
 import com.emotionlog.domain.DiaryCountsVO;
 import com.emotionlog.domain.QboardVO;
 import com.emotionlog.domain.UsersVO;
@@ -21,5 +22,6 @@ public interface AdminService {
 	public QboardVO getQboardDetails(Long qno) throws Exception;
 	
 	// QnA 답변 조회
+	public AboardVO getAnwser(Long qno) throws Exception;
 
 }
