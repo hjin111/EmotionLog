@@ -164,8 +164,9 @@
 														    <c:forEach var="diary" items="${diary}">
 														        <!-- diary.regdate를 yyyy-MM-dd 형식으로 변환 -->
 														        <fmt:formatDate value="${diary.regdate}" pattern="dd" var="formattedDate" />														        
-								 						        <c:if test="${formattedDate == date}">
+																<c:if test="${formattedDate + 0 == date + 0}">
 														            <li>${diary.title}</li>
+														            <li>${diary.emotion_status}</li>
 														        </c:if> 
 														    </c:forEach>
 										                </ul>
@@ -280,7 +281,6 @@ $(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상�
             actionForm.submit();
         }
         else{
-        	// 일기가 없는 경우, 등록 페이지 이동
         	// 일기가 없는 경우, 등록 페이지 이동 (POST 요청)
             actionForm.find("input[name='regdate']").remove(); // 중복 방지를 위해 기존 regdate 제거
             actionForm.find("input[name='username']").remove(); // 중복 방지를 위해 기존 username 제거

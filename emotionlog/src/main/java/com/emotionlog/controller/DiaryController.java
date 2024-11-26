@@ -39,12 +39,12 @@ public class DiaryController {
 	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate
 					  ,@RequestParam(value = "regdate", required = false) String regdate
 					  ,@ModelAttribute(value = "regdate") String regdateFromModel
-					  ,@RequestParam(value = "username", required = false) Long username
+					  ,@RequestParam(value = "username", required = false) String username
 					  ,Model model) {
 		try {
 			
 			// 회원 아이디 부분
-			username = 2L;
+			username = "2";
 			
 			// pick date 설정 부분
 			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@1"+ selectedDate);
@@ -165,7 +165,7 @@ public class DiaryController {
 	// GET방식으로 입력 페이지를 볼 수 있도록~
 	@GetMapping("/register")
 	public void register(@RequestParam("regdate") String regdate
-						,@RequestParam("username") Long username
+						,@RequestParam("username") String username
 						,Model model) {
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
