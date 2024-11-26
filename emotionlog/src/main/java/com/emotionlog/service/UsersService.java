@@ -6,4 +6,5 @@ public interface UsersService {
 
 	// 회원가입 
 	 public void join(UsersVO user, String authority) throws Exception;
+	 
 }

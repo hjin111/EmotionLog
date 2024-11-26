@@ -10,7 +10,7 @@
 <form action="/api/users/join" method="post">
 	<div>
         <label for="username">아이디:</label>
-        <input type="number" id="username" name="username" required>
+        <input type="text" id="username" name="username" required>
     </div>
     <div>
         <label for="name">이름:</label>
