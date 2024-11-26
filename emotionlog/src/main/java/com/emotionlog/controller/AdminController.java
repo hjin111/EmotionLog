@@ -27,13 +27,13 @@ public class AdminController {
 	
 	// 미답변 QnA 리스트 조회
 	@GetMapping("/qna")
-	public void getQnaList() {
+	public void getQboardList() {
 		
 	}
 	
 	// QnA 문의 상세 조회
 	@GetMapping("/qna/{qno}")
-	public void getQnaDetails() {
+	public void getQboardDetails() {
 		
 	}
 	

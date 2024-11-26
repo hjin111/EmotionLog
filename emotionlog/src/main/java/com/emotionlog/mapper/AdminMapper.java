@@ -14,5 +14,5 @@ public interface AdminMapper {
 	
 	public List<QboardVO> getQboardList();
 	
-	public QboardVO getQnaDetails(Long qno);
+	public QboardVO getQboardDetails(Long qno);
 }

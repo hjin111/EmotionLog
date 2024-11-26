@@ -18,6 +18,6 @@ public interface AdminService {
 	public List<QboardVO> getQboardList() throws Exception;
 	
 	// QnA 문의 상세 조회
-	public QboardVO getQnaDetails(Long qno) throws Exception;
+	public QboardVO getQboardDetails(Long qno) throws Exception;
 
 }
