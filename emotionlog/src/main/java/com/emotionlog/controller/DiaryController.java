@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,10 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/api/diary/*") 
 @AllArgsConstructor // BoardController는 BoardService에 대해서 의존적이므로 @AllArgsConstructor를 이용해서 생성자를 만들고 자동으로 주입하도록 한다!
 public class DiaryController {
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
 	private DiaryService service;
 	
 	/**
@@ -35,7 +41,7 @@ public class DiaryController {
 	 * 내용      : 목록에 대한 처리
 	 */
 	@GetMapping("/list")
-	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate,@RequestParam(value = "regdate", required = false) String regdate,@RequestParam(value = "username", required = false) Long username,Model model) {
+	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate,@RequestParam(value = "regdate", required = false) String regdate,@RequestParam(value = "username", required = false) long username,Model model) {
 		try {
 			// 회원 아이디 부분
 			username = 2L;

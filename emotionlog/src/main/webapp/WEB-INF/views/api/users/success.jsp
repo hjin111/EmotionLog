@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome!</title>
-    <style>
+   <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            background: linear-gradient(to right, #99ddc8, #95bf74); /* Tiffany Blue to Pistachio */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,7 +18,7 @@
 
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(40, 63, 59, 0.8); /* Dark Slate Gray */
             padding: 30px 50px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -40,7 +40,7 @@
 
         .button-container a {
             display: inline-block;
-            background: #00c6ff;
+            background: #659b5e; /* Asparagus */
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -50,9 +50,10 @@
         }
 
         .button-container a:hover {
-            background: #0072ff;
+            background: #556f44; /* Fern Green */
         }
     </style>
+
 </head>
 <body>
     <div class="container">
@@ -60,7 +61,7 @@
         <h3>Your Role: <sec:authentication property="principal.authorities" /></h3>
         
         <div class="button-container">
-            <a href="/home">Go to Home</a>
+            <a href="/">Go to Home</a>
             <a href="/logout">Logout</a>
         </div>
     </div>
