@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +50,13 @@ public class DiaryController {
 					  ,@RequestParam(value = "username", required = false) String username
 					  ,Model model) {
 		try {
-			
+	
+			 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			 Object principal = authentication.getPrincipal();
+			 org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
 			// 회원 아이디 부분
-			username = "2";
-			
+			username = user.getUsername();
+			log.info(username);
 			// pick date 설정 부분
 			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@1"+ selectedDate);
 			log.info("*************************************2"+ regdate);

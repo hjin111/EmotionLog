@@ -62,7 +62,7 @@
         
         <div class="button-container">
             <a href="/">Go to Home</a>
-            <a href="/logout">Logout</a>
+            <a href="/api/diary/list">MY DIARY</a>
         </div>
     </div>
 </body>
