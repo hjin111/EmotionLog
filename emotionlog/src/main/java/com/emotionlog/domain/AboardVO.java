@@ -10,6 +10,6 @@ public class AboardVO {
 	private String atitle;
 	private String acontent;
 	private Date adate;
-	private Long username;
+	private String username;
 	private Date aupdate_date;
 }

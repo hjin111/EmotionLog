@@ -42,5 +42,10 @@
 	WHERE qno = #{qno}
 	</select>
 	 
+	<!-- QnA 답변 조회 -->
+	<select id="getAnswer" resultType="AboardVO">
+	SELECT * FROM aboard
+	WHERE qno = #{qno}
+	</select>
 	
 </mapper>
