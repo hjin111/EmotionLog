@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.emotionlog.domain.DiaryCountsVO;
 import com.emotionlog.domain.UsersVO;
 import com.emotionlog.mapper.AdminMapper;
 
@@ -22,5 +23,12 @@ public class AdminServiceImpl implements AdminService {
 		
 		return mapper.getUserList();
 	}
+
+	@Override
+	public List<DiaryCountsVO> getDiaryCountsByDateRange() throws Exception {
+		
+		return mapper.getDiaryCountsByDateRange();
+	}
+
 
 }
