@@ -19,5 +19,11 @@ public class AdminController {
 		
 	}
 	
+	// 날짜별 작성된 일기 수 조회
+	@GetMapping("/diary-counts")
+	public void getDiaryCountsByDateRange() {
+		
+	}
+	
 
 }

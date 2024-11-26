@@ -8,5 +8,28 @@
 	select * from users
 	</select>
 
+	<!-- 날짜별 작성된 일기 수 조회 -->
+	<select id="getDiaryCountsByDateRange" resultType="DiaryCountsVO">
+	<![CDATA[
+	SELECT 
+	    TO_CHAR(dates.regdate, 'YYYY-MM-DD') AS regdateStr,
+	    NVL(COUNT(d.dno), 0) AS dailyCount
+	FROM 
+	    (SELECT TRUNC(SYSDATE) - LEVEL + 1 AS regdate 
+	     FROM DUAL
+	     CONNECT BY LEVEL <= 7) dates
+	LEFT JOIN diary d
+	ON TRUNC(d.regdate) = dates.regdate
+	GROUP BY dates.regdate
+	ORDER BY dates.regdate DESC
+
+        ]]>
+	</select>
+	
+	
+	
+
+	
+	 
 	
 </mapper>
