@@ -1,7 +1,5 @@
 package com.emotionlog.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.emotionlog.domain.Criteria;
+import com.emotionlog.domain.ReplyPageDTO;
 import com.emotionlog.domain.ReplyVO;
 import com.emotionlog.service.ReplyService;
 
@@ -42,15 +41,7 @@ public class ReplyController {
 								: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	// 특정 게시물의 댓글 목록 확인
-	@GetMapping(value = "/pages/{dno}/{page}",
-				produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("dno") Long dno){
-		log.info("getlist.....");
-		Criteria cri = new Criteria(page,10);
-		log.info(cri);
-		return new ResponseEntity<>(service.getList(cri,dno), HttpStatus.OK);
-	}
+
 	
 	// 댓글 조회
 	@GetMapping(value ="/{rno}",
@@ -85,4 +76,26 @@ public class ReplyController {
 				? new ResponseEntity<String>("success",HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	/*
+	 * // 특정 게시물의 댓글 목록 확인
+	 * 
+	 * @GetMapping(value = "/pages/{dno}/{page}", produces =
+	 * {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+	 * public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int
+	 * page, @PathVariable("dno") Long dno){ log.info("getlist....."); Criteria cri
+	 * = new Criteria(page,10); log.info(cri); return new
+	 * ResponseEntity<>(service.getList(cri,dno), HttpStatus.OK); }
+	 */
+	
+	// 새롭게 추가된 getListPage()를 호출하고 데이터를 전송하는 형태
+	@GetMapping(value    = "/pages/{dno}/{page}",
+			    produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page")int page,@PathVariable("dno") Long dno){
+		Criteria cri = new Criteria(page,10);
+		log.info("get Reply List dno : " + dno);
+		log.info("cri:"+cri);
+		return new ResponseEntity<ReplyPageDTO>(service.getListPage(cri, dno),HttpStatus.OK);
+	}
+	     
 }

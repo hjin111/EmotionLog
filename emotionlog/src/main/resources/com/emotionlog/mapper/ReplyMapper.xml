@@ -29,9 +29,25 @@
 	
 	<!-- 페이징 처리 -->
 	<select id="getListWithPaging" resultType="com.emotionlog.domain.ReplyVO">
-		select rno,dno,reply,replyer,reply_date,update_date
-		from reply
-		where dno = #{dno}
-		order by rno asc
+		<![CDATA[
+		select rno, dno, reply, replyer, reply_date, update_date 
+		from (
+			select /*+INDEX(reply idx_reply) */ 
+				rownum rn, rno, dno, reply, replyer, reply_date, update_date
+			from reply
+			where 1=1
+			and dno = #{dno} 
+			and rno >0
+			and rownum <= #{cri.pageNum} * #{cri.amount}		
+		)
+		where rn > (#{cri.pageNum}-1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<!-- 댓글의 숫자 파악 -->
+	<select id ="getCountByDno" resultType="int">
+		<![CDATA[
+			select count(rno) from reply where dno = #{dno}
+		]]>
 	</select>
 </mapper>

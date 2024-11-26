@@ -19,4 +19,6 @@ public class DiaryVO {
 	private String emotion_status;
 	private String enabled;
 	private Long username;
+	
+
 }
