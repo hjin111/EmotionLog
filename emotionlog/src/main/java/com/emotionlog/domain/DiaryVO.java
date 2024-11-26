@@ -18,7 +18,7 @@ public class DiaryVO {
 	private Date update_date;
 	private String emotion_status;
 	private String enabled;
-	private Long username;
+	private String username;
 	
 
 }

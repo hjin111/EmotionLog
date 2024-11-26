@@ -162,6 +162,22 @@ $('button').on("click",function(e){
 	if (operation === 'list') {
 		// move to list
 		formObj.attr("action", "/api/diary/list").attr("method", "get");
+	}else{
+		//제목 값 안넣었을때
+		if(!formObj.find("input[name='title']").val()){
+			alert("제목 값을 입력해주세요.");
+			return false;
+		}
+		//내용 값 안넣었을때
+		if(!formObj.find("textarea[name='content']").val()){
+			alert("내용 값을 입력해주세요.");
+			return false;
+		}
+		//감정 값 안넣었을때
+		if(!formObj.find("option:selected").val()){
+			alert("감정 상태를 선택하세요.");
+			return false;
+		}
 	}
 	formObj.submit(); // 마지막에 직접 submit() 수행
 	});
