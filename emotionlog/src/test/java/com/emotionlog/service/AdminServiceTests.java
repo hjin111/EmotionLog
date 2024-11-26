@@ -56,5 +56,9 @@ public class AdminServiceTests {
 	    log.info("QnA List: " + qnaList);
 	}
 
-	
+	@Test
+	public void testGetQnaDetail() throws Exception {
+		Long testQno = 2L;
+		QnAVO vo = mapper.getQnaDetails(testQno);
+	}
 }

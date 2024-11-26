@@ -33,7 +33,11 @@
 	</select>
 	
 
-	
+	<!-- QnA 문의 상세 조회 -->
+	<select id="getQnaDetails" resultType="QnAVO">
+	SELECT * FROM qboard
+	WHERE qno = #{qno}
+	</select>
 	 
 	
 </mapper>
