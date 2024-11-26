@@ -34,7 +34,7 @@
 	
 
 	<!-- QnA 문의 상세 조회 -->
-	<select id="getQnaDetails" resultType="QboardVO">
+	<select id="getQboardDetails" resultType="QboardVO">
 	SELECT * FROM qboard
 	WHERE qno = #{qno}
 	</select>

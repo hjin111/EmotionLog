@@ -57,8 +57,8 @@ public class AdminServiceTests {
 	}
 
 	@Test
-	public void testGetQnaDetail() throws Exception {
+	public void testGetQboardDetails() throws Exception {
 		Long testQno = 2L;
-		QboardVO vo = mapper.getQnaDetails(testQno);
+		QboardVO vo = mapper.getQboardDetails(testQno);
 	}
 }

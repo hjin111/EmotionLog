@@ -38,9 +38,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public QboardVO getQnaDetails(Long qno) throws Exception {
+	public QboardVO getQboardDetails(Long qno) throws Exception {
 		
-		return mapper.getQnaDetails(qno);
+		return mapper.getQboardDetails(qno);
 	}
 
 
