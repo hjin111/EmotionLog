@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class QnAVO {
+public class QboardVO {
     private Long qno;                
     private String qtitle;           
     private String qcontent;         

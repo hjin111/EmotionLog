@@ -26,15 +26,15 @@
         ]]>
 	</select>
 	
-	<!-- 미답변 QnA 리스트 조회 -->
-	<select id="getQnaList" resultType="QnAVO">
+	<!-- 미답변 문의 리스트 조회 -->
+	<select id="getQboardList" resultType="QboardVO">
 	SELECT * FROM qboard
 	WHERE ano IS NULL
 	</select>
 	
 
 	<!-- QnA 문의 상세 조회 -->
-	<select id="getQnaDetails" resultType="QnAVO">
+	<select id="getQnaDetails" resultType="QboardVO">
 	SELECT * FROM qboard
 	WHERE qno = #{qno}
 	</select>

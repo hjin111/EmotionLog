@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.emotionlog.domain.DiaryCountsVO;
-import com.emotionlog.domain.QnAVO;
+import com.emotionlog.domain.QboardVO;
 import com.emotionlog.mapper.AdminMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -51,14 +51,14 @@ public class AdminServiceTests {
 	}
 	
 	@Test
-	public void testGetQnaList() throws Exception {
-	    List<QnAVO> qnaList = service.getQnaList();
-	    log.info("QnA List: " + qnaList);
+	public void testGetQboardList() throws Exception {
+	    List<QboardVO> qboardList = service.getQboardList();
+	    log.info("QnA List: " + qboardList);
 	}
 
 	@Test
 	public void testGetQnaDetail() throws Exception {
 		Long testQno = 2L;
-		QnAVO vo = mapper.getQnaDetails(testQno);
+		QboardVO vo = mapper.getQnaDetails(testQno);
 	}
 }
