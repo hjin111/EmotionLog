@@ -14,7 +14,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.emotionlog.domain.DiaryCountsVO;
 import com.emotionlog.domain.QboardVO;
-import com.emotionlog.mapper.AdminMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,9 +25,6 @@ public class AdminServiceTests {
 	
 	@Autowired
 	AdminService service;
-	
-	@Autowired
-	AdminMapper mapper;
 	
 	@Test
 	public void testGetUserList() throws Exception {
@@ -58,7 +54,7 @@ public class AdminServiceTests {
 
 	@Test
 	public void testGetQboardDetails() throws Exception {
-		Long testQno = 2L;
-		QboardVO vo = mapper.getQboardDetails(testQno);
+		Long qno = 2L;
+		QboardVO vo = service.getQboardDetails(qno);
 	}
 }

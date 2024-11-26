@@ -10,8 +10,7 @@ public class QboardVO {
     private String qtitle;           
     private String qcontent;         
     private Date qdate;             
-    private Long username;           
-    private Long ano;               
+    private String username;                        
     private Date qupdate_date;       
 }
 

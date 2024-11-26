@@ -25,7 +25,7 @@ public class AdminController {
 		
 	}
 	
-	// 미답변 QnA 리스트 조회
+	// 미답변 문의 리스트 조회
 	@GetMapping("/qna")
 	public void getQboardList() {
 		
@@ -34,6 +34,12 @@ public class AdminController {
 	// QnA 문의 상세 조회
 	@GetMapping("/qna/{qno}")
 	public void getQboardDetails() {
+		
+	}
+	
+	// QnA 문의 답변 조회
+	@GetMapping("/qna/answer/{qno}")
+	public void getAnswer() {
 		
 	}
 	
