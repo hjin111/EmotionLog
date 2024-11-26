@@ -25,5 +25,12 @@
         values (#{username}, #{authority})
 	</insert>
 	
-	
+	<!-- 사용자 정보 조회(로그인시 사용) -->
+    <select id="read" resultType="com.emotionlog.domain.UsersVO" parameterType="string">
+        SELECT u.username, u.password, u.enabled, a.authority
+        FROM users u
+        LEFT JOIN authorities a ON u.username = a.username
+        WHERE u.username = #{username}
+    </select>
+    	
 </mapper>

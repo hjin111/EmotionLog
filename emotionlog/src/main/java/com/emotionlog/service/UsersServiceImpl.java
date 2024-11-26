@@ -1,10 +1,18 @@
 package com.emotionlog.service;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.emotionlog.domain.UsersVO;
+import com.emotionlog.mapper.AuthoritiesMapper;
 import com.emotionlog.mapper.UsersMapper;
 
 import lombok.AllArgsConstructor;
@@ -13,13 +21,15 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service 
 @AllArgsConstructor
-@Transactional
-public class UsersServiceImpl implements UsersService{
+public class UsersServiceImpl implements UsersService, UserDetailsService{
 
 	private UsersMapper mapper;
 	private BCryptPasswordEncoder passwordEncoder; // BCryptPasswordEncoder 주입
 	
+	private AuthoritiesMapper authoritiesMapper;
+	
 	@Override
+	@Transactional
 	public void join(UsersVO user, String authority) throws Exception {
         // 사용자 정보 로그 출력
         log.info("회원가입된 user : " + user);
@@ -34,5 +44,25 @@ public class UsersServiceImpl implements UsersService{
         // 사용자 권한을 authorities 테이블에 삽입
         mapper.insertAuthority(user.getUsername(), authority);
     }
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		UsersVO user = mapper.read(username);
+		
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found with username: " + username);
+		}
 
+		// 권한 조회
+		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.getAuthority(username);
+
+		// UserDetails로 변환하여 반환
+		return new User(user.getUsername(), user.getPassword(), user.getEnabled() == '1', // enabled가 '1'이면 true로 설정
+				true, // accountNonExpired는 true로 설정
+				true, // credentialsNonExpired는 true로 설정
+				true, // accountNonLocked는 true로 설정
+				authorities // Authorities 반환
+		);
+	}
 }
