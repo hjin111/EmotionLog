@@ -37,5 +37,11 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.getQnaList();
 	}
 
+	@Override
+	public QnAVO getQnaDetails(Long qno) throws Exception {
+		
+		return mapper.getQnaDetails(qno);
+	}
+
 
 }

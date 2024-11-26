@@ -16,5 +16,8 @@ public interface AdminService {
 
 	// 미답변 QnA 리스트 조회
 	public List<QnAVO> getQnaList() throws Exception;
+	
+	// QnA 문의 상세 조회
+	public QnAVO getQnaDetails(Long qno) throws Exception;
 
 }

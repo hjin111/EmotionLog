@@ -31,5 +31,11 @@ public class AdminController {
 		
 	}
 	
+	// QnA 문의 상세 조회
+	@GetMapping("/qna/{qno}")
+	public void getQnaDetails() {
+		
+	}
+	
 
 }

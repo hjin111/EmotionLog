@@ -13,4 +13,6 @@ public interface AdminMapper {
 	public List<DiaryCountsVO> getDiaryCountsByDateRange();
 	
 	public List<QnAVO> getQnaList();
+	
+	public QnAVO getQnaDetails(Long qno);
 }
