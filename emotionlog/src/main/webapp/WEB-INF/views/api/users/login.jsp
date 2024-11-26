@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            background: linear-gradient(to right, #99ddc8, #95bf74); /* Tiffany Blue to Pistachio */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,7 +20,7 @@
         }
         
         .login-container {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(40, 63, 59, 0.8); /* Dark Slate Gray */
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -55,14 +55,14 @@
         }
 
         .form-group input:focus {
-            border-color: #2575fc;
+            border-color: #95bf74; /* Pistachio */
             outline: none;
-            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+            box-shadow: 0 0 5px rgba(149, 191, 116, 0.5); /* Pistachio glow */
         }
 
         button {
             width: 100%;
-            background-color: #2575fc;
+            background-color: #659b5e; /* Asparagus */
             color: #fff;
             border: none;
             padding: 10px;
@@ -72,7 +72,7 @@
         }
 
         button:hover {
-            background-color: #6a11cb;
+            background-color: #556f44; /* Fern Green */
         }
 
         .footer {
@@ -80,7 +80,13 @@
             font-size: 14px;
             color: rgba(255, 255, 255, 0.7);
         }
+
+        .footer a {
+            color: #99ddc8; /* Tiffany Blue */
+            text-decoration: underline;
+        }
     </style>
+
 </head>
 <body>
     <div class="login-container">
