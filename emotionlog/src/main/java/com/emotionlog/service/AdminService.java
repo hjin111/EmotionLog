@@ -19,5 +19,7 @@ public interface AdminService {
 	
 	// QnA 문의 상세 조회
 	public QboardVO getQboardDetails(Long qno) throws Exception;
+	
+	// QnA 답변 조회
 
 }
