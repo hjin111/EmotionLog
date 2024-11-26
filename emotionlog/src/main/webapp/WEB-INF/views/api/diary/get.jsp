@@ -7,84 +7,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>EmotionLog_list</title>
-    <!-- 부트스트랩 CSS 추가 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%@include file="../includes/header.jsp" %>
 
-<style>
-    /* 전체 달력 중앙 정렬 */
-    .calendar-wrapper {
-        display: flex;
-        justify-content: center; /* 가로 중앙 정렬 */
-        align-items: center;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    /* 테이블 스타일 */
-    .calendar-table {
-        table-layout: fixed;
-        width: auto;
-        margin: 0 auto; /* 테이블 자체 중앙 정렬 */
-    }
-
-    .calendar-table th,
-    .calendar-table td {
-        text-align: center; /* 날짜 번호 중앙 정렬 */
-        vertical-align: top; /* 내용 위쪽 정렬 */
-        height: 150px; /* 셀 높이 고정 */
-        width: 150px; /* 셀 너비 고정 */
-    }
-
-    .calendar-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* 카드 내부 내용 위쪽 정렬 */
-        align-items: flex-start; /* 텍스트 왼쪽 정렬 */
-        height: 100%;
-        width: 100%;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #f8f9fa;
-        padding: 10px;
-        overflow: hidden;
-    }
-    
-    
-    .calendar-card .date {
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center; /* 날짜 번호는 중앙 정렬 */
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    .calendar-card .card-text {
-        font-size: 14px;
-        line-height: 1.5;
-        text-align: left; /* 텍스트 왼쪽 정렬 */
-        overflow-wrap: break-word;
-        word-break: break-word;
-        overflow-y: auto; /* 내용이 넘치면 스크롤 */
-        max-height: calc(100% - 30px); /* 날짜 번호를 제외한 높이 제한 */
-    }
-    
-    .chat li {
-        border-bottom: 2px dotted grey; /* 빨간 줄 추가 */
-        padding-bottom: 10px; /* 줄과 텍스트 간격 추가 */
-        margin-bottom: 10px; /* 줄 아래 간격 추가 */
-    }
-
-
-</style>
-</head>
-<body>
 	<div class="container my-4">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
