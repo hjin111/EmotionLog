@@ -157,11 +157,13 @@
 				            <!-- 댓글이 여기에 동적으로 추가됩니다 -->
 				        </ul>
 				    </div>
+				    
+				    <div class ="card-footer">
+				    	<!-- 댓글 페이지 번호 출력 -->
+				    </div>
 				</div>
 				<!-- 댓글 끝 -->
 			</div>
-			
-
 		</div>
 	</div>
 
@@ -220,37 +222,117 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 
 	 // 댓글 리스트 보여주기
 	 showList(1);
+	 // >>> showList 함수 시작 >>>
 	 function showList(page) {
-	        replyService.getList({ dno: dnoValue, page: page || 1 }, function(list) {
 
+
+	 	// >>> replyService.getList 시작 >>>
+	 	replyService.getList(
+	 		{ dno: dnoValue, page: page || 1 },
+	 		function(replyCnt,list) {
+	 			console.log(replyCnt);
+	 			console.log(list);
+
+				if(page == -1){
+					pageNum = Math.ceil(replyCnt/10.0);
+					showList(pageNum);
+					return;
+				}
+			
 	            let str = "";
 	            if (list == null || list.length == 0) {
 	                replyUL.html(""); // 댓글이 없는 경우 비움
 	                return;
 	            }
-
-	            for (let i = 0, len = list.length; i < len; i++) {
-	                console.log(i)
-	                
-	                // replyDate 값을 사람이 읽을 수 있는 형식으로 변환
-	                let replyDate = list[i].reply_date ? new Date(list[i].reply_date).toLocaleString() : "N/A";
 	
-	                console.log("날짜: ", replyDate); // 각 댓글 데이터 확인
-	             	// 문자열 연결 연산자 사용
-	                str += '<li class="clearfix mb-2" data-rno="' + list[i].rno + '">' +
-			                    '<div>' +
-			                        '<div class="d-flex justify-content-between align-items-center">' +
-			                            '<strong class="fw-bold">' + list[i].replyer + '</strong>' +
-			                            '<small class="text-muted">' + replyDate + '</small>' +
-			                        '</div>' +
-			                        '<p>' + list[i].reply + '</p>' +
-			                    '</div>' +
-	              		  '</li>';
+	            for (let i = 0, len = list.length; i < len; i++) {
+	               console.log(i)
+	               
+	               // replyDate 값을 사람이 읽을 수 있는 형식으로 변환
+	               let replyDate = list[i].reply_date ? new Date(list[i].reply_date).toLocaleString() : "N/A";
+	
+	               console.log("날짜: ", replyDate); // 각 댓글 데이터 확인
+	            	// 문자열 연결 연산자 사용
+	               str += `<li class="clearfix mb-2" data-rno="\${list[i].rno}">
+		                    <div>
+		                        <div class="d-flex justify-content-between align-items-center">
+		                            <strong class="fw-bold">\${list[i].replyer}</strong>
+		                            <small class="text-muted">\${replyDate}</small>
+		                        </div>
+		                        <p>\${list[i].reply}</p>
+		                    </div>
+	             		  </li>`;
 	            }
 	            replyUL.html(str); // 댓글을 <ul>에 추가
-	        });
-	 } // end showList
+	            showReplyPage(replyCnt); // 페이지 번호 출력
+       		}
+	 	);
+       	// <<< replyService.getList 끝 <<<
+       	
+	 } 
+	 // <<< showList 함수 끝 <<<
 	 
+	 // 댓글 페이지 번호 출력
+	 let pageNum = 1;
+	 let replyPageFooter = $(".card-footer");
+	 // >>> showReplyPage 함수 시작 >>>
+	 function showReplyPage(replyCnt){
+		let endNum = Math.ceil(pageNum/10.0) * 10;
+		let startNum = endNum - 9;
+		
+		let prev = startNum != 1;
+		let next = false;
+		
+		console.log(endNum);
+		console.log(startNum);
+		console.log(prev);
+		console.log(next);
+
+		
+		if(endNum * 10 >= replyCnt){
+			endNum = Math.ceil(replyCnt/10.0);
+		}
+		if(endNum * 10 < replyCnt){
+			next =true;
+		}
+		
+		let str = "<ul class='pagination pull-right'>";
+		
+		if(prev){
+	        str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
+	      }
+	      
+	      for(var i = startNum ; i <= endNum; i++){
+	        
+	        var active = pageNum == i? "active":"";
+	        
+	        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+	      }
+	      
+	      if(next){
+	        str+= "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li>";
+	      }
+	      
+	    
+		str += "</ul></div>";
+		
+
+		console.log(str);
+		replyPageFooter.html(str);
+	 }
+	 // <<< showReplyPage 함수 끝 <<<
+	 replyPageFooter.on("click","li a", function(e){
+       e.preventDefault();
+       console.log("page click");
+       
+       var targetPageNum = $(this).attr("href");
+       
+       console.log("targetPageNum: " + targetPageNum);
+       
+       pageNum = targetPageNum;
+       
+       showList(pageNum);
+     });     
 	 // 모달 : 새로운 댓글의 추가버튼 이벤트 처리
 	 let modal = $(".modal");
 	 let modalInputReply = modal.find("input[name='reply']");
@@ -284,7 +366,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 			modal.find("input").val("");
 			modal.modal("hide");
 			
-			showList(1);
+			showList(-1);
 		});
 	 });
 	 // 특정 댓글의 클릭 이벤트 처리, 댓글 조회 클릭 이벤트 처리
@@ -310,7 +392,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 		 replyService.update(reply,function(result){
 			 alert(result);
 			 modal.modal("hide");
-			 showList(1);
+			 showList(pageNum);
 		 });
 	 });
 	 
@@ -320,7 +402,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 	 	 replyService.remove(rno,function(result){
 	 		 alert(result);
 	 		 modal.modal("hide");
-	 		 showList(1);
+	 		 showList(pageNum);
 	 	 });
 	 });
 	

@@ -80,9 +80,9 @@ public class ReplyMapperTests {
 	// 페이징 처리(list)
 	@Test
 	public void testList() {
-		Criteria cri= new Criteria();
+		Criteria cri= new Criteria(2,3);
 		
-		List<ReplyVO> replies = mapper.getListWithPaging(cri, dnoArr[0]);
+		List<ReplyVO> replies = mapper.getListWithPaging(cri, dnoArr[1]);
 		replies.forEach(reply -> log.info(reply));
 	}
 }

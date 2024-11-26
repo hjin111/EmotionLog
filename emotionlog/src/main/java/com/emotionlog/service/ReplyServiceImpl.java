@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emotionlog.domain.Criteria;
+import com.emotionlog.domain.ReplyPageDTO;
 import com.emotionlog.domain.ReplyVO;
 import com.emotionlog.mapper.ReplyMapper;
 
@@ -48,6 +49,13 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<ReplyVO> getList(Criteria cri, Long dno) {
 		log.info("get Reply List of a Board" + dno);
 		return mapper.getListWithPaging(cri, dno);
+	}
+
+	// 댓글과 댓글수 처리
+	@Override
+	public ReplyPageDTO getListPage(Criteria cri, Long dno) {
+		
+		return new ReplyPageDTO(mapper.getCountByDno(dno),mapper.getListWithPaging(cri, dno));
 	}
 	
 }

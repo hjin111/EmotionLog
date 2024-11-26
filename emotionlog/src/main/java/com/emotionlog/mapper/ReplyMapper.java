@@ -21,8 +21,11 @@ public interface ReplyMapper {
 	// 수정(update)
 	public int update(ReplyVO reply);
 	
-	// 페이징 -> 일딴 추후에
+	// 페이징(list)
 	public List<ReplyVO> getListWithPaging(
 			@Param("cri") Criteria cri,
 			@Param("dno") Long dno);
+	
+	// 댓글의 숫자 파악
+	public int getCountByDno(Long dno);
 }

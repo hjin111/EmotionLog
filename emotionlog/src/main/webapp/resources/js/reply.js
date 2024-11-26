@@ -1,4 +1,3 @@
-console.log("Reply Module.....")
 let replyService =(function(){
 	
 	// 댓글의 등록 처리
@@ -24,17 +23,23 @@ let replyService =(function(){
 	}
 	// 댓글의 목록 처리
 	function getList(param,callback,error){
+		console.log("get reply.....");
+	
 		let dno = param.dno;
 		let page = param.page || 1;
+					
 		$.getJSON("/api/replies/pages/"+dno+"/"+page+".json",
 				  function(data){
+				  	console.log("Data received:", data); // 응답 데이터 확인
 				  	if(callback){
-				  		callback(data);
+				  		//callback(data); // 댓글 목록만 가져오는 경우
+				  		callback(data.replyCnt,data.list); // 댓글 숫자와 목록을 가져오는 경우
 				  	}
 				  }).fail(function(xhr,status,err){
-				  	if(error){
-				  		error();
-				  	}
+				    console.error("Request failed. Status:", status, "Error:", err, "Response:", xhr.responseText);
+				    if (error) {
+				        error(err);
+				    }
 				  });
 	}
 	
