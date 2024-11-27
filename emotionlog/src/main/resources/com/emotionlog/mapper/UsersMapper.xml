@@ -32,5 +32,11 @@
         LEFT JOIN authorities a ON u.username = a.username
         WHERE u.username = #{username}
     </select>
-    	
+    
+    <!-- 사용자 정보 조회(마이페이지 사용) -->	
+    <select id="readMypage" resultType="com.emotionlog.domain.UsersVO" parameterType="string">
+    	SELECT username, name, birthday, password, phone_number, gender
+    	FROM users
+    	WHERE username = #{username}
+    </select>	
 </mapper>

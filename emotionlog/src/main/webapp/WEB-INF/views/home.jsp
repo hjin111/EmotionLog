@@ -64,7 +64,7 @@
             h1 {
                 font-size: 60px; /* 모바일에서 폰트 크기 조정 */
             }
-
+            
             a {
                 font-size: 16px;
                 padding: 10px 20px;
@@ -76,7 +76,6 @@
     <div>
         <h1>Emotion Log</h1>
         <ul>
-            <li><a href="/api/diary/list">board list</a></li>
             <li><a href="/api/users/join">회원가입</a></li>
             <li><a href="/api/users/login">로그인</a></li>
         </ul>

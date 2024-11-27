@@ -49,8 +49,7 @@ public class UsersController {
         service.join(user, authority);
         return "redirect:/api/users/login"; 
     }
-    
-    
+        
     @GetMapping("/login")
     public String loginForm() {
         return "/api/users/login";
@@ -85,7 +84,6 @@ public class UsersController {
         }
     }
 
-
     @GetMapping("/success")
     public String usersProfile(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -116,7 +114,14 @@ public class UsersController {
     }
 
     @GetMapping("/mypage")
-    public void myPage() {
+    public void myPage(Model model) {
+    	
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	User user = (User) authentication.getPrincipal();
+    	
+    	String username = user.getUsername();
+    
+    	model.addAttribute("users", service.readMypage(username));
     	
     }
     
