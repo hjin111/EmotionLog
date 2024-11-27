@@ -12,4 +12,8 @@ public interface UsersService {
 	
 	// 사용자 정보 수정
 	public void update(UsersVO user);
+	
+	// 사용자 정보 삭제
+	public void delete(String username);
+	
 }

@@ -148,18 +148,28 @@ public class UsersController {
     public String myPageModify(@ModelAttribute UsersVO updatedUser, Model model) {
         try {
         	
-           
             service.update(updatedUser);
-
             
             model.addAttribute("message", "succeess");
             return "redirect:/api/users/mypage"; 
         } catch (Exception e) {
-            log.error("Error updating user profile: ", e);
+            log.error("Error updating", e);
             model.addAttribute("error", "fail");
             return "/api/users/mypageModify"; 
         }
     }
-        
-
+    
+    // 사용자 삭제 처리
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("username") String username, Model model) {
+        try {
+            service.delete(username);  
+            model.addAttribute("message", "success");
+            return "redirect:/";
+        } catch (Exception e) {
+            log.error("Error deleting user: ", e);
+            model.addAttribute("error", "error");
+            return "redirect:/api/users/login";
+        }
+    }
 }

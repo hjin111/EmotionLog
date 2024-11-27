@@ -49,4 +49,15 @@
         birthday = TO_DATE(#{birthday}, 'YYYY-MM-DD')
     	WHERE username = #{username}
     </update>
+    
+   	<!-- 권한 정보 삭제 -->
+	<delete id="deleteAuthority" parameterType="string">
+	    DELETE FROM authorities WHERE username = #{username}
+	</delete>
+
+	<!-- 사용자 정보 삭제 -->
+	<delete id="delete" parameterType="string">
+	    DELETE FROM users WHERE username = #{username}
+	</delete>
+    
 </mapper>

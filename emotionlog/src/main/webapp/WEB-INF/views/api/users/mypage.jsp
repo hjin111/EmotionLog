@@ -189,9 +189,16 @@ h2 {
         </div>
 
 		<div class="footer">
-			사용중인 계정을 삭제하시겠습니까? <a href="#"
-				style="color: #fff; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='red'" onmouseout="this.style.color='#fff'" > 계정 삭제</a>
+			사용중인 계정을 삭제하시겠습니까?
+			<form action="/api/users/delete" method="post">
+				<input type="hidden" name="username" value="${users.username}" />
+				<button type="submit"
+					style="color: #fff; text-decoration: underline; background: none; border: none; cursor: pointer;"
+					onmouseover="this.style.color='red'"
+					onmouseout="this.style.color='#fff'">계정 삭제</button>
+			</form>
 		</div>
+
 
 	</div>
 </body>
