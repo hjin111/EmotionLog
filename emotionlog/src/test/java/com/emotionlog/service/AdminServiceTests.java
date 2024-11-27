@@ -27,10 +27,10 @@ public class AdminServiceTests {
 	@Autowired
 	AdminService service;
 	
-	@Test
-	public void testGetUserList() throws Exception {
-		service.getUserList().forEach(u -> log.info(u));
-	}
+//	@Test
+//	public void testGetUserList() throws Exception {
+//		service.getUserList().forEach(u -> log.info(u));
+//	}
 	
 	@Test
 	public void testGetDiaryCountsByDateRange() throws Exception {

@@ -21,9 +21,9 @@ public class AdminServiceImpl implements AdminService {
 	private AdminMapper mapper;
 
 	@Override
-	public List<UsersVO> getUserList() throws Exception {
+	public List<UsersVO> getUserList(Integer limit) throws Exception {
 		
-		return mapper.getUserList();
+		return mapper.getUserList(limit);
 	}
 
 	@Override
