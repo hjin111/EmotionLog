@@ -39,30 +39,25 @@ public class DiaryController {
 	private DiaryService service;
 	
 	/**
-	 * 메소드명  : list (GET)
+	 * 메소드명  : listDiary (GET)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-22
 	 * 내용      : 목록에 대한 처리
 	 */
 	@GetMapping("/list")
-	public String list(@RequestParam(value = "selectedDate", required = false) String selectedDate
+	public String listDiary(@RequestParam(value = "selectedDate", required = false) String selectedDate
 					  ,@RequestParam(value = "regdate", required = false) String regdate
 					  ,@ModelAttribute(value = "regdate") String regdateFromModel
 					  ,@RequestParam(value = "username", required = false) String username
 					  ,Model model) {
 		try {
 	
-			 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			 User user = (User) authentication.getPrincipal();
-			
 			// 회원 아이디 부분
+			 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			 User user = (User) authentication.getPrincipal();			
 			username = user.getUsername();
-			log.info(username);
+
 			// pick date 설정 부분
-			log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@1"+ selectedDate);
-			log.info("*************************************2"+ regdate);
-			log.info("*************************************3"+ regdateFromModel);
-	        
 	        String pickdate = null;
 	        // 원래 문자열을 LocalDate로 파싱
 	        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -102,35 +97,27 @@ public class DiaryController {
 	        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 	        int endDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+	        // 달력 관련 변수 보내기~~
 	        model.addAttribute("year", year);
 	        model.addAttribute("month", month);
 	        model.addAttribute("dayOfWeek", dayOfWeek);
 	        model.addAttribute("endDay", endDay);
 	        model.addAttribute("pick_date", pickdate);
-	        
-	        // username
 	        model.addAttribute("username", username);
 
 
-	        // diary
+	        // diary 변수 보내기 ~~
 			DiaryVO diary = new DiaryVO();
 			diary.setUsername(username);
 			Date date_regdate = c.getTime();			// Date 객체로 변환
 		    diary.setRegdate(date_regdate); 
 		    List<DiaryVO> dia = service.getList(diary);
 		    log.info(dia);
-		    for (DiaryVO d : dia) {
-		        if (d.getRegdate() != null) {
-		        	log.info("regdate type: " + d.getRegdate().getClass().getName());
-		        }
 
-		    }
 		    model.addAttribute("diary",dia);
 
 	        // AJAX 요청에 응답할 JSP 반환
 	        return "/api/diary/list"; // JSP의 특정 부분만 반환
-			
-			
 			
 		} catch (Exception e) {
 			// 유저에게 보여줄 메시지 리턴
@@ -142,14 +129,14 @@ public class DiaryController {
 	}
 	
 	/**
-	 * 메소드명  : register (POST)
+	 * 메소드명  : registerDiary (POST)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 등록 처리 
 	 */ 
 	// addFlashAttribute 의 경우 일회성으로만 데이터를 전달, 보관된 데이터는 단 한번만 사용할수 있게 보관
 	@PostMapping("/register")
-	public String register(DiaryVO diary, RedirectAttributes rttr) {
+	public String registerDiary(DiaryVO diary, RedirectAttributes rttr) {
 		try {
 			log.info("register: "+diary);
 			service.register(diary);
@@ -168,7 +155,7 @@ public class DiaryController {
 	}
 	
 	/**
-	 * 메소드명  : register (GET)
+	 * 메소드명  : registerDiary (GET)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 등록 처리
@@ -176,7 +163,7 @@ public class DiaryController {
 	// 게시물의 등록 작업은 POST 방식으로 처리하지만, 화면에서 입력을 받아야하므로
 	// GET방식으로 입력 페이지를 볼 수 있도록~
 	@GetMapping("/register")
-	public void register(@RequestParam("regdate") String regdate
+	public void registerDiary(@RequestParam("regdate") String regdate
 						,@RequestParam("username") String username
 						,Model model) {
 		try {
@@ -192,13 +179,13 @@ public class DiaryController {
 	
 
 	/**
-	 * 메소드명  : get (GET)
+	 * 메소드명  : getDiary (GET)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 조회 처리 
 	 */
 	@GetMapping({"/get","/modify"})
-	public void get (@RequestParam("dno") Long dno, Model model) {
+	public void getDiary(@RequestParam("dno") Long dno, Model model) {
 		try {
 			model.addAttribute("diary",service.get(dno));   
 		} catch (Exception e) {
@@ -207,13 +194,13 @@ public class DiaryController {
 	}
 
 	/**
-	 * 메소드명  : modify (POST)
+	 * 메소드명  : modifyDiary (POST)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 수정 처리
 	 */
 	@PostMapping("/modify")
-	public String modify(@ModelAttribute DiaryVO diary,RedirectAttributes rttr) {
+	public String modifyDiary(@ModelAttribute DiaryVO diary,RedirectAttributes rttr) {
 		try {
 			if(service.modify(diary)) {
 				rttr.addFlashAttribute("result","success");
@@ -232,20 +219,21 @@ public class DiaryController {
 	}
 	
 	/**
-	 * 메소드명  : remove (POST)
+	 * 메소드명  : removeDiary (POST)
 	 * 작성자    : 박혜정
 	 * 작성일    : 2024-11-23
 	 * 내용      : 삭제 처리
 	 */
 	@PostMapping("/remove")
-	public String remove(@ModelAttribute DiaryVO diary, RedirectAttributes rttr) {
+	public String removeDiary(@ModelAttribute DiaryVO diary, RedirectAttributes rttr) {
 		try {
 			if(service.remove(diary.getDno())) {
 				rttr.addFlashAttribute("result","success");
 				// SimpleDateFormat 사용하여 Date를 String으로 변환
 		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		        String formattedDate = dateFormat.format(diary.getRegdate());
-				rttr.addFlashAttribute("regdate", formattedDate);			}
+				rttr.addFlashAttribute("regdate", formattedDate);			
+				}
 			
 			return "redirect:/api/diary/list" ;
 		} catch (Exception e) {
