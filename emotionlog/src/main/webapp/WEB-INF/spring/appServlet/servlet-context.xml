@@ -17,6 +17,17 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- MyBatis SQLSessionFactory 설정 -->
+    <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="configuration">
+            <beans:bean class="org.apache.ibatis.session.Configuration">
+                <!-- jdbcTypeForNull을 VARCHAR로 설정 -->
+                <beans:property name="jdbcTypeForNull" value="VARCHAR" />
+            </beans:bean>
+        </beans:property>
+    </beans:bean>
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

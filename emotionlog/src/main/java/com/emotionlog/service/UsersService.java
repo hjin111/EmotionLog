@@ -9,4 +9,7 @@ public interface UsersService {
 	
 	// 사용자 정보 조회(마이페이지 사용)
 	public UsersVO readMypage(String username);
+	
+	// 사용자 정보 수정
+	public void update(UsersVO user);
 }

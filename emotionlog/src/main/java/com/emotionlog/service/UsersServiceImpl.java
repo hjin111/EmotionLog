@@ -74,4 +74,13 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
 		
 		return user;
 	}
+
+	@Override
+	public void update(UsersVO user) {
+		mapper.update(user);
+		log.info(user);
+		
+	}
+	
+	
 }

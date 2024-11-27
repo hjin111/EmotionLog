@@ -30,12 +30,28 @@ public class UsersMapperTests {
 		user.setPhone_number("010-1233-5678");
 	    user.setPassword("pw1414");
 	    user.setGender('M');
-        user.setBirthday("1995-11-20"); 
+        user.setBirthday(null); 
         
 	    mapper.insert(user);
 	    
 	    log.info("insert된 user : " + user);
 		
 	}
+	
+	@Test
+	public void testUpdate() {
+		
+		UsersVO user = new UsersVO();
+		user.setUsername("3");
+		user.setName("짜증나");
+		user.setPhone_number("010-1233-5678");
+	    user.setGender('M');
+        
+	    mapper.update(user);
+	    
+	    log.info("update된 user : " + user);
+	}
+	
+
 	
 }
