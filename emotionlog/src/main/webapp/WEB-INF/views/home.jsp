@@ -14,4 +14,5 @@
 </body>
 	<li><a href="/api/diary/list">board list</a></li>
 	<li><a href="/api/users/join">회원가입</a></li>
+	<li><a href="/api/users/login">로그인</a></li>
 </html>

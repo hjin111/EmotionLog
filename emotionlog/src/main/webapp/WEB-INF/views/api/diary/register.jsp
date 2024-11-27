@@ -7,6 +7,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="../includes/header.jsp" %>
+<body>
+	<%@include file="../includes/navbar.jsp" %>
 
     
     

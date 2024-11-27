@@ -8,19 +8,38 @@
 
 <%@include file="../includes/header.jsp" %>
 
+<body>
+	
+<div id="calendar-container">
+	<%@include file="../includes/navbar.jsp" %>
+	
 
-<div class="container my-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8" id="calendar-container">
+    <div class="centered justify-content-center">
+        <div class="col-md-8" >
 			
 			<!-- form -->
 			<form id="actionForm" action="/api/diary/list" method="get">
  			</form>
-			
+
+		<%-- 				   <input type="text" id="date-picker" class="form-control" value="${pick_date}" />
+--%>	
+			<div class="datepicker-container">
+	            <div class="datepicker-header">Select Date</div>
+	            <input type="text" id="date-picker" class="datepicker-input" value="${pick_date}">
+	        </div>
+			   <%-- <h1 class="text-left">Emotion_log : ${year}-${month}</h1> --%>
+		    <!-- 헤더 영역 -->
+		    <div class="header-container" boder = none>
+		        <h1 class="header-title">Emotional Diary Tracking</h1>
+		        <div class="divider"></div>
+		        <p class="header-subtitle">Your personal emotion tracker - Month: ${year}-${month}</p>
+		    </div>   
+			    
+			    
 			<!-- table -->
             <table class="table table-bordered calendar-table">
                 <thead>
-                    <tr class="bg-light">
+                    <tr>
                         <th>일</th>
                         <th>월</th>
                         <th>화</th>
@@ -31,11 +50,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
-				  
-				   <input type="text" id="date-picker" class="form-control" value="${pick_date}" />
-				   <h1 class="text-left">Emotion_log : ${year}-${month}</h1>
-					                    
                    <c:set var="date" value="1" />
                    <c:forEach var="row" begin="0" end="5">
 					    <%-- 날짜가 마지막을 초과했는지 확인 --%>
@@ -155,6 +169,8 @@
 <script>
 $(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
 	 
+
+	
 	// 모달을 위한 result 값
 	 let result = '<c:out value="${result}"/>';
 	 console.info("리저트 결과값!!!!!: "+result);
@@ -225,7 +241,17 @@ $(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상�
 
     });
 
-
+    // DatePicker 재초기화
+	function reinitializeDatePicker() {
+	    $('.datepicker').datepicker('destroy');
+	    $('.datepicker').datepicker({
+	        format: "yyyy/mm",
+	        minViewMode: 1,
+	        language: "ko",
+	        autoclose: true
+	    });
+	}
+	
     $(document).ready(function () {
         $('#date-picker').datepicker({
             format: "yyyy/mm",
@@ -240,10 +266,16 @@ $(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상�
             $.ajax({
                 url: '/api/diary/list', // 서버에서 데이터를 가져올 URL
                 type: 'GET',
-                data: { selectedDate: selectedDate },
+                data: { selectedDate: selectedDate,username: username },
                 success: function (response) {
-                    // 서버에서 받은 데이터로 달력 업데이트
+                	$('#calendar-container').empty(); // 기존 내용을 제거
+                	// 서버에서 받은 데이터로 달력 업데이트
                     $('#calendar-container').html(response);
+                	
+                    // DatePicker 재초기화 추가
+                    reinitializeDatePicker();
+
+                    console.log($('#calendar-container').html());
                 },
                 error: function (error) {
                     console.error('데이터를 가져오는 중 오류 발생:', error);

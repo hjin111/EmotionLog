@@ -9,6 +9,9 @@
 
 <%@include file="../includes/header.jsp" %>
 
+<body>
+	<%@include file="../includes/navbar.jsp" %>
+	
 	<div class="container my-4">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
