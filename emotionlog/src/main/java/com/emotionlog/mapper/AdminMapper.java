@@ -15,7 +15,7 @@ public interface AdminMapper {
 	
 	public List<DiaryCountsVO> getDiaryCountsByDateRange();
 	
-	public List<QboardVO> getQboardList();
+	public List<QboardVO> getQboardList(@Param("limit") Integer limit);
 	
 	public QboardVO getQboardDetails(Long qno);
 	
