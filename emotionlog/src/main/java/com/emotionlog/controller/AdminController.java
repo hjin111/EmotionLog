@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.emotionlog.domain.DiaryCountsVO;
+import com.emotionlog.domain.QboardVO;
 import com.emotionlog.domain.UsersVO;
 import com.emotionlog.service.AdminService;
 
@@ -32,11 +34,25 @@ public class AdminController {
 		return "api/admin/admin";
 	}
 	
+	// 전체 회원 리스트 조회
+	@GetMapping("/users")
+	public String getUserList(Model model) {
+	    try {
+	        List<UsersVO> userList = service.getUserList(Integer.MAX_VALUE);
+	        model.addAttribute("users", userList);
+	        
+	        return "api/admin/userList";  // 전체 페이지 렌더링 (userList.jsp)
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "error";  // 에러 페이지
+	    }
+	}
+	
 	
 	// 회원 리스트 조회(5)
-	@GetMapping("/users")
+	@GetMapping("/userpart")
 	@ResponseBody
-	public ResponseEntity<List<UsersVO>> getUserList(@RequestParam(value = "limit", required = false) Integer limit) throws Exception {
+	public ResponseEntity<List<UsersVO>> getUserListAjax(@RequestParam(value = "limit", required = false) Integer limit) throws Exception {
         if (limit == null) {
             limit = Integer.MAX_VALUE;  // limit이 없으면 모든 데이터를 조회
         }
@@ -52,6 +68,8 @@ public class AdminController {
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 	
+	
+	
 	// 날짜별 작성된 일기 수 조회
 	@GetMapping("/diary-counts")
 	@ResponseBody
@@ -64,11 +82,23 @@ public class AdminController {
 		}
 		
 	}
-	
-	// 미답변 문의 리스트 조회
+	// 미답변 문의 리스트 조회(5)
 	@GetMapping("/qna")
-	public void getQboardList() {
-		
+	@ResponseBody
+	public ResponseEntity<List<QboardVO>> getQboardList(@RequestParam(value = "limit", required = false) Integer limit) throws Exception {
+		if (limit == null) {
+            limit = Integer.MAX_VALUE;  // limit이 없으면 모든 데이터를 조회
+        }
+
+        List<QboardVO> qList = service.getQboardList(limit);
+
+        if (qList.isEmpty()) {
+            // 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // 데이터를 정상적으로 가져온 경우 200 OK와 데이터 반환
+        return new ResponseEntity<>(qList, HttpStatus.OK);
 	}
 	
 	// QnA 문의 상세 조회

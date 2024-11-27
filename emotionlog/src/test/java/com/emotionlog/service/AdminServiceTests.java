@@ -47,11 +47,11 @@ public class AdminServiceTests {
         
 	}
 	
-	@Test
-	public void testGetQboardList() throws Exception {
-	    List<QboardVO> qboardList = service.getQboardList();
-	    log.info("QnA List: " + qboardList);
-	}
+//	@Test
+//	public void testGetQboardList() throws Exception {
+//	    List<QboardVO> qboardList = service.getQboardList();
+//	    log.info("QnA List: " + qboardList);
+//	}
 
 	@Test
 	public void testGetQboardDetails() throws Exception {

@@ -23,7 +23,9 @@
 	
 	<section>
 		<h2>회원 목록</h2>
-		<div>+</div>
+		<div>
+			<a href="/api/admin/users">+</a>
+		</div>
 		<hr>
 		<table class="userList">
 			<thead>
@@ -33,6 +35,31 @@
 					<th>생일</th>
 					<th>전화번호</th>
 					<th>성별</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+		
+			</tbody>
+		
+		</table>	
+	</section>
+	
+	
+	<section>
+		<h2>답변 대기 중 문의</h2>
+		<div>
+			<a href="/api/admin/qna">+</a>
+		</div>
+		<hr>
+		<table class="qList">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<!-- <th>내용</th> -->
+					<th>작성자</th>
+					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -96,7 +123,7 @@ $(document).ready(function() {
     });
     
     $.ajax({
-    	url: '/api/admin/users',  
+    	url: '/api/admin/userpart',  
         method: 'GET',
         data: {limit: 5},
         dataType: 'json',
@@ -124,8 +151,38 @@ $(document).ready(function() {
         error: function(xhr, status, error) {
             console.error('Error:', xhr.responseText); 
         }
-    })
+    });
     
+    $.ajax({
+    	url: '/api/admin/qna',  
+        method: 'GET',
+        data: {limit: 5},
+        dataType: 'json',
+        success: function(response) {
+        	console.log(response);
+        	
+        	 // 테이블에 데이터를 추가
+            let tableBody = $('.qList tbody');
+            tableBody.empty();  // 기존 테이블 내용 비우기 (초기화)
+            
+         // 응답받은 데이터로 테이블 채우기
+            response.forEach(function(q) {
+                let row = '<tr>' +
+                    '<td>' + q.qno + '</td>' +
+                    '<td>' + q.qtitle + '</td>' +
+                    //'<td>' + q.qcontent + '</td>' +
+                    '<td>' + q.username + '</td>' +
+                    '<td>' + q.date + '</td>' +
+                '</tr>';
+                tableBody.append(row);
+            });
+            
+            
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', xhr.responseText); 
+        }
+    });
     
 });
 </script>

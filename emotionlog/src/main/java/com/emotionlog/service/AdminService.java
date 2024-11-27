@@ -16,7 +16,7 @@ public interface AdminService {
 	public List<DiaryCountsVO> getDiaryCountsByDateRange() throws Exception;
 
 	// 미답변 문의 리스트 조회
-	public List<QboardVO> getQboardList() throws Exception;
+	public List<QboardVO> getQboardList(Integer limit) throws Exception;
 	
 	// QnA 문의 상세 조회
 	public QboardVO getQboardDetails(Long qno) throws Exception;

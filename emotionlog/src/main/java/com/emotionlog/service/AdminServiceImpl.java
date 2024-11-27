@@ -33,9 +33,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<QboardVO> getQboardList() throws Exception {
+	public List<QboardVO> getQboardList(Integer limit) throws Exception {
 
-		return mapper.getQboardList();
+		return mapper.getQboardList(limit);
 	}
 
 	@Override
