@@ -15,22 +15,20 @@
 	
 
     <div class="centered justify-content-center">
-        <div class="col-md-8" >
-			
+        <div class="col-md-8" >		
 			<!-- form -->
 			<form id="actionForm" action="/api/diary/list" method="get">
  			</form>
-
-		<%-- 				   <input type="text" id="date-picker" class="form-control" value="${pick_date}" />
---%>	
+ 			
+ 			<!-- datepicker 영역 -->
 			<div class="datepicker-container">
-	            <div class="datepicker-header">Select Date</div>
+				<br/>
 	            <input type="text" id="date-picker" class="datepicker-input" value="${pick_date}">
 	        </div>
 			   <%-- <h1 class="text-left">Emotion_log : ${year}-${month}</h1> --%>
 		    <!-- 헤더 영역 -->
 		    <div class="header-container" boder = none>
-		        <h1 class="header-title">Emotional Diary Tracking</h1>
+		        <h1 class="header-title">Emotion_log</h1>
 		        <div class="divider"></div>
 		        <p class="header-subtitle">Your personal emotion tracker - Month: ${year}-${month}</p>
 		    </div>   

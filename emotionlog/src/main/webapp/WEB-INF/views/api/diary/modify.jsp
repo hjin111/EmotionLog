@@ -12,7 +12,7 @@
 
 	<div class="container my-4">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="gmr-container">
 
 				<!-- 다양한 상황을 처리하기 위해서 form 태그 이용~~ -->
 				<form id='modifyForm' action="/api/diary/modify" method="post">
@@ -45,7 +45,7 @@
 							</div>
 							
 							<!-- 감정 -->
-							<div class ="dropdown">
+							<div class =" form-group dropdown">
 								<label>감정</label><br/>				
 								<select name = 'emotion_status'>
 									<option value="" <c:out value="${diary.emotion_status == null?'selected':'' }"/>>--</option>
@@ -71,9 +71,11 @@
 							</c:if>
 							
 							<br/>
-							<button type='submit' data-oper='modify' class="btn btn-default">Modify</button>
-							<button type='submit' data-oper='remove' class="btn btn-danger">Remove</button>
-							<button type='submit' data-oper='list' class="btn btn-info">List</button>
+							<div class ="form-group">
+								<button type='submit' data-oper='modify' class="btn btn-primary">Modify</button>
+								<button type='submit' data-oper='remove' class="btn btn-danger">Remove</button>
+								<button type='submit' data-oper='list' class="btn btn-info">List</button>							
+							</div>
 
 						</div>
 						<!-- end panel-body -->

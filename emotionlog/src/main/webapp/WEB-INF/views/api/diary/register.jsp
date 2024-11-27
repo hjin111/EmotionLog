@@ -14,7 +14,7 @@
     
 	<div class="container my-4">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="gmr-container">
 				<div class="panel panel-default">
 					<div class="panel-heading">diary Register Page</div>
 					<!-- /.panel-heading -->
@@ -42,7 +42,7 @@
 							</div>
 							
 							<!-- 감정 -->
-							<div class ="dropdown">
+							<div class ="form-group dropdown">
 								<label>감정</label><br/>				
 								<select name = 'emotion_status'>
 									<option value="" <c:out value="${diary.emotion_status == null?'selected':'' }"/>>--</option>
@@ -56,10 +56,11 @@
 							</div>
 							<br/>
 							
-		                 	<button type="submit" class="btn btn-default">Submit Button</button>
-                			<button type="reset" class="btn btn-default">Reset Button</button>
-                			<button type='submit' data-oper='list' class="btn btn-info">List</button>
-                			
+							<div class ="form-group">
+			                 	<button type="submit" class="btn btn-success">Submit Button</button>
+	                			<button type="reset" class="btn btn-danger">Reset Button</button>
+	                			<button type='submit' data-oper='list' class="btn btn-info">List</button>	                			
+							</div>
 					    </form>
 					</div>
 					<!-- end panel-body -->
