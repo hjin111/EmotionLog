@@ -8,8 +8,16 @@
             <ul class="navbar-nav ms-auto">
             	 <li class="nav-item"><a class="nav-link" href="/" style="font-size: 22px; color: #fff;">Home</a></li>
                  <li class="nav-item"><a class="nav-link" href="/api/users/mypage" style="font-size: 22px; color: #fff;">Mypage</a></li>
-                 <li class="nav-item"><a class="nav-link" href="#" style="font-size: 22px; color: #fff;">Logout</a></li>
-            </ul>
+				<!-- 수정된 로그아웃 부분: form으로 변경 -->
+				<li class="nav-item">
+					<form action="/api/users/logout" method="post"
+						style="display: inline;">
+						<button type="submit" class="nav-link"
+							style="font-size: 22px; color: #fff; background: none; border: none; cursor: pointer;">
+							Logout</button>
+					</form>
+				</li>
+			</ul>
         </div>
     </div>
 </nav>
