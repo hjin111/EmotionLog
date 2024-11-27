@@ -39,4 +39,14 @@
     	FROM users
     	WHERE username = #{username}
     </select>	
+    
+    <!-- 사용자 정보 수정 -->
+    <update id="update" >
+    	UPDATE users
+    	SET name = #{name},
+        phone_number = #{phone_number},
+        gender = #{gender},
+        birthday = TO_DATE(#{birthday}, 'YYYY-MM-DD')
+    	WHERE username = #{username}
+    </update>
 </mapper>

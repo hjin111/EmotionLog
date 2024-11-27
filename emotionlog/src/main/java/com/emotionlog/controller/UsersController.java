@@ -113,6 +113,7 @@ public class UsersController {
         return "/api/users/success"; // success.jsp 반환
     }
 
+    // 마이페이지 조회
     @GetMapping("/mypage")
     public void myPage(Model model) {
     	
@@ -125,5 +126,40 @@ public class UsersController {
     	
     }
     
+    // 마이페이지 수정
+    @GetMapping("/mypageModify")
+    public String myPageModify(Model model) {
+    	
+    	  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+          User user = (User) authentication.getPrincipal();
+          String username = user.getUsername();
+
+          // 수정할 사용자 모델에 추가
+          UsersVO users = service.readMypage(username);
+          model.addAttribute("users", users);
+
+          return "/api/users/mypageModify"; 
+    	
+    }
+    
+    
+    // 마이페이지 수정 처리
+    @PostMapping("/mypageModify")
+    public String myPageModify(@ModelAttribute UsersVO updatedUser, Model model) {
+        try {
+        	
+           
+            service.update(updatedUser);
+
+            
+            model.addAttribute("message", "succeess");
+            return "redirect:/api/users/mypage"; 
+        } catch (Exception e) {
+            log.error("Error updating user profile: ", e);
+            model.addAttribute("error", "fail");
+            return "/api/users/mypageModify"; 
+        }
+    }
+        
 
 }

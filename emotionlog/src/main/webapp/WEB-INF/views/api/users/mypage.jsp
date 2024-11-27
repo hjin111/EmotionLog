@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -50,13 +52,6 @@ h2 {
 	letter-spacing: 1px;
 }
 
-.welcome-message p {
-	font-size: 22px;
-	color: #fff;
-	font-weight: normal;
-	margin-top: 10px;
-	font-style: italic;
-}
 
 /* 사용자 정보 박스 스타일 */
 .user-info {
@@ -181,9 +176,9 @@ h2 {
             <input type="text" id="phoneNumber" value='<c:out value="${users.phone_number }"/>' readonly> 
 
             <label for="gender"><strong>Your Gender</strong></label>
-			<input type="text" style="text-align: center; padding-left:60px; width:496px;" id="gender" value='<c:choose>
+			<input type="text" style="text-align: center; padding-left:50px; width:496px;" id="gender" value='<c:choose>
         	<c:when test="${fn:trim(String.valueOf(users.gender)) eq 'M'}">MAN</c:when>
-        	<c:when test="${fn:trim(String.valueOf(users.gender)) eq 'W'}">WOMAN</c:when>
+        	<c:when test="${fn:trim(String.valueOf(users.gender)) eq 'F'}">WOMAN</c:when>
     		</c:choose>' readonly>
 
         </div>
@@ -194,8 +189,8 @@ h2 {
         </div>
 
 		<div class="footer">
-			Are you sure you want to delete your account? <a href="#"
-				style="color: #fff; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='red'" onmouseout="this.style.color='#fff'" >Delete Account</a>
+			사용중인 계정을 삭제하시겠습니까? <a href="#"
+				style="color: #fff; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='red'" onmouseout="this.style.color='#fff'" > 계정 삭제</a>
 		</div>
 
 	</div>
