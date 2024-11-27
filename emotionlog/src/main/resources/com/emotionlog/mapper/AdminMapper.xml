@@ -21,7 +21,7 @@
 	LEFT JOIN diary d
 	ON TRUNC(d.regdate) = dates.regdate
 	GROUP BY dates.regdate
-	ORDER BY dates.regdate DESC
+	ORDER BY dates.regdate 
 
         ]]>
 	</select>
