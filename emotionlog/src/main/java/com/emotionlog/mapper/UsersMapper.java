@@ -24,5 +24,13 @@ public interface UsersMapper {
     // 사용자 정보 수정
     public void update(UsersVO user);
     
+    // 권한 삭제
+    public void deleteAuthority(String username);
+    
+    // 사용자 정보 삭제
+    public void delete(String username);
+    
+    
+    
 
 }

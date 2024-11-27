@@ -81,6 +81,14 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
 		log.info(user);
 		
 	}
+
+	@Override
+	@Transactional
+	public void delete(String username) {
+		mapper.deleteAuthority(username); // 권한 삭제
+		mapper.delete(username); // 사용자 정보 삭제
+		
+	}
 	
 	
 }
