@@ -65,4 +65,13 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
 				authorities // Authorities 반환
 		);
 	}
+
+	@Override
+	public UsersVO readMypage(String username) {
+		
+		UsersVO user = mapper.readMypage(username);
+		log.info(user);
+		
+		return user;
+	}
 }
