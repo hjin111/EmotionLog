@@ -18,4 +18,6 @@ public interface AdminMapper {
 	public QboardVO getQboardDetails(Long qno);
 	
 	public AboardVO getAnswer(Long qno);
+	
+	public void createAnswer(AboardVO vo);
 }

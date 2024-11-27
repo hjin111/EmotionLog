@@ -65,4 +65,20 @@ public class AdminServiceTests {
 		AboardVO vo = service.getAnwser(qno);
 		log.info(vo);
 	}
+	
+//	@Transactional
+	@Test
+	public void testCreateAnswer() throws Exception {
+		AboardVO vo = new AboardVO();
+		vo.setAtitle("RE: 테스트");
+		vo.setAcontent("테스트 본문");
+		vo.setUsername("1");
+		vo.setQno(1L);
+		
+		service.createAnswer(vo);
+		
+		log.info(vo);
+		
+	}
+	
 }
