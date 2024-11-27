@@ -72,9 +72,9 @@
 							
 							<br/>
 							<div class ="form-group">
-								<button type='submit' data-oper='modify' class="btn btn-primary">Modify</button>
+								<button type='submit' data-oper='modify' class="btn btn-warning">Modify</button>
 								<button type='submit' data-oper='remove' class="btn btn-danger">Remove</button>
-								<button type='submit' data-oper='list' class="btn btn-info">List</button>							
+								<button type='submit' data-oper='list' class="btn btn-secondary">List</button>							
 							</div>
 
 						</div>

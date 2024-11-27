@@ -64,8 +64,8 @@
 						
 						<br/>
 						<div class ="form-group">
-							<button data-oper='modify' class="btn btn-primary">Modify</button>
-							<button data-oper='list' class="btn btn-info">List</button> 
+							<button data-oper='modify' class="btn btn-warning">Modify</button>
+							<button data-oper='list' class="btn btn-secondary">List</button> 
 						</div>
 
 					</div>
@@ -264,6 +264,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
        
        showList(pageNum);
      });     
+	 
 	 // 모달 : 새로운 댓글의 추가버튼 이벤트 처리
 	 let modal = $(".modal");
 	 let modalInputReply = modal.find("input[name='reply']");
