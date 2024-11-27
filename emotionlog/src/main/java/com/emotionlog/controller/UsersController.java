@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +57,7 @@ public class UsersController {
     }
     
     @PostMapping("/login")
-    public String loginSubmit(@RequestParam String username, @RequestParam String password, Model model) {
+    public String usersLogin(@RequestParam String username, @RequestParam String password, Model model) {
         try {
             UsernamePasswordAuthenticationToken token =
                     new UsernamePasswordAuthenticationToken(username, password);
@@ -86,7 +87,7 @@ public class UsersController {
 
 
     @GetMapping("/success")
-    public String home(Model model) {
+    public String usersProfile(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("Authentication: " + authentication);
 
@@ -105,7 +106,7 @@ public class UsersController {
             model.addAttribute("username", user.getUsername());
         } else if (principal instanceof org.springframework.security.core.userdetails.User) {
             // Spring Security 기본 UserDetails 객체인 경우
-            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
+            User user = (User) principal;
             model.addAttribute("username", user.getUsername());
         } else {
             model.addAttribute("username", authentication.getName()); // 기본 처리
@@ -114,7 +115,10 @@ public class UsersController {
         return "/api/users/success"; // success.jsp 반환
     }
 
-    
+    @GetMapping("/mypage")
+    public void myPage() {
+    	
+    }
     
 
 }
