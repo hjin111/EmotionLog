@@ -80,10 +80,10 @@
 						                       
 						                        <c:forEach var="entry" items="${diary}">
 						                            <fmt:formatDate value="${entry.regdate}" pattern="dd" var="formattedDate"/>
-						                            <c:if test="${formattedDate == date}">
-						                                <c:set var="hasEntry" value="true" />
+						                            <c:if test="${formattedDate + 0 == date + 0}">
+						                                <c:set var="hasEntry" value="true"/>
 						                                <c:set var="currentRegdate" value="${entry.regdate}"/>
-						                                <c:set var="currentDno" value="${entry.dno}" />
+						                                <c:set var="currentDno" value="${entry.dno}" />		                                
 						                            </c:if>
 						                        </c:forEach>
 																                        
@@ -187,7 +187,6 @@
 						<div class="modal-footer">
 			                <!-- 버튼 속성 수정 -->
 			                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-<!-- 			                <button type="button" class="btn btn-primary">Save changes</button>-->						
 						</div>
 						<!-- /.modal-footer -->
 					</div>
@@ -217,7 +216,6 @@ $(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상�
 	
 	// 모달을 위한 result 값
 	 let result = '<c:out value="${result}"/>';
-	 console.info("리저트 결과값!!!!!: "+result);
 	
 	// 모달
 	 checkModal(result);
@@ -245,10 +243,6 @@ $(document).ready(function(){ //dom 구조가 만들어져 준비되어진 상�
         let dno = $(this).data("dno"); // 클릭된 요소의 data-dno 값 가져오기
         let username = $(this).data("username"); // 클릭된 요소의 data-dno 값 가져오기
         let actionForm = $("#actionForm"); // 미리 정의된 form 태그
-
-
-        console.log("Form action: ", actionForm.attr("action"));
-        console.log("Form method: ", actionForm.attr("method"));
 
         if(hasEntry){
             // 일기가 있는 경우

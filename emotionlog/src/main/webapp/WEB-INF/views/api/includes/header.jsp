@@ -262,68 +262,68 @@ body {
 }
 /* Panel 스타일 */
 .panel {
-  border: 1px solid #dee2e6;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  padding: 20px;
+	border: 1px solid #dee2e6;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	padding: 20px;
 }
 
 /* Panel 헤더 스타일 */
 .panel-heading {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #343a40;
-  border-bottom: 2px solid #dee2e6;
-  margin-bottom: 20px;
-  text-align: center;
-  padding: 10px 0;
-  background-color: #f8f9fa;
-  border-radius: 10px 10px 0 0;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #343a40;
+	border-bottom: 2px solid #dee2e6;
+	margin-bottom: 20px;
+	text-align: center;
+	padding: 10px 0;
+	background-color: #f8f9fa;
+	border-radius: 10px 10px 0 0;
 }
 
 /* 입력 필드 스타일 */
 input[type="text"], textarea, select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #dee2e6;
-  border-radius: 5px;
-  background-color: #f8f9fa;
-  margin-bottom: 15px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  font-size: 1rem;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #dee2e6;
+	border-radius: 5px;
+	background-color: #f8f9fa;
+	margin-bottom: 15px;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+	font-size: 1rem;
 }
 
 /* 버튼 스타일 */
 button {
-  padding: 10px 15px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+	padding: 10px 15px;
+	font-size: 1rem;
+	border-radius: 5px;
+	border: none;
+	transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #007bff;
-  color: #ffffff;
-  transform: scale(1.05);
+	background-color: #007bff;
+	color: #ffffff;
+	transform: scale(1.05);
 }
 
 button.modify {
-  background-color: #28a745;
-  color: #ffffff;
+	background-color: #28a745;
+	color: #ffffff;
 }
 
 button.list {
-  background-color: #6c757d;
-  color: #ffffff;
+	background-color: #6c757d;
+	color: #ffffff;
 }
 
 /* 감정 선택 스타일 */
 select {
-  font-size: 1rem;
-  height: auto;
-  cursor: pointer;
+	font-size: 1rem;
+	height: auto;
+	cursor: pointer;
 }
 
 .form-group {
