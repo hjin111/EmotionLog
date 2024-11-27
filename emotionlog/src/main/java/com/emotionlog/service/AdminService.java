@@ -23,5 +23,8 @@ public interface AdminService {
 	
 	// QnA 답변 조회
 	public AboardVO getAnwser(Long qno) throws Exception;
+	
+	// QnA 답변 작성
+	public void createAnswer(AboardVO vo) throws Exception;
 
 }

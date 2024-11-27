@@ -48,4 +48,10 @@
 	WHERE qno = #{qno}
 	</select>
 	
+	<!-- QnA 답변 작성 -->
+	<insert id="createAnswer">
+	INSERT INTO aboard (ano, atitle, acontent, adate, username, qno)
+	VALUES (seq_aboard.nextval, #{atitle}, #{acontent}, SYSDATE,#{username}, #{qno})
+	</insert>
+	
 </mapper>

@@ -12,4 +12,5 @@ public class AboardVO {
 	private Date adate;
 	private String username;
 	private Date aupdate_date;
+	private Long qno;
 }
