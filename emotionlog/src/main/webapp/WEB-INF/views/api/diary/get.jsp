@@ -14,7 +14,7 @@
 	
 	<div class="container my-4">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="gmr-container">
 
 				<!-- 다양한 상황을 처리하기 위해서 form 태그 이용~~ -->
 				<form id='operForm' action="/api/diary/modify" method="get">
@@ -23,7 +23,7 @@
 				</form>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">diary Read Page</div>
+					<div class="panel-heading">Diary Read Page</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 	
@@ -48,7 +48,7 @@
 						</div>
 						
 						<!-- 감정 -->
-						<div class ="dropdown">
+						<div class ="form-group dropdown">
 							<label>감정</label><br/>				
 							<select name = 'emotion_status' disabled>
 								<option value="" <c:out value="${diary.emotion_status == null?'selected':'' }"/>>--</option>
@@ -63,8 +63,10 @@
 
 						
 						<br/>
-						<button data-oper='modify' class="btn btn-default">Modify</button>
-						<button data-oper='list' class="btn btn-info">List</button> 
+						<div class ="form-group">
+							<button data-oper='modify' class="btn btn-primary">Modify</button>
+							<button data-oper='list' class="btn btn-info">List</button> 
+						</div>
 
 					</div>
 					<!-- end panel-body -->
@@ -75,8 +77,10 @@
 				<!-- 댓글 -->
 				<div class="card">
 				    <div class="card-header">
-				        <i class="fa fa-comments fa-fw"></i> Reply
-  						<button id="addReplyBtn" class="btn btn-primary btn-sm float-end">New Reply</button>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+						  <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+						</svg>  						
+						<button id="addReplyBtn" class="btn btn-success btn-sm float-end">New Reply</button>
 				    </div>
 				
 				    <div class="card-body">
