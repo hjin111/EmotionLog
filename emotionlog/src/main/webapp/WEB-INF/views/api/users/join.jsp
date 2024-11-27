@@ -87,27 +87,27 @@
         <h1>회원가입</h1>
         <form action="/api/users/join" method="post">
             <div class="form-group">
-                <label for="username">아이디:</label>
+                <label for="username">아이디</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
-                <label for="name">이름:</label>
+                <label for="name">이름</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="birthday">생일:</label>
-                <input type="text" id="birthday" name="birthday" required>
+                <label for="birthday">생일</label>
+                <input type="text" id="birthday" name="birthday"  placeholder="ex) 2024-01-01 " required>
             </div>
             <div class="form-group">
-                <label for="phone_number">전화번호:</label>
-                <input type="text" id="phone_number" name="phone_number" required>
+                <label for="phone_number">전화번호</label>
+                <input type="text" id="phone_number" name="phone_number"  placeholder="ex) 010-1234-5678" required>
             </div>
             <div class="form-group">
-                <label for="password">비밀번호:</label>
+                <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="form-group">
-                <label for="gender">성별:</label>
+                <label for="gender">성별</label>
                 <select id="gender" name="gender">
                     <option value="M">남성</option>
                     <option value="F">여성</option>
@@ -126,7 +126,7 @@
             </div>
         </form>
         <div class="footer">
-            이미 계정이 있으신가요? <a href="/login" style="color: #fff; text-decoration: underline;">로그인</a>
+            이미 계정이 있으신가요? <a href="/api/users/login" style="color: #fff; text-decoration: underline;">로그인</a>
         </div>
     </div>
 </body>

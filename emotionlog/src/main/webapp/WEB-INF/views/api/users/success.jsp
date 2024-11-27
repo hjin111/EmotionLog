@@ -57,11 +57,12 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome, ${pageContext.request.userPrincipal.name}!</h2>
+        <h2>Welcome ${pageContext.request.userPrincipal.name}</h2>
         <h3>Your Role: <sec:authentication property="principal.authorities" /></h3>
         
         <div class="button-container">
-            <a href="/">Go to Home</a>
+            <a href="/api/users/mypage">MY PAGE</a>
+
             <a href="/api/diary/list">MY DIARY</a>
         </div>
     </div>
