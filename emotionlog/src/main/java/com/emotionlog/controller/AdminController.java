@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.emotionlog.domain.DiaryCountsVO;
+import com.emotionlog.domain.UsersVO;
 import com.emotionlog.service.AdminService;
 
 import lombok.AllArgsConstructor;
@@ -31,11 +33,24 @@ public class AdminController {
 	}
 	
 	
-	// 전체 회원 리스트 조회(뷰
+	// 회원 리스트 조회(5)
 	@GetMapping("/users")
-	public void getUserList() {
-		
-	}
+	@ResponseBody
+	public ResponseEntity<List<UsersVO>> getUserList(@RequestParam(value = "limit", required = false) Integer limit) throws Exception {
+        if (limit == null) {
+            limit = Integer.MAX_VALUE;  // limit이 없으면 모든 데이터를 조회
+        }
+
+        List<UsersVO> userList = service.getUserList(limit);
+
+        if (userList.isEmpty()) {
+            // 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // 데이터를 정상적으로 가져온 경우 200 OK와 데이터 반환
+        return new ResponseEntity<>(userList, HttpStatus.OK);
+    }
 	
 	// 날짜별 작성된 일기 수 조회
 	@GetMapping("/diary-counts")
