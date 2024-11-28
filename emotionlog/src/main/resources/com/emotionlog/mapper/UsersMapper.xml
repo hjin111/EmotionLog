@@ -59,5 +59,12 @@
 	<delete id="delete" parameterType="string">
 	    DELETE FROM users WHERE username = #{username}
 	</delete>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findUsername" resultType="string">
+		SELECT username
+		FROM users
+		WHERE name = #{name} AND phone_number = #{phone_number}
+	</select>
     
 </mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emotionlog.domain.UsersVO;
 import com.emotionlog.service.UsersService;
@@ -85,7 +86,7 @@ public class UsersController {
     }
 
     @GetMapping("/success")
-    public String usersProfile(Model model) {
+    public String usersLoginSuccess(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("Authentication: " + authentication);
 
@@ -107,10 +108,10 @@ public class UsersController {
             User user = (User) principal;
             model.addAttribute("username", user.getUsername());
         } else {
-            model.addAttribute("username", authentication.getName()); // 기본 처리
+            model.addAttribute("username", authentication.getName()); 
         }
 
-        return "/api/users/success"; // success.jsp 반환
+        return "/api/users/success"; 
     }
 
     // 마이페이지 조회
@@ -172,4 +173,37 @@ public class UsersController {
             return "redirect:/api/users/login";
         }
     }
+    
+    
+    @GetMapping("/findusername")
+    public String findUsername() {
+        return "/api/users/findusername";
+    }
+    
+    
+    // 아이디 찾기(이름, 전화번호 입력)
+    @PostMapping("/findusername")
+    public String findUsername(@RequestParam("name") String name, 
+    			@RequestParam("phone_number") String phone_number,
+    			RedirectAttributes redirectAttributes) {
+		try {
+
+			String username = service.findUsername(name, phone_number);
+			redirectAttributes.addFlashAttribute("username", username);
+			return "redirect:/api/users/findusersuccess";
+		} catch (Exception e) {
+			log.error("Error: ", e);
+			redirectAttributes.addFlashAttribute("error", "아이디를 찾을 수 없습니다.");
+			return "redirect:/api/users/findusername";
+		}
+    }
+    
+    @GetMapping("/findusersuccess")
+    public String findUserSuccess() {
+        return "/api/users/findusersuccess";  
+    }
+    
+
+ 
+    
 }

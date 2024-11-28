@@ -89,6 +89,12 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
 		mapper.delete(username); // 사용자 정보 삭제
 		
 	}
+
+	@Override
+	public String findUsername(String name, String phone_number) {
+		String username =  mapper.findUsername(name, phone_number);
+		return username;
+	}
 	
 	
 }
