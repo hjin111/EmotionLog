@@ -33,5 +33,13 @@ public interface UsersMapper {
     // 아이디 찾기
 	public String findUsername(@Param("name") String name, 
 			@Param("phone_number")String phone_number);
+	
+	// 아이디와 전화번호로 사용자 찾기
+	public UsersVO findByUser(@Param("username") String username, 
+			@Param("phone_number")String phone_number);
+	
+	// 비밀번호 업데이트 
+	public void updatePassword(@Param("username") String username, 
+			@Param("newPassword")String newPassword);
     
 }

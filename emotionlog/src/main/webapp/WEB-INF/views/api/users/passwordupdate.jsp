@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>비밀번호 변경</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,25 +89,27 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
-        <form action="/api/users/login" method="POST">
-            <div class="form-group">
+        <h1>비밀번호 변경</h1>
+        <form action="/api/users/passwordupdate" method="POST">
+        	<div class="form-group">
                 <label for="username">ID</label>
                 <input type="text" id="username" name="username" placeholder="Enter your id" required/>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required/>
+                <label for="phone_number">Phone Number</label>
+    			<input type="text" id="phone_number" name="phone_number" placeholder="ex) 010-1234-5678" required>
             </div>
-            <button type="submit">Login</button>
+            <div class="form-group">
+                <label for="newPassword">새 비밀번호:</label>
+    			<input type="text" name="newPassword" required>  
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">새 비밀번호 확인:</label>
+    			<input type="text" name="confirmPassword" required>
+    		 </div>
+            <button type="submit">비밀번호 변경</button>
         </form>
-     
-      	<div class="footer">
-          <a href="/api/users/findusername" style="color: #fff; text-decoration: underline;">아이디 찾기 </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="/api/users/passwordupdate" style="color: #fff; text-decoration: underline;"> 비밀번호 변경</a>
-        </div>
-        <div class="footer">
-           계정이 없으신가요? <a href="/api/users/join" style="color: #fff; text-decoration: underline;"> 가입하기</a>
-        </div>
     </div>
+    
 </body>
 </html>

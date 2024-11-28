@@ -203,6 +203,46 @@ public class UsersController {
         return "/api/users/findusersuccess";  
     }
     
+    
+    
+    // 비밀번호 변경 페이지
+    @GetMapping("/passwordupdate")
+    public String passwordUpdate() {
+        return "/api/users/passwordupdate";
+    }
+    
+    
+    // 비밀번호 변경 처리
+    @PostMapping("/passwordupdate")
+    public String passwordUpdate(@RequestParam("username") String username,
+                                 @RequestParam("phone_number") String phone_number,
+                                 @RequestParam("newPassword") String newPassword,
+                                 @RequestParam("confirmPassword") String confirmPassword,
+                                 Model model) {
+    	
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+            return "/api/users/passwordupdate"; // 비밀번호 불일치시 폼으로 돌아감
+        }
+
+        // 아이디와 전화번호로 사용자 검색
+        UsersVO user = service.findByUser(username, phone_number);
+
+        if (user == null) {
+            model.addAttribute("error", "아이디 또는 전화번호가 일치하지 않습니다.");
+            return "/api/users/passwordupdate"; // 사용자 정보 불일치시 폼으로 돌아감
+        }
+
+        service.updatePassword(username, newPassword);
+
+        model.addAttribute("message", "비밀번호가 성공적으로 변경되었습니다.");
+        return "redirect:/api/users/pwsuccess"; 
+    }
+    
+    @GetMapping("/pwsuccess")
+    public String findPwSuccess() {
+        return "/api/users/pwsuccess";  
+    }
 
  
     

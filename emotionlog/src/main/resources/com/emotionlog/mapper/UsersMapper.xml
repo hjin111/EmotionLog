@@ -66,5 +66,19 @@
 		FROM users
 		WHERE name = #{name} AND phone_number = #{phone_number}
 	</select>
+
+	<!-- 아이디와 전화번호로 사용자 찾기 -->
+	<select id="findByUser" parameterType="map"
+		resultType="UsersVO">
+		SELECT * FROM users
+		WHERE username = #{username} AND phone_number = #{phone_number}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword" parameterType="map">
+		UPDATE users
+		SET password = #{newPassword}
+		WHERE username = #{username}
+	</update>
     
 </mapper>

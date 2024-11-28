@@ -82,6 +82,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
 		
 	}
 
+	// 사용자 계정 삭제
 	@Override
 	@Transactional
 	public void delete(String username) {
@@ -90,10 +91,35 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
 		
 	}
 
+	// 아이디 찾기
 	@Override
 	public String findUsername(String name, String phone_number) {
 		String username =  mapper.findUsername(name, phone_number);
+		log.info("아이디 찾기 완료 username : " + username);
 		return username;
+	}
+
+	// 아이디와 전화번호로 사용자 찾기
+	@Override
+	public UsersVO findByUser(String username, String phone_number) {
+		UsersVO user = mapper.findByUser(username, phone_number);
+		log.info("사용자 찾기 완료 : " + user);
+		return  user;
+		
+	}
+
+	// 비밀번호 업데이트
+	@Override
+	public void updatePassword(String username, String newPassword) {
+		
+		// 비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        
+        log.info(encodedPassword);
+        
+        // 비밀번호 업데이트
+        mapper.updatePassword(username, encodedPassword);
+		
 	}
 	
 	
