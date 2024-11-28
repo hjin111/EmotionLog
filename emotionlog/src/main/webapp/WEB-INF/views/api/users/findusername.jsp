@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>아이디 찾기</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,25 +89,18 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
-        <form action="/api/users/login" method="POST">
+        <h1>아이디 찾기</h1>
+        <form action="/api/users/findusername" method="POST">
             <div class="form-group">
-                <label for="username">ID</label>
-                <input type="text" id="username" name="username" placeholder="Enter your id" required/>
+                <label for="username">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required/>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required/>
+                <label for="password">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" placeholder="ex) 010-1234-5678" required/>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">아이디 찾기</button>
         </form>
-     
-      	<div class="footer">
-          <a href="/api/users/findusername" style="color: #fff; text-decoration: underline;">아이디 찾기 </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="/api/users/join" style="color: #fff; text-decoration: underline;"> 비밀번호 찾기</a>
-        </div>
-        <div class="footer">
-           계정이 없으신가요? <a href="/api/users/join" style="color: #fff; text-decoration: underline;"> 가입하기</a>
-        </div>
     </div>
 </body>
 </html>

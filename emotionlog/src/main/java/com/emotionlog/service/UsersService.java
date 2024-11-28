@@ -16,4 +16,7 @@ public interface UsersService {
 	// 사용자 정보 삭제
 	public void delete(String username);
 	
+	// 아이디 찾기
+	public String findUsername(String name, String phone_number);
+	
 }

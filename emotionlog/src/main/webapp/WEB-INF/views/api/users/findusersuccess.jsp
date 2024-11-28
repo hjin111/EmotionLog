@@ -58,13 +58,12 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome ${pageContext.request.userPrincipal.name}</h2>
-        <h3>Your Role: <sec:authentication property="principal.authorities" /></h3>
+        <h2>아이디는 ${username} 입니다!</h2>
         
-        <div class="button-container">
-            <a href="/api/users/mypage">MY PAGE</a>
+         <div class="button-container">
+            <a href="/">Home</a>
 
-            <a href="/api/diary/list">MY DIARY</a>
+            <a href="/api/users/login">Login</a>
         </div>
     </div>
 </body>

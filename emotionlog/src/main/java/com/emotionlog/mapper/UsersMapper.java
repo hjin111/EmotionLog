@@ -29,8 +29,9 @@ public interface UsersMapper {
     
     // 사용자 정보 삭제
     public void delete(String username);
-    
-    
-    
 
+    // 아이디 찾기
+	public String findUsername(@Param("name") String name, 
+			@Param("phone_number")String phone_number);
+    
 }
