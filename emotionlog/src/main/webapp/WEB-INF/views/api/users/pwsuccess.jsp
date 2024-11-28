@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Your ID</title>
+    <title>Your Password</title>
    <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>아이디는 ${username} 입니다!</h2>
+        <h2>비밀번호 변경을 성공했습니다!</h2>
         
          <div class="button-container">
             <a href="/">Home</a>

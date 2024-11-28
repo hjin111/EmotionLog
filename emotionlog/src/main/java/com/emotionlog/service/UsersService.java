@@ -19,4 +19,10 @@ public interface UsersService {
 	// 아이디 찾기
 	public String findUsername(String name, String phone_number);
 	
+	// 아이디와 전화번호로 사용자 찾기
+    public UsersVO findByUser(String username, String phone_number);
+
+    // 비밀번호 업데이트
+    public void updatePassword(String username, String newPassword);
+	
 }
