@@ -221,7 +221,7 @@ public class UsersController {
                                  Model model) {
     	
         if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("error", "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+            model.addAttribute("error", "새 비밀번호가 일치하지 않습니다.");
             return "/api/users/passwordupdate"; // 비밀번호 불일치시 폼으로 돌아감
         }
 
