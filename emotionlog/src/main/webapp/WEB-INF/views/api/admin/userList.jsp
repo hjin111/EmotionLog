@@ -2,17 +2,31 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@include file="../includes/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- <title>Insert title here</title> -->
+<!-- <style type="text/css">
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	body {
+		font-family: 'Pretendard-Regular';
+	} -->
+</style>
 </head>
 <body>
-	<h1>전체 회원 목록</h1>
-	<main>
-		<section>
-			<table id="userList">
+<%@include file="../includes/navbar.jsp" %>
+	<main style="border: 5px solid pink; margin: 5vh 10vw">
+		<section class="card" style="background-color: white;">
+		<h2 class="card-header">전체 회원 목록</h2>
+		<div class="card-body">
+			<table id="userList" class="table" >
 				<thead>
 					<tr>
 						<th>이름</th>
@@ -39,6 +53,7 @@
 
 
 			</table>
+		</div>
 		</section>
 	</main>
 </body>

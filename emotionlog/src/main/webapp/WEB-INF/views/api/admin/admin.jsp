@@ -29,31 +29,33 @@
 	<main style="border: 5px solid pink; margin: 5vh 10vw">
 
 		<section
-			style="border: 2px solid yellow; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 2vh;">
+			style="border: 2px solid yellow; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
 
-			<article style="border: 1px solid; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
-				<h2>지난 7일간 일기 통계</h2>
-				<!-- <hr> -->
-				<canvas id="diaryChart"></canvas>
+			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
+		
+				<h2 class="card-header">지난 7일간 일기 통계</h2>
+				
+				<canvas id="diaryChart" class="card-body"></canvas>
 			</article>
 
-			<article style="border: 1px solid green; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
-				<h2>프로필</h2>
+			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
+				<h2 class="card-header" >프로필</h2>
 			</article>
 		</section>
 
 		<section
 			style="border: 2px solid yellow; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
 
-			<article style="border: 1px solid; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
-				<h2>회원 목록</h2>
-				<div>
+			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
+				<h2 class="card-header">회원 목록</h2>
+				<!-- <div> -->
 					<a href="/api/admin/users"
 						style="text-decoration: none; color: inherit;"> <span
 						class="material-symbols-outlined"> add </span>
 					</a>
-				</div>
-				<!-- <hr> -->
+				<!-- </div> -->
+				
+				<div class="card-body">
 				<div class="table-responsive">
 
 					<table id="userList" class="table" style="width: 100%">
@@ -73,36 +75,39 @@
 
 					</table>
 				</div>
+				</div>
 			</article>
 
 
-			<article
-				style="border: 1px solid orange; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
-				<h2>답변 대기 중 문의</h2>
+			<article class="card" 
+				style="flex: 1 1 calc(50% - 10px); background-color: white;">
+				<h2 class="card-header">답변 대기 중 문의</h2>
 				<div>
 					<a href="/api/admin/qna"
 						style="text-decoration: none; color: inherit;"> <span
 						class="material-symbols-outlined"> add </span>
 					</a>
 				</div>
-				<!-- <hr> -->
-				<div class="table-responsive">
-					<table id="qList" class="table">
-						<thead>
-							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">제목</th>
-								<!-- <th>내용</th> -->
-								<th scope="col">작성자</th>
-								<th scope="col">작성일</th>
-							</tr>
-						</thead>
-						<tbody>
+				
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="qList" class="table">
+							<thead>
+								<tr>
+									<th scope="col">번호</th>
+									<th scope="col">제목</th>
+									<!-- <th>내용</th> -->
+									<th scope="col">작성자</th>
+									<th scope="col">작성일</th>
+								</tr>
+							</thead>
+							<tbody>
 
 
-						</tbody>
+							</tbody>
 
-					</table>
+						</table>
+					</div>
 				</div>
 			</article>
 
