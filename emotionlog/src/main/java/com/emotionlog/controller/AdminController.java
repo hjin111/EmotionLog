@@ -82,10 +82,27 @@ public class AdminController {
 		}
 		
 	}
-	// 미답변 문의 리스트 조회(5)
+	
+	// 미답변 문의 전체 조회
 	@GetMapping("/qna")
+	public String getQboardList(Model model) {
+	    try {
+	        List<QboardVO> qList = service.getQboardList(Integer.MAX_VALUE);
+	        model.addAttribute("question", qList);
+	        
+	        return "api/admin/qList";  
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "error"; 
+	    }
+	}
+	
+	
+	
+	// 미답변 문의 리스트 조회(5)
+	@GetMapping("/qnapart")
 	@ResponseBody
-	public ResponseEntity<List<QboardVO>> getQboardList(@RequestParam(value = "limit", required = false) Integer limit) throws Exception {
+	public ResponseEntity<List<QboardVO>> getQboardListAjax(@RequestParam(value = "limit", required = false) Integer limit) throws Exception {
 		if (limit == null) {
             limit = Integer.MAX_VALUE;  // limit이 없으면 모든 데이터를 조회
         }
