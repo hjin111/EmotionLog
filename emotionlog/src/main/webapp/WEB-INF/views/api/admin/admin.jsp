@@ -2,47 +2,50 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@include file="../includes/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <meta charset="UTF-8">
-<title>Admin main</title>
-<link
+<!-- <title>Admin main</title> -->
+<!-- <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
 </head>
 <body>
-	<h1>Admin main</h1>
-	<script
+<%@include file="../includes/navbar.jsp" %>
+	<!-- <h1>Admin main</h1> -->
+	<!-- <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
-	<main style="border: 1px solid pink; margin: 5vh 10vw">
+		crossorigin="anonymous"></script> -->
+	<main style="border: 5px solid pink; margin: 5vh 10vw">
 
 		<section
-			style="border: 1px solid yellow; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+			style="border: 2px solid yellow; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 2vh;">
 
-			<article style="border: 1px solid; flex: 1 1 calc(50% - 10px);">
+			<article style="border: 1px solid; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
 				<h2>지난 7일간 일기 통계</h2>
 				<!-- <hr> -->
 				<canvas id="diaryChart"></canvas>
 			</article>
 
-			<article style="border: 1px solid green; flex: 1 1 calc(50% - 10px);">
+			<article style="border: 1px solid green; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
 				<h2>프로필</h2>
 			</article>
 		</section>
 
 		<section
-			style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+			style="border: 2px solid yellow; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
 
-			<article style="border: 1px solid; flex: 1 1 calc(50% - 10px);">
+			<article style="border: 1px solid; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
 				<h2>회원 목록</h2>
 				<div>
 					<a href="/api/admin/users"
@@ -74,7 +77,7 @@
 
 
 			<article
-				style="border: 1px solid orange; flex: 1 1 calc(50% - 10px);">
+				style="border: 1px solid orange; flex: 1 1 calc(50% - 10px); background-color: white; padding: 1vw">
 				<h2>답변 대기 중 문의</h2>
 				<div>
 					<a href="/api/admin/qna"
@@ -152,13 +155,19 @@
 															} ]
 														},
 														options : {
+															
+															/* maintainAspectRatio: false, */
 															scales : {
 																y : {
-																	beginAtZero : true
+																	beginAtZero : true,
+																	max: 10,
+																	ticks: {
+																		stepSize : 2
+																	} 
 
 																}
-															},
-														 /* maintainAspectRatio : false, */
+															}
+													
 														}
 													});
 										},
