@@ -25,7 +25,6 @@
 				<br/>
 	            <input type="text" id="date-picker" class="datepicker-input" value="${pick_date}">
 	        </div>
-			   <%-- <h1 class="text-left">Emotion_log : ${year}-${month}</h1> --%>
 		    <!-- 헤더 영역 -->
 		    <div class="header-container" boder = none>
 		        <h1 class="header-title">Emotion_log</h1>
