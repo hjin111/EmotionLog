@@ -114,7 +114,7 @@
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" required>
+                <input type="text" id="password" name="password" required>
             </div>
             <div class="form-group">
                 <label for="gender">성별</label>

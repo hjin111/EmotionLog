@@ -174,18 +174,38 @@ h2 {
             <label for="phoneNumber"><strong>Your PhoneNumber</strong></label>
             <input type="text" id="phoneNumber" value='<c:out value="${users.phone_number }"/>' readonly> 
 
-            <label for="gender"><strong>Your Gender</strong></label>
-			<input type="text" style="text-align: center; padding-left:50px; width:496px;" id="gender" value='<c:choose>
-        	<c:when test="${fn:trim(String.valueOf(users.gender)) eq 'M'}">MAN</c:when>
-        	<c:when test="${fn:trim(String.valueOf(users.gender)) eq 'F'}">WOMAN</c:when>
-    		</c:choose>' readonly>
-
+           <label for="gender"><strong>Your Gender</strong></label>
+			<c:choose>
+			    <c:when test="${fn:trim(String.valueOf(users.gender)) eq 'M'}">
+			        <input type="text" id="gender" value="MAN" readonly 
+			               style="text-align: center; padding: 10px; width: 100%; max-width: 554px; box-sizing: border-box; display: block; margin: 0 auto;">
+			    </c:when>
+			    <c:when test="${fn:trim(String.valueOf(users.gender)) eq 'F'}">
+			        <input type="text" id="gender" value="WOMAN" readonly 
+			               style="text-align: center; padding: 10px; width: 100%; max-width: 554px; box-sizing: border-box; display: block; margin: 0 auto;">
+			    </c:when>
+			</c:choose>
         </div>
 
-        <div class="button-container">
-            <a href="/api/users/mypageModify">Modify</a>
-            <a href="/api/diary/list">My Diary</a>
-        </div>
+         <!-- Spring Security를 통해 권한을 확인 -->
+        <sec:authentication var="role" property="principal.authorities" />
+        
+        <c:choose>
+            <c:when test="${fn:contains(role, 'ROLE_USER')}">
+                <!-- ROLE_USER일 때 -->
+                <div class="button-container">
+                    <a href="/api/users/mypageModify">Modify</a>
+                    <a href="/api/diary/list">My Diary</a>
+                </div>
+            </c:when>
+            <c:when test="${fn:contains(role, 'ROLE_ADMIN')}">
+                <!-- ROLE_ADMIN일 때 -->
+                <div class="button-container">
+                    <a href="/api/users/mypageModify">Modify</a>
+                    <a href="/api/admin/">ADMIN PAGE</a>
+                </div>
+            </c:when>
+        </c:choose>
 
 		<div class="footer">
 			사용중인 계정을 삭제하시겠습니까?

@@ -91,7 +91,7 @@ public class UsersController {
             return "redirect:/api/users/success";
         } catch (Exception e) {
             log.error("Authentication failed: ", e);
-            model.addAttribute("error", "Invalid username or password");
+            model.addAttribute("error", "입력하신 정보가 일치하지 않습니다. 다시 시도해 주세요.");
             return "/api/users/login";
         }
     }
