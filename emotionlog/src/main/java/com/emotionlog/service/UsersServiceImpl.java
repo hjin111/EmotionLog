@@ -45,6 +45,14 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
         mapper.insertAuthority(user.getUsername(), authority);
     }
 	
+	// 아이디 중복 체크
+	@Override
+	public int idCheck(String username) {
+		int result = mapper.idCheck(username); // result는 Integer 타입
+	    return result; // 1이면 true, 0이면 false
+	}
+
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
@@ -121,6 +129,8 @@ public class UsersServiceImpl implements UsersService, UserDetailsService{
         mapper.updatePassword(username, encodedPassword);
 		
 	}
+
+	
 	
 	
 }

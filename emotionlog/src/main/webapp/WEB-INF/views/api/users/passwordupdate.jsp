@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>비밀번호 변경</title>
+    <title>>Emotion Log🌱/title>
  <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,32 +91,6 @@
             margin-top: 5px;
         }
     </style>
-
-<script>
-	function validatePassword() {
-		const newPassword = document.getElementById("newPassword").value;
-		const confirmPassword = document.getElementById("confirmPassword").value;
-		const errorElement = document.getElementById("passwordError");
-
-		if (newPassword !== "" && confirmPassword !== ""
-				&& newPassword !== confirmPassword) {
-			errorElement.textContent = "새 비밀번호와 일치하지 않습니다.";
-		} else {
-			errorElement.textContent = ""; // 오류 메시지 초기화
-		}
-	}
-
-	function checkForm(event) {
-		const newPassword = document.getElementById("newPassword").value;
-		const confirmPassword = document.getElementById("confirmPassword").value;
-
-		if (newPassword !== confirmPassword) {
-			event.preventDefault(); // 폼 제출 방지
-			document.getElementById("passwordError").textContent = "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.";
-		}
-	}
-</script>
-
 </head>
 <body>
     <div class="login-container">
@@ -142,5 +116,32 @@
             <button type="submit">비밀번호 변경</button>
         </form>
     </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#newPassword, #confirmPassword").on("input", function() {
+            const newPassword = $("#newPassword").val();
+            const confirmPassword = $("#confirmPassword").val();
+            const errorElement = $("#passwordError");
+
+            if (newPassword !== "" && confirmPassword !== "" && newPassword !== confirmPassword) {
+                errorElement.text("새 비밀번호와 일치하지 않습니다.");
+            } else {
+                errorElement.text("");
+            }
+        });
+
+        $("form").on("submit", function(event) {
+            const newPassword = $("#newPassword").val();
+            const confirmPassword = $("#confirmPassword").val();
+
+            if (newPassword !== confirmPassword) {
+                event.preventDefault(); // 폼 제출 방지
+                $("#passwordError").text("새 비밀번호와 일치하지 않습니다.");
+            }
+        });
+    });
+</script>
 </body>
 </html>

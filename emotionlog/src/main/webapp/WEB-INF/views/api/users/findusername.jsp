@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>아이디 찾기</title>
+    <title>Emotion Log🌱</title>
     <style>
         body {
             font-family: Arial, sans-serif;

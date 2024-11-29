@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
+    <title>Emotion Log🌱</title>
     <style>
         /* 기존 스타일 그대로 유지 */
         body {

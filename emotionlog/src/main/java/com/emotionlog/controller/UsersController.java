@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emotionlog.domain.UsersVO;
@@ -38,11 +39,20 @@ public class UsersController {
 	// logger.info("Authenticated User: " + authentication.getName()); 이거 찍을려고 주입한거임
 	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 	
+	// 회원가입
 	@GetMapping("/join")
 	 public String joinForm(Model model) {
         model.addAttribute("user", new UsersVO()); // 새로운 UsersVO 객체를 모델에 추가하여 폼에 전달
         return "/api/users/join"; // join.jsp (회원가입 화면)
     }
+	
+	// 아이디 중복 체크
+	@GetMapping(value = "/check-username", produces = "application/json") // JSON으로 응답 요청
+	@ResponseBody
+	public int checkUsername(@RequestParam String username) {
+	    int check = service.idCheck(username);
+	    return check;  
+	}
 
     // 회원가입 요청 처리
     @PostMapping("/join")
@@ -50,6 +60,7 @@ public class UsersController {
         service.join(user, authority);
         return "redirect:/api/users/login"; 
     }
+    
         
     @GetMapping("/login")
     public String loginForm() {

@@ -15,6 +15,9 @@ public interface UsersMapper {
 	public void insertAuthority(@Param("username") String username, 
 			@Param("authority") String authority);
 	
+	// 아이디 중복 체크
+	public int idCheck(String username);
+	
 	 // 사용자 정보 조회 (로그인 시 사용)
     public UsersVO read(String username);
 	

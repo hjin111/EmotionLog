@@ -1,10 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome!</title>
+    <title>Emotion Log🌱</title>
    <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -58,8 +60,18 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome ${pageContext.request.userPrincipal.name}</h2>
-        <h3>Your Role: <sec:authentication property="principal.authorities" /></h3>
+        <h2>Welcome ${pageContext.request.userPrincipal.name}🌱</h2>
+           <h3>Your Role : 
+            <sec:authentication var="role" property="principal.authorities" />
+            <c:choose>
+                <c:when test="${fn:contains(role, 'ROLE_ADMIN')}">
+                    관리자
+                </c:when>
+                <c:when test="${fn:contains(role, 'ROLE_USER')}">
+                    일반회원
+                </c:when>
+            </c:choose>
+        </h3>
         
         <div class="button-container">
             <a href="/api/users/mypage">MY PAGE</a>

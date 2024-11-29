@@ -7,6 +7,9 @@ public interface UsersService {
 	// 회원가입 
 	public void join(UsersVO user, String authority) throws Exception;
 	
+	// 아이디 중복 체크
+	public int idCheck(String username);
+	
 	// 사용자 정보 조회(마이페이지 사용)
 	public UsersVO readMypage(String username);
 	

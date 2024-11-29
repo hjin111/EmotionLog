@@ -25,6 +25,15 @@
         values (#{username}, #{authority})
 	</insert>
 	
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" resultType="int" parameterType="string">
+	    SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+	    FROM Users
+	    WHERE username = #{username}
+	</select>
+
+	
+	
 	<!-- 사용자 정보 조회(로그인시 사용) -->
     <select id="read" resultType="com.emotionlog.domain.UsersVO" parameterType="string">
         SELECT u.username, u.password, u.enabled, a.authority
