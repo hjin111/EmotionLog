@@ -47,12 +47,14 @@
 			style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
 
 			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
-				<h2 class="card-header">회원 목록</h2>
-				<!-- <div> -->
+				<div class="card-header">회원 목록
 					<a href="/api/admin/users"
 						style="text-decoration: none; color: inherit;"> <span
 						class="material-symbols-outlined"> add </span>
 					</a>
+				</div>
+				<!-- <div> -->
+					
 				<!-- </div> -->
 				
 				<div class="card-body">
@@ -81,13 +83,15 @@
 
 			<article class="card" 
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
-				<h2 class="card-header">답변 대기 중 문의</h2>
-				<div>
+				<div class="card-header">답변 대기 중 문의				
 					<a href="/api/admin/qna"
 						style="text-decoration: none; color: inherit;"> <span
 						class="material-symbols-outlined"> add </span>
 					</a>
+			
 				</div>
+				
+			
 				
 				<div class="card-body">
 					<div class="table-responsive">
