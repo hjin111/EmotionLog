@@ -143,6 +143,32 @@
   </div>
 </div>
 <!-- 모달 끝 -->
+
+<!-- Modal 추가 -->
+<div class="modal fade" id="processModal" tabindex="-1" role="dialog" aria-labelledby="processModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+                <!-- 닫기 버튼 수정 -->
+                <h4 class="modal-title" id="processModalLabel">알림</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<!-- /.modal-header -->
+			<div class="modal-body">처리가 완료되었습니다.</div>
+			<!-- /.modal-body -->
+			<div class="modal-footer">
+                <!-- 버튼 속성 수정 -->
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+			</div>
+			<!-- /.modal-footer -->
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <script type ="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태 -> ready -> call back function
@@ -155,7 +181,6 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 	 showList(1);
 	 // >>> showList 함수 시작 >>>
 	 function showList(page) {
-
 
 	 	// >>> replyService.getList 시작 >>>
 	 	replyService.getList(
@@ -251,6 +276,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 		console.log(str);
 		replyPageFooter.html(str);
 	 }
+	 
 	 // <<< showReplyPage 함수 끝 <<<
 	 replyPageFooter.on("click","li a", function(e){
        e.preventDefault();
@@ -265,8 +291,11 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
        showList(pageNum);
      });     
 	 
+	 
 	 // 모달 : 새로운 댓글의 추가버튼 이벤트 처리
-	 let modal = $(".modal");
+//	 let modal = $(".modal");
+	 let modal = $("#myModal");  // 특정 모달 선택
+
 	 let modalInputReply = modal.find("input[name='reply']");
 	 let modalInputReplyer = modal.find("input[name='replyer']");
 	 let modalInputReplyDate = modal.find("input[name='reply_date']");
@@ -283,8 +312,10 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 		 
 		 modalRegisterBtn.show();
 		 
-		 $(".modal").modal("show");
+		 $("#myModal").modal("show");
 	 });
+	 
+	
 	 
 	 // 댓글 등록 및 목록 갱신
 	 modalRegisterBtn.on("click",function(e){
@@ -294,7 +325,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 				dno     : dnoValue
 		};
 		replyService.add(reply, function(result){
-			alert(result);
+		    showProcessModal(); // 버튼 클릭 시 processModal 띄우기
 			modal.find("input").val("");
 			modal.modal("hide");
 			
@@ -314,7 +345,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 			 modalModBtn.show();
 			 modalRemoveBtn.show();
 			 
-			 $(".modal").modal("show");
+			 $("#myModal").modal("show");
 		 })
 	 });
 	 
@@ -322,7 +353,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 	 modalModBtn.on("click",function(e){
 		 let reply ={rno:modal.data("rno"), reply: modalInputReply.val()};
 		 replyService.update(reply,function(result){
-			 alert(result);
+			 showProcessModal(); // 버튼 클릭 시 processModal 띄우기
 			 modal.modal("hide");
 			 showList(pageNum);
 		 });
@@ -332,13 +363,29 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 	 modalRemoveBtn.on("click",function(e){
 		 let rno = modal.data("rno");
 	 	 replyService.remove(rno,function(result){
-	 		 alert(result);
+			 showProcessModal(); // 버튼 클릭 시 processModal 띄우기
 	 		 modal.modal("hide");
 	 		 showList(pageNum);
 	 	 });
 	 });
 	
-	 
+	// 원하는 조건을 관리하는 변수
+	 let shouldShowProcessModal = false;
+
+	 // 첫 번째 모달(myModal)이 닫힐 때 이벤트 설정
+	 $('#myModal').on('hidden.bs.modal', function () {
+	     if (shouldShowProcessModal) { // 조건이 참일 때만 실행
+	         $('#processModal').modal('show');
+	         shouldShowProcessModal = false; // 다시 false로 초기화
+	     }
+	 });
+
+	 // 조건을 만족시켜 모달을 띄우는 함수
+	 function showProcessModal() {
+	     shouldShowProcessModal = true; // 조건을 true로 설정
+	     $('#myModal').modal('hide');   // myModal 닫기 -> 닫힘 이벤트 발생
+	 }
+
 	  // 폼태그 처리	 
 	  let operForm = $("#operForm");
 
