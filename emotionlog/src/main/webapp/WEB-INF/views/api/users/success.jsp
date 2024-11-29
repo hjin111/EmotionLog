@@ -60,8 +60,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome ${pageContext.request.userPrincipal.name}🌱</h2>
-           <h3>Your Role : 
+        <h2>환영합니다! ${pageContext.request.userPrincipal.name}님🌱</h2>
+        <h3>Your Role : 
             <sec:authentication var="role" property="principal.authorities" />
             <c:choose>
                 <c:when test="${fn:contains(role, 'ROLE_ADMIN')}">
@@ -72,12 +72,23 @@
                 </c:when>
             </c:choose>
         </h3>
-        
-        <div class="button-container">
-            <a href="/api/users/mypage">MY PAGE</a>
 
-            <a href="/api/diary/list">MY DIARY</a>
-        </div>
+        <c:choose>
+            <c:when test="${fn:contains(role, 'ROLE_USER')}">
+                <!-- ROLE_USER일 때 -->
+                <div class="button-container">
+                    <a href="/api/users/mypage">MY PAGE</a>
+                    <a href="/api/diary/list">MY DIARY</a>                   
+                </div>
+            </c:when>
+            <c:when test="${fn:contains(role, 'ROLE_ADMIN')}">
+                <!-- ROLE_ADMIN일 때 -->
+                <div class="button-container">
+                	<a href="/api/users/mypage">MY PAGE</a>
+                    <a href="/api/admin/">ADMIN PAGE</a>     
+                </div>
+            </c:when>
+        </c:choose>
     </div>
 </body>
 </html>

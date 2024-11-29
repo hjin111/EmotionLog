@@ -10,13 +10,12 @@
 
     <!-- Spring Security 설정 -->
     <security:http>
-        <!-- 인증되지 않은 사용자에 대한 접근 허용 -->
-        <security:intercept-url pattern="/customLogin" access="permitAll"/>
-        <security:intercept-url pattern="/login" access="permitAll"/>
-        <security:intercept-url pattern="/api/users/success" access="hasRole('ROLE_USER')"/>
-		
-		 <!-- 로그인 페이지 설정 -->
-        <security:form-login login-page="/customLogin" default-target-url="/api/users/success" />
+	    <security:intercept-url pattern="/api/diary/**" access="hasAuthority('ROLE_USER')"/>
+	    <security:intercept-url pattern="/api/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
+
+
+		<!-- 로그인 페이지 설정 -->
+		<security:form-login login-page="/api/users/login" default-target-url="/api/users/success" />
 
         <!-- CSRF 비활성화 -->
         <security:csrf disabled="true"/>
