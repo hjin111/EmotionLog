@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>회원가입</title>
+    <title>Emotion Log🌱</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -69,6 +69,12 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        
+         .username-group {
+            display: flex;
+            align-items: center;
+        }
+        
 
         button:hover {
             background-color: #556f44; /* Fern Green */
@@ -85,9 +91,14 @@
     <div class="signup-container">
         <h1>회원가입</h1>
         <form action="/api/users/join" method="post">
-            <div class="form-group">
-                <label for="username">아이디</label>
-                <input type="text" id="username" name="username" required>
+            <div class="form-group" >
+				<label for="username">아이디</label>
+				<div style:" display: flex;  align-items:center;">
+					<input type="text" style="width: 250px;" id="username"
+						name="username" required>
+					<button type="button" id="checkUsernameBtn" style="width: 95px; height:38.4px; padding-top: 5px">중복확인</button>
+				</div>
+				<span id="usernameCheckResult"></span>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
@@ -128,5 +139,39 @@
             이미 계정이 있으신가요? <a href="/api/users/login" style="color: #fff; text-decoration: underline;">로그인</a>
         </div>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function() {
+	    $('#checkUsernameBtn').on('click', function() {
+	        let username = $('#username').val();
+	        if (username) {
+	            $.ajax({
+	                url: '/api/users/check-username',
+	                type: 'GET',
+	                data: { username: username },
+	                headers: {
+	                    "Accept": "application/json"  // 응답을 JSON으로 요청
+	                },
+	                success: function(response) {
+	                    console.log(response); // 서버에서 반환한 응답을 확인
+	                    if (response === 0) {  // response가 0일 때: 사용 가능한 아이디
+	                        $('#usernameCheckResult').text('사용 가능한 아이디입니다.').css('color', 'white');
+	                    } else if (response === 1) {  // response가 1일 때: 이미 사용 중인 아이디
+	                        $('#usernameCheckResult').text('이미 사용 중인 아이디입니다.').css('color', 'red');
+	                    }
+	                },
+	                error: function() {
+	                    $('#usernameCheckResult').text('오류가 발생했습니다.').css('color', 'red');
+	                }
+	            });
+	        } else {
+	            $('#usernameCheckResult').text('아이디를 입력해주세요.').css('color', 'red');
+	        }
+	    });
+	});
+
+
+	</script>
 </body>
 </html>

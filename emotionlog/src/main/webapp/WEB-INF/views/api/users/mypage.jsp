@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
+    <title>Emotion Log🌱</title>
     <style>
 /* 기본적인 body 스타일 */
 body {
@@ -156,7 +156,7 @@ h2 {
 
         <!-- 환영 문구 수정 -->
         <div class="welcome-message">
-            <p>This is ${pageContext.request.userPrincipal.name} Information.</p>
+            <p>This is ${pageContext.request.userPrincipal.name} Information🌱</p>
         </div>   
 
         <div class="user-info">
