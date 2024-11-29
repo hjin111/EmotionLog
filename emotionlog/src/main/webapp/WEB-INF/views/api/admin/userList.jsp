@@ -22,7 +22,7 @@
 </head>
 <body>
 <%@include file="../includes/navbar.jsp" %>
-	<main style="border: 5px solid pink; margin: 5vh 10vw">
+	<main style="margin: 5vh 10vw">
 		<section class="card" style="background-color: white;">
 		<h2 class="card-header">전체 회원 목록</h2>
 		<div class="card-body">
