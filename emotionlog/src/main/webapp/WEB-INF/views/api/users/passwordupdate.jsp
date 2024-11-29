@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>>Emotion Log🌱/title>
+    <title>Emotion Log🌱</title>
  <style>
         body {
             font-family: Arial, sans-serif;
@@ -116,7 +116,6 @@
             <button type="submit">비밀번호 변경</button>
         </form>
     </div>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function() {
