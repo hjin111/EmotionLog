@@ -200,6 +200,12 @@ public class UsersController {
 		try {
 
 			String username = service.findUsername(name, phone_number);
+			
+			if (username == null || username.isEmpty()) {
+	            redirectAttributes.addFlashAttribute("error", "아이디를 찾을 수 없습니다.");
+	            return "redirect:/api/users/findusername";
+	        }
+			
 			redirectAttributes.addFlashAttribute("username", username);
 			return "redirect:/api/users/findusersuccess";
 		} catch (Exception e) {

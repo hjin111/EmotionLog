@@ -84,8 +84,48 @@
             color: #99ddc8; /* Tiffany Blue */
             text-decoration: underline;
         }
-    </style>
 
+        /* Error Modal */
+        #errorModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #errorModal button {
+            margin-top: 10px;
+            background-color: #95bf74;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #errorModal button:hover {
+            background-color: #659b5e;
+        }
+
+        /* Overlay effect */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -96,11 +136,37 @@
                 <input type="text" id="name" name="name" placeholder="Enter your name" required/>
             </div>
             <div class="form-group">
-                <label for="password">Phone Number</label>
+                <label for="phone_number">Phone Number</label>
                 <input type="text" id="phone_number" name="phone_number" placeholder="ex) 010-1234-5678" required/>
             </div>
             <button type="submit">아이디 찾기</button>
         </form>
     </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal">
+        <p>${error}</p>
+        <button id="closeModal">Close</button>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var errorMessage = "<c:out value='${error}'/>"; // JSTL 안전 출력
+
+            if (errorMessage.trim().length > 0) { // 오류 메시지가 비어있지 않으면
+                $("#overlay").fadeIn();
+                $("#errorModal").fadeIn();
+            }
+
+            $("#closeModal").click(function() {
+                $("#overlay").fadeOut();
+                $("#errorModal").fadeOut();
+            });
+        });
+    </script>
 </body>
 </html>
