@@ -13,7 +13,7 @@
 <body>
 	<%@include file="../includes/navbar.jsp"%>
 
-	<main style="border: 5px solid pink; margin: 5vh 10vw">
+	<main style="margin: 5vh 10vw">
 		<section class="card" style="background-color: white;">
 			<h1 class="card-header">문의사항</h1>
 			<div class="card-body">
