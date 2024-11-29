@@ -22,7 +22,7 @@ public interface AdminService {
 	public QboardVO getQboardDetails(Long qno) throws Exception;
 	
 	// QnA 답변 조회
-	public AboardVO getAnwser(Long qno) throws Exception;
+	public List<AboardVO> getAnwser(Long qno) throws Exception;
 	
 	// QnA 답변 작성
 	public int createAnswer(AboardVO vo) throws Exception;

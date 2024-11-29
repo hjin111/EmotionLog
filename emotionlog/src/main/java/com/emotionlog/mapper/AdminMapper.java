@@ -19,7 +19,7 @@ public interface AdminMapper {
 	
 	public QboardVO getQboardDetails(Long qno);
 	
-	public AboardVO getAnswer(Long qno);
+	public List<AboardVO> getAnswer(Long qno);
 	
 	public int createAnswer(AboardVO vo);
 }

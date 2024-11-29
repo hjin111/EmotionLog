@@ -45,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public AboardVO getAnwser(Long qno) throws Exception {
+	public List<AboardVO> getAnwser(Long qno) throws Exception {
 		
 		return mapper.getAnswer(qno);
 	}

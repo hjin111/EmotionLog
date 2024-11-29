@@ -14,7 +14,7 @@
 	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- <style type="text/css">
+<style type="text/css">
 @font-face {
 	font-family: 'Pretendard-Regular';
 	src:
@@ -27,7 +27,7 @@
 body {
 	font-family: 'Pretendard-Regular';
 }
-</style> -->
+</style>
 
 </head>
 <body>
@@ -58,13 +58,71 @@ body {
 			</form>
 		</section>
 
-		<section>
-		<!-- 댓글 불러오기 -->
+		<section id="answersContainer">
+			<!-- 댓글 불러오기 -->
 		</section>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript">
     $(document).ready(function () {
+    	const qno = ${qDetail.qno}; 
+
+        function loadAnswers() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/api/admin/qna/answer/" + qno,  // 해당 질문 번호로 GET 요청을 보냅니다.
+                success: function (response) {
+                	
+                	/* console.log("?",response); */
+                	
+                    if (response.length > 0) {
+                        // 응답이 있으면 댓글을 화면에 렌더링
+                        let answersHtml = '';
+                        response.forEach(function (answer) {
+                        	let formattedDate = new Date(answer.adate).toLocaleDateString('en-CA', {
+								year : '2-digit',
+								month : '2-digit',
+								day : '2-digit'
+							});
+                        	console.log(formattedDate);
+                            answersHtml += `
+                                <div class="card">
+                                    <p>\${answer.username}</p>
+                                    <p>
+                                    	<i class="fa-regular fa-calendar"></i>
+                                    \${formattedDate}
+                                    </p>
+                                    <hr>
+                                    <p>\${answer.acontent}</p>
+                                </div>
+                            `;
+                        });
+                        
+                        
+                        $('#answersContainer').append(answersHtml);  // 댓글을 삽입할 영역에 추가
+                    } else {
+                    	let noAnswer = '';
+                    	noAnswer += `
+                    		<div class="card">
+                            <p>답변을 달아주세요.</p>
+                        </div>
+                    	`;
+                        $('#answersContainer').append(noAnswer);  // 댓글이 없을 경우
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("댓글을 불러오는 데 실패했습니다:", error);
+                    alert("댓글을 불러오는 데 실패했습니다. 다시 시도해주세요.");
+                }
+            });
+        }
+
+        // 페이지 로드 시 댓글을 불러오기
+        loadAnswers();
+    	
+    	
+    	
         $("#answerForm").on("submit", function (event) {
             event.preventDefault(); // 기본 form 제출 방지
             

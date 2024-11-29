@@ -110,10 +110,10 @@ public class AdminController {
 
 		List<QboardVO> qList = service.getQboardList(limit);
 
-		if (qList.isEmpty()) {
-			// 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+//		if (qList.isEmpty()) {
+//			// 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
 
 		// 데이터를 정상적으로 가져온 경우 200 OK와 데이터 반환
 		return new ResponseEntity<>(qList, HttpStatus.OK);
@@ -135,7 +135,10 @@ public class AdminController {
 
 	// QnA 문의 답변 조회
 	@GetMapping("/qna/answer/{qno}")
-	public void getAnswer() {
+	public ResponseEntity<List<AboardVO>> getAnswer(@PathVariable("qno") Long qno) throws Exception {
+		List<AboardVO> answers = service.getAnwser(qno);
+		
+		return new ResponseEntity<>(answers, HttpStatus.OK);
 
 	}
 
