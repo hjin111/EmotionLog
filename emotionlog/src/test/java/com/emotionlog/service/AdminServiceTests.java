@@ -59,12 +59,12 @@ public class AdminServiceTests {
 		QboardVO vo = service.getQboardDetails(qno);
 	}
 	
-	@Test
-	public void testGetAnswer() throws Exception {
-		Long qno = 1L;
-		AboardVO vo = service.getAnwser(qno);
-		log.info(vo);
-	}
+//	@Test
+//	public void testGetAnswer() throws Exception {
+//		Long qno = 1L;
+//		AboardVO vo = service.getAnwser(qno);
+//		log.info(vo);
+//	}
 	
 //	@Transactional
 	@Test

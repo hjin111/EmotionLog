@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@include file="../includes/header.jsp" %>
+<%@include file="../includes/header.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
 </head>
 <body>
-<%@include file="../includes/navbar.jsp" %>
+	<%@include file="../includes/navbar.jsp"%>
 	<!-- <h1>Admin main</h1> -->
 	<!-- <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -31,68 +31,71 @@
 		<section
 			style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
 
-			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
-		
+			<article class="card"
+				style="flex: 1 1 calc(50% - 10px); background-color: white;">
+
 				<h2 class="card-header">지난 7일간 일기 통계</h2>
-				
+
 				<canvas id="diaryChart" class="card-body"></canvas>
 			</article>
 
-			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
-				<h2 class="card-header" >프로필</h2>
+			<article class="card"
+				style="flex: 1 1 calc(50% - 10px); background-color: white;">
+				<h2 class="card-header">프로필</h2>
 			</article>
 		</section>
 
 		<section
 			style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
 
-			<article class="card" style="flex: 1 1 calc(50% - 10px); background-color: white;">
-				<div class="card-header">회원 목록
-					<a href="/api/admin/users"
+			<article class="card"
+				style="flex: 1 1 calc(50% - 10px); background-color: white;">
+				<div class="card-header">
+					회원 목록 <a href="/api/admin/users"
 						style="text-decoration: none; color: inherit;"> <span
 						class="material-symbols-outlined"> add </span>
 					</a>
 				</div>
 				<!-- <div> -->
-					
+
 				<!-- </div> -->
-				
+
 				<div class="card-body">
-				<div class="table-responsive">
+					<div class="table-responsive">
 
-					<table id="userList" class="table" style="width: 100%">
-						<thead>
-							<tr>
-								<th scope="col">이름</th>
-								<th scope="col">아이디</th>
-								<th scope="col">생일</th>
-								<th scope="col">전화번호</th>
-								<th scope="col">성별</th>
-							</tr>
-						</thead>
-						<tbody>
+						<table id="userList" class="table" style="width: 100%">
+							<thead>
+								<tr>
+									<th scope="col">이름</th>
+									<th scope="col">아이디</th>
+									<th scope="col">생일</th>
+									<th scope="col">전화번호</th>
+									<th scope="col">성별</th>
+								</tr>
+							</thead>
+							<tbody>
 
 
-						</tbody>
+							</tbody>
 
-					</table>
-				</div>
+						</table>
+					</div>
 				</div>
 			</article>
 
 
-			<article class="card" 
+			<article class="card"
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
-				<div class="card-header">답변 대기 중 문의				
-					<a href="/api/admin/qna"
+				<div class="card-header">
+					답변 대기 중 문의 <a href="/api/admin/qna"
 						style="text-decoration: none; color: inherit;"> <span
 						class="material-symbols-outlined"> add </span>
 					</a>
-			
+
 				</div>
-				
-			
-				
+
+
+
 				<div class="card-body">
 					<div class="table-responsive">
 						<table id="qList" class="table">
@@ -193,7 +196,10 @@
 								},
 								dataType : 'json',
 								success : function(response) {
-									console.log(response);
+									/* console.log(response); */
+									
+									if(response.length > 0 ) {
+										
 
 									// 테이블에 데이터를 추가
 									let tableBody = $('#userList tbody');
@@ -211,6 +217,10 @@
 												+ '</td>' + '</tr>';
 										tableBody.append(row);
 									});
+									} else {
+										let noQuestion = '';
+				                    	tableBody.append(noQuestion);
+									}
 
 								},
 								error : function(xhr, status, error) {
