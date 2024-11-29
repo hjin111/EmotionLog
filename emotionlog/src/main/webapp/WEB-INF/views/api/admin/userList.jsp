@@ -17,8 +17,8 @@
 	}
 	body {
 		font-family: 'Pretendard-Regular';
-	} -->
-</style>
+	} 
+</style> -->
 </head>
 <body>
 <%@include file="../includes/navbar.jsp" %>

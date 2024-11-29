@@ -51,9 +51,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void createAnswer(AboardVO vo) throws Exception {
+	public int createAnswer(AboardVO vo) throws Exception {
 		
-		mapper.createAnswer(vo);
+//		mapper.createAnswer(vo);
+		return mapper.createAnswer(vo);
 		
 	}
 
