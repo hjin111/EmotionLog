@@ -26,5 +26,8 @@ public interface AdminService {
 	
 	// QnA 답변 작성
 	public int createAnswer(AboardVO vo) throws Exception;
+	
+	// QnA 답변 삭제
+	public int deleteAnswer(Long ano) throws Exception;
 
 }

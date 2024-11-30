@@ -65,4 +65,10 @@
 	VALUES (seq_aboard.nextval, #{atitle}, #{acontent}, SYSDATE,#{username}, #{qno})
 	</insert>
 	
+	<delete id="deleteAnswer">
+	DELETE FROM aboard
+	WHERE ano = #{ano}
+	
+	</delete>
+	
 </mapper>

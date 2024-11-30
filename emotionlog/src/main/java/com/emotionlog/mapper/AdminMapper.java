@@ -22,4 +22,6 @@ public interface AdminMapper {
 	public List<AboardVO> getAnswer(Long qno);
 	
 	public int createAnswer(AboardVO vo);
+	
+	public int deleteAnswer(Long ano);
 }
