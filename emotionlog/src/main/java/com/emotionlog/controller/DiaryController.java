@@ -145,7 +145,6 @@ public class DiaryController {
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	        String formattedDate = dateFormat.format(diary.getRegdate());
 			rttr.addFlashAttribute("regdate", formattedDate);
-			log.info("regdate!!!!!!!!!!!!: "+diary.getRegdate());
 
 			return "redirect:/api/diary/list"; // 새로운 화면으로 ,url 재이동
 		} catch (Exception e) {
