@@ -89,7 +89,7 @@ public class ReplyController {
 	{
 		vo.setRno(rno);
 		log.info("rno:"+rno);
-		log.info("modify"+vo);
+		log.info("modify 수정수정"+vo);
 		return service.modify(vo) == 1
 				? new ResponseEntity<String>("success",HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -23,6 +23,7 @@
 	<update id ="update">
 		update reply
 		set reply =#{reply},
+			replyer=#{replyer},
 			update_date = sysdate
 			where rno = #{rno}
 	</update>

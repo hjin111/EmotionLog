@@ -351,7 +351,7 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 	 
 	 // 댓글의 수정 이벤트 처리
 	 modalModBtn.on("click",function(e){
-		 let reply ={rno:modal.data("rno"), reply: modalInputReply.val()};
+		 let reply ={rno:modal.data("rno"), reply: modalInputReply.val(), replyer : modalInputReplyer.val()};
 		 replyService.update(reply,function(result){
 			 showProcessModal(); // 버튼 클릭 시 processModal 띄우기
 			 modal.modal("hide");
