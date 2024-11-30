@@ -60,7 +60,7 @@
 			                 	<button type="submit" data-oper='register' class="btn btn-success">Submit Button</button>
 								<!-- Reset 버튼 -->
 								<button type="button" class="btn btn-danger" onclick="resetFields()">Reset</button>
-	                			<button type='submit' data-oper='list' class="btn btn-info">List</button>	                			
+	                			<button type='submit' data-oper='list' class="btn btn-secondary">List</button>	                			
 							</div>
 					    </form>
 					</div>
