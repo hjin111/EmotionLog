@@ -71,4 +71,9 @@
 	
 	</delete>
 	
+	<update id="updateAnswer">
+        UPDATE aboard
+        SET acontent = #{acontent}
+        WHERE ano = #{ano}
+    </update>
 </mapper>

@@ -1,3 +1,5 @@
+<!-- 작성자 : 심세연 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -18,6 +20,10 @@
 	crossorigin="anonymous"> -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 	<%@include file="../includes/navbar.jsp"%>
@@ -34,7 +40,7 @@
 			<article class="card"
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
 
-				<h2 class="card-header">지난 7일간 일기 통계</h2>
+				<h2 class="card-header">지난 7일간 사용자 일기 통계</h2>
 
 				<canvas id="diaryChart" class="card-body"></canvas>
 			</article>
@@ -63,8 +69,8 @@
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
 				<div class="card-header">
 					회원 목록 <a href="/api/admin/users"
-						style="text-decoration: none; color: inherit;"> <span
-						class="material-symbols-outlined"> add </span>
+						style="text-decoration: none; color: inherit;">
+						<i class="fa-solid fa-plus"></i>
 					</a>
 				</div>
 				<!-- <div> -->
@@ -77,8 +83,8 @@
 						<table id="userList" class="table" style="width: 100%">
 							<thead>
 								<tr>
-									<th scope="col">이름</th>
 									<th scope="col">아이디</th>
+									<th scope="col">이름</th>
 									<th scope="col">생일</th>
 									<th scope="col">전화번호</th>
 									<th scope="col">성별</th>
@@ -99,8 +105,8 @@
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
 				<div class="card-header">
 					답변 대기 중 문의 <a href="/api/admin/qna"
-						style="text-decoration: none; color: inherit;"> <span
-						class="material-symbols-outlined"> add </span>
+						style="text-decoration: none; color: inherit;">
+						<i class="fa-solid fa-plus"></i>
 					</a>
 
 				</div>
@@ -137,6 +143,8 @@
 
 	<script>
 		$(document).ready(function() {
+			
+			/* 일기 개수 데이터 불러오기 */
 			$.ajax({
 				url : '/api/admin/diary-counts',
 				method : 'GET',
@@ -191,7 +199,7 @@
 						}
 					});
 
-
+			/* 관리자 프로필 불러오기 */
 			$.ajax({
 				url : '/api/admin/profile',
 				method : 'GET',
@@ -209,7 +217,7 @@
 			
 			
 			
-			
+			/* 회원 목록(일부) 불러오기 */
 			$.ajax({
 				url : '/api/admin/userpart',
 				method : 'GET',
@@ -229,6 +237,7 @@
 
 					// 응답받은 데이터로 테이블 채우기
 					response.forEach(function(user) {
+		                
 						let row = '<tr>' + '<td>'
 								+ user.username + '</td>'
 								+ '<td>' + user.name + '</td>'
@@ -249,6 +258,8 @@
 					console.error('Error:', xhr.responseText);
 				}
 			});
+			
+		
 
 			$.ajax({
 				url : '/api/admin/qnapart',
@@ -273,13 +284,14 @@
 									day : '2-digit'
 								});
 
-						let row = '<tr>' + '<td>' + q.qno
-								+ '</td>' + '<td>' + q.qtitle
-								+ '</td>' +
-								//'<td>' + q.qcontent + '</td>' +
-								'<td>' + q.username + '</td>'
-								+ '<td>' + formattedDate
-								+ '</td>' + '</tr>';
+						let row = `
+						    <tr>
+						        <td>\${q.qno}</td>
+						        <td><a href="/api/admin/qna/\${q.qno}" class="move" style="text-decoration: none; color: inherit;">\${q.qtitle}</a></td>
+						        <td>\${q.username}</td>
+						        <td>\${formattedDate}</td>
+						    </tr>
+						`
 						tableBody.append(row);
 					});
 
