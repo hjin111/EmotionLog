@@ -48,18 +48,23 @@ body {
 			</div>
 		</section>
 
-		<section>
-			<form id="answerForm">
-				<input id="answerTitle" class="form-control"
-					value="RE: <c:out value="${qDetail.qtitle }"/>" readonly="readonly"
-					disabled style="margin-bottom: 1vh">
-				<textarea id="answerContent" rows="" cols="" class="form-control"></textarea>
-				<button type="submit" class="btn btn-light">등록</button>
-			</form>
-		</section>
+		<section class="card">
+			<div class="card-body" style="padding: 3vw">
+				<form id="answerForm">
+					<input id="answerTitle" class="form-control"
+						value="RE: <c:out value="${qDetail.qtitle }"/>"
+						readonly="readonly" disabled type="hidden"
+						style="margin-bottom: 1vh">
+					<textarea id="answerContent" rows="" cols="" class="form-control"
+						placeholder="답변을 작성해주세요."></textarea>
+					<button type="submit" class="btn btn-light">등록</button>
+				</form>
+				<hr style="margin-bottom: 5vh">
 
-		<section id="answersContainer">
-			<!-- 댓글 불러오기 -->
+				<article id="answersContainer">
+					<!-- 댓글 불러오기 -->
+				</article>
+			</div>
 		</section>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -85,17 +90,23 @@ body {
 								month : '2-digit',
 								day : '2-digit'
 							});
-                        	console.log(formattedDate);
+                        	/* console.log(formattedDate); */
                             answersHtml += `
-                                <div class="card">
-                                    <p>\${answer.username}</p>
-                                    <p>
-                                    	<i class="fa-regular fa-calendar"></i>
-                                    \${formattedDate}
-                                    </p>
-                                    <hr>
-                                    <p>\${answer.acontent}</p>
-                                </div>
+                            	<div class="card" style="background-color: whitesmoke; padding: 3vw; border: 0">
+                            	<div style="display: flex; justify-content: space-between; margin-bottom: 2vh">
+                            		<h3 class="card-title" style="margin: 0" >\${answer.atitle}</h3>
+	                             	<button id="deleteAnswer" data-ano="\${answer.ano}" style="border: 0; background-color: transparent; padding: 0;">
+	                             		<i class="fa-solid fa-trash-can" style="color: grey"></i>
+	                             	</button>
+                            
+                            	</div>
+	                                    <p class="card-subtitle">\${answer.username}</p>
+	                                    <p>
+	                                    	<i class="fa-regular fa-calendar"></i>
+	                                    \${formattedDate}
+	                                    </p>
+	                                    <p class="card-text" >\${answer.acontent}</p>
+	                             </div>
                             `;
                         });
                         
@@ -104,9 +115,9 @@ body {
                     } else {
                     	let noAnswer = '';
                     	noAnswer += `
-                    		<div class="card">
-                            <p>답변을 달아주세요.</p>
-                        </div>
+                    		
+                            <p style="text-align: center;">아직 작성된 답변이 없습니다.</p>
+                        
                     	`;
                         $('#answersContainer').append(noAnswer);  // 댓글이 없을 경우
                     }
@@ -123,7 +134,7 @@ body {
     	
     	
     	
-        $("#answerForm").on("submit", function (event) {
+        $("#answerForm").on("submit", function (e) {
             event.preventDefault(); // 기본 form 제출 방지
             
             const responseData = {
@@ -139,7 +150,7 @@ body {
                 data: JSON.stringify(responseData),
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    alert("답변이 성공적으로 등록되었습니다!");
+                    /* alert("답변이 성공적으로 등록되었습니다!"); */
                     location.reload(); // 페이지를 새로고침하여 업데이트된 댓글 반영
                 },
                 error: function (xhr, status, error) {
@@ -147,7 +158,36 @@ body {
                     alert("답변 등록에 실패했습니다. 다시 시도해주세요.");
                 }
             });
+           
         });
+        
+        
+        $(document).on("click", "#deleteAnswer", function (e) {
+        	e.preventDefault();
+        	const ano = $(this).data("ano");
+        	console.log(ano);
+        	
+        	$.ajax({
+                type: "DELETE",
+                url: "/api/admin/qna/answer/" + ano,
+                dataType: "text", // 서버에서 plain text("success")를 반환하므로
+                success: function (response) {
+                    if (response === "success") {
+                        alert("답변이 삭제되었습니다.");
+                        location.reload(); // 삭제 후 새로고침
+                    } else {
+                        alert("삭제에 실패했습니다.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("삭제 오류:", error);
+                    alert("삭제 중 오류가 발생했습니다. 다시 시도해주세요.");
+                }
+            });
+        	
+        	
+        })
+        
     });
 </script>
 </body>

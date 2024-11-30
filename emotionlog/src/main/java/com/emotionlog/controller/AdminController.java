@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,10 +64,10 @@ public class AdminController {
 
 		List<UsersVO> userList = service.getUserList(limit);
 
-		if (userList.isEmpty()) {
-			// 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+//		if (userList.isEmpty()) {
+//			// 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
 
 		// 데이터를 정상적으로 가져온 경우 200 OK와 데이터 반환
 		return new ResponseEntity<>(userList, HttpStatus.OK);
@@ -110,12 +111,6 @@ public class AdminController {
 
 		List<QboardVO> qList = service.getQboardList(limit);
 
-//		if (qList.isEmpty()) {
-//			// 데이터가 없을 경우 404 상태 코드와 함께 빈 리스트 반환
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-
-		// 데이터를 정상적으로 가져온 경우 200 OK와 데이터 반환
 		return new ResponseEntity<>(qList, HttpStatus.OK);
 	}
 
@@ -155,5 +150,17 @@ public class AdminController {
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
+	
+	
+	// QnA 답변 삭제
+	@DeleteMapping(value = "/qna/answer/{ano}", produces = {MediaType.TEXT_PLAIN_VALUE})
+	   public ResponseEntity<String> deleteAnswer(@PathVariable("ano") Long ano) throws Exception {
+	      log.info("delete: " + ano);
+	      
+	      return service.deleteAnswer(ano) == 1 
+	            ? new ResponseEntity<>("success", HttpStatus.OK) 
+	            : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
+	   }
+	
 
 }

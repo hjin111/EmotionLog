@@ -58,6 +58,12 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	@Override
+	public int deleteAnswer(Long ano) throws Exception {
+		
+		return mapper.deleteAnswer(ano);
+	}
+
 
 
 }
