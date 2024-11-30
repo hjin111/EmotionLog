@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emotionlog.mapper.QnABoardMapper">
+
+    <!-- QnA 전체리스트 조회 -->
+    <select id="getListQnA" resultType="com.emotionlog.domain.QboardVO">
+        SELECT qno, qtitle, qcontent, qdate, username, qupdate_date
+        FROM qboard
+        ORDER BY qno DESC
+    </select>
+
+    <!-- QnA 등록 -->
+    <insert id="insertQnA" parameterType="com.emotionlog.domain.QboardVO">
+        INSERT INTO qboard (qno, qtitle, qcontent, username, qdate, qupdate_date)
+        VALUES (seq_qboard.nextval, #{qtitle}, #{qcontent}, #{username}, SYSDATE, SYSDATE)
+    </insert>
+
+    <!-- QnA 수정 -->
+    <update id="updateQnA" parameterType="com.emotionlog.domain.QboardVO">
+        UPDATE qboard
+        SET qtitle = #{qtitle}, 
+            qcontent = #{qcontent}, 
+            username = #{username}, 
+            qupdate_date = SYSDATE
+        WHERE qno = #{qno}
+    </update>
+
+    <!-- QnA 조회 - 단 건 -->
+    <select id="readQnA" resultType="com.emotionlog.domain.QboardVO">
+        SELECT qno, qtitle, qcontent, qdate, username, qupdate_date
+        FROM qboard
+        WHERE qno = #{qno}
+    </select>
+
+    <!-- QnA 삭제 -->
+    <delete id="deleteQnA">
+        DELETE FROM qboard WHERE qno = #{qno}
+    </delete>
+
+</mapper>
