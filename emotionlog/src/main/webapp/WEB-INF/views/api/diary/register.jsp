@@ -16,7 +16,7 @@
 		<div class="row justify-content-center">
 			<div class="gmr-container">
 				<div class="panel panel-default">
-					<div class="panel-heading">diary Register Page</div>
+					<div class="panel-heading">Diary Register Page</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
     					<form id="registerForm" action="/api/diary/register" method="post">
@@ -32,19 +32,19 @@
 					        <!-- 제목 -->
 					        <div class="form-group">
 					            <label>제목</label>
-					            <input type="text" name="title" class="form-control" required>
+					            <input type="text" id ='title' name="title" class="form-control" required>
 					        </div>
 	
 							<!-- 내용 -->
 							<div class="form-group">
 								<label>내용</label>
-								<textarea class="form-control" rows="3" name='content'/></textarea>
+								<textarea class="form-control" rows="3" id ='content' name='content'/></textarea>
 							</div>
 							
 							<!-- 감정 -->
 							<div class ="form-group dropdown">
 								<label>감정</label><br/>				
-								<select name = 'emotion_status'>
+								<select name = 'emotion_status' id ='emotion_status'>
 									<option value="" <c:out value="${diary.emotion_status == null?'selected':'' }"/>>--</option>
 	               					<option value="joy" <c:out value="${diary.emotion_status eq 'joy'?'selected':'' }"/>>기쁨</option>
 	               					<option value="anger" <c:out value="${diary.emotion_status eq 'anger'?'selected':'' }"/>>분노</option>
@@ -57,8 +57,9 @@
 							<br/>
 							
 							<div class ="form-group">
-			                 	<button type="submit" class="btn btn-success">Submit Button</button>
-	                			<button type="reset" class="btn btn-danger">Reset Button</button>
+			                 	<button type="submit" data-oper='register' class="btn btn-success">Submit Button</button>
+								<!-- Reset 버튼 -->
+								<button type="button" class="btn btn-danger" onclick="resetFields()">Reset</button>
 	                			<button type='submit' data-oper='list' class="btn btn-info">List</button>	                			
 							</div>
 					    </form>
@@ -84,6 +85,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script>
+
+function resetFields() {
+    // 특정 필드만 초기화
+    document.getElementById('title').value = '';       // 제목 초기화
+    document.getElementById('content').value = '';     // 내용 초기화
+    document.getElementById('emotion_status').value = ''; // 감정 초기화
+
+    // 등록일 값은 유지
+    const regdate = document.getElementById('regdate');
+    regdate.value = regdate.defaultValue; // 초기값 유지
+ }
+
 let formObj = $("#registerForm");  // 올바른 선택자: id 기반 선택 (등록폼의 아이디를 #registerForm으로 선택)
 
 $('button').on("click",function(e){
@@ -94,7 +107,13 @@ $('button').on("click",function(e){
 	if (operation === 'list') {
 		// move to list
 		formObj.attr("action", "/api/diary/list").attr("method", "get");
-	}else{
+        // 제목, 내용, 감정 상태 필드를 폼 데이터에서 제거
+        formObj.find("input[name='title']").remove();
+        formObj.find("textarea[name='content']").remove();
+        formObj.find("select[name='emotion_status']").remove();
+        
+		formObj.submit(); 
+	}else if (operation === 'register'){
 		//제목 값 안넣었을때
 		if(!formObj.find("input[name='title']").val()){
 			alert("제목 값을 입력해주세요.");
@@ -110,9 +129,9 @@ $('button').on("click",function(e){
 			alert("감정 상태를 선택하세요.");
 			return false;
 		}
+		formObj.submit(); 
 	}
-	formObj.submit(); // 마지막에 직접 submit() 수행
-	});
+});
 </script>
 </body>
 </html>

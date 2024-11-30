@@ -20,7 +20,7 @@
 
 					<div class="panel panel-default">
 
-						<div class="panel-heading">diary Modify Page</div>
+						<div class="panel-heading">Diary Modify Page</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 
@@ -109,8 +109,14 @@ $(document).ready(function(){//dom 구조가 만들어져 준비되어진 상태
 		
 		
 		if(operation === 'list'){
+            // 불필요한 입력 값 제거
+            formObj.find("input[name='title']").remove();
+            formObj.find("textarea[name='content']").remove();
+            formObj.find("select[name='emotion_status']").remove();
+			formObj.find("input[name='update_date']").remove();
             // 리스트 페이지 이동
             formObj.attr("action", "/api/diary/list").attr("method", "get");
+            
 		}else{
 			//제목 값 안넣었을때
 			if(!formObj.find("input[name='title']").val()){
