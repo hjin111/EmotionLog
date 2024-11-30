@@ -45,6 +45,7 @@ body {
 				</p>
 				<hr>
 				<p class="card-text" style="margin: 1vh 0">${qDetail.qcontent }</p>
+				
 			</div>
 		</section>
 
@@ -140,10 +141,10 @@ body {
             const responseData = {
             		atitle: $("#answerTitle").val(),
             		acontent: $("#answerContent").val(),
-            		username: "2",
+            		username: "${username}",
             		qno: ${qDetail.qno}
             };
-
+			
             $.ajax({
                 type: "POST",
                 url: "/api/admin/qna/answer", 
@@ -161,7 +162,7 @@ body {
            
         });
         
-        
+        // 동적으로 생성된 요소에 이벤트 부여
         $(document).on("click", "#deleteAnswer", function (e) {
         	e.preventDefault();
         	const ano = $(this).data("ano");

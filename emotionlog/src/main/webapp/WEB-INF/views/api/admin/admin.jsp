@@ -17,7 +17,7 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous"> -->
 <link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 	<%@include file="../includes/navbar.jsp"%>
@@ -41,7 +41,18 @@
 
 			<article class="card"
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
-				<h2 class="card-header">프로필</h2>
+				<h2 class="card-header">관리자 프로필</h2>
+				<div class="card-body" style="width: 100%; display: flex; justify-content: center; align-items: center;">				
+				<div style="text-align: center;">
+					<span class="material-symbols-outlined" style="display: block; font-size: 96px; font-weight: 200">badge</span>
+					<div>					
+						<p id="name" style="margin: 0">관리자 이름</p>
+						<p id="username" style="margin: 0">관리자 아이디</p>
+						<p id="phone_number" style="margin: 0">관리자 전화번호</p>
+					</div>
+				</div>
+					
+				</div>
 			</article>
 		</section>
 
@@ -125,149 +136,160 @@
 
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-							// Ajax 요청으로 지난 7일간 일기 데이터를 가져오기
-							$
-									.ajax({
-										url : '/api/admin/diary-counts',
-										method : 'GET',
-										dataType : 'json',
-										success : function(response) {
-											console.log(response); // 데이터 확인
-
-											// 날짜와 일기 개수를 분리
-											let labels = response.map(function(
-													item) {
-												return item.regdateStr; // 날짜
-											});
-
-											let data = response.map(function(
-													item) {
-												return item.dailyCount; // 일기 개수
-											});
-
-											// 차트 렌더링
-											let ctx = document.getElementById(
-													'diaryChart').getContext(
-													'2d');
-											let diaryChart = new Chart(
-													ctx,
-													{
-														type : 'bar',
-														data : {
-															labels : labels,
-															datasets : [ {
-																label : '일기 개수',
-																data : data,
-																backgroundColor : 'rgba(75, 192, 192, 0.2)',
-																borderColor : 'rgba(75, 192, 192, 1)',
-																borderWidth : 1
-															} ]
-														},
-														options : {
-															
-															/* maintainAspectRatio: false, */
-															scales : {
-																y : {
-																	beginAtZero : true,
-																	max: 10,
-																	ticks: {
-																		stepSize : 2
-																	} 
-
-																}
-															}
-													
-														}
-													});
+		$(document).ready(function() {
+			$.ajax({
+				url : '/api/admin/diary-counts',
+				method : 'GET',
+				dataType : 'json',
+				success : function(response) {
+						console.log(response); // 데이터 확인
+						// 날짜와 일기 개수를 분리
+						let labels = response.map(function(
+								item) {
+							return item.regdateStr; // 날짜
+						});
+	
+						let data = response.map(function(item) {
+								return item.dailyCount; // 일기 개수
+							});
+	
+							// 차트 렌더링
+							let ctx = document.getElementById(
+									'diaryChart').getContext(
+									'2d');
+							let diaryChart = new Chart(ctx,{
+									type : 'bar',
+									data : {
+										labels : labels,
+										datasets : [ {
+											label : '일기 개수',
+											data : data,
+											backgroundColor : 'rgba(75, 192, 192, 0.2)',
+											borderColor : 'rgba(75, 192, 192, 1)',
+											borderWidth : 1
+										} ]
 										},
-										error : function(xhr, status, error) {
-											console.error('Ajax 요청 실패:', error);
+										options : {
+	
+										/* maintainAspectRatio: false, */
+											scales : {
+												y : {
+													beginAtZero : true,
+													max: 10,
+													ticks: {
+														stepSize : 2
+													} 
+	
+												}
+											}
+									
 										}
 									});
+						},
+						error : function(xhr, status, error) {
+							console.error('Ajax 요청 실패:', error);
+						}
+					});
 
-							$.ajax({
-								url : '/api/admin/userpart',
-								method : 'GET',
-								data : {
-									limit : 5
-								},
-								dataType : 'json',
-								success : function(response) {
-									/* console.log(response); */
-									
-									if(response.length > 0 ) {
-										
 
-									// 테이블에 데이터를 추가
-									let tableBody = $('#userList tbody');
-									tableBody.empty(); // 기존 테이블 내용 비우기 (초기화)
+			$.ajax({
+				url : '/api/admin/profile',
+				method : 'GET',
+				dataType : 'json',
+				success : function(response) {
+					console.log(response);
+					$('#name').text(response.name);
+					$('#username').text(response.username);
+					$('#phone_number').text(response.phone_number);
+				},
+				error : function(xhr, status, error) {
+					console.error('Error:', xhr.responseText);
+				}
+			});
+			
+			
+			
+			
+			$.ajax({
+				url : '/api/admin/userpart',
+				method : 'GET',
+				data : {
+					limit : 5
+				},
+				dataType : 'json',
+				success : function(response) {
+					/* console.log(response); */
+					
+					if(response.length > 0 ) {
+						
 
-									// 응답받은 데이터로 테이블 채우기
-									response.forEach(function(user) {
-										let row = '<tr>' + '<td>'
-												+ user.username + '</td>'
-												+ '<td>' + user.name + '</td>'
-												+ '<td>' + user.birthday
-												+ '</td>' + '<td>'
-												+ user.phone_number + '</td>'
-												+ '<td>' + user.gender
-												+ '</td>' + '</tr>';
-										tableBody.append(row);
-									});
-									} else {
-										let noQuestion = '';
-				                    	tableBody.append(noQuestion);
-									}
+					// 테이블에 데이터를 추가
+					let tableBody = $('#userList tbody');
+					tableBody.empty(); // 기존 테이블 내용 비우기 (초기화)
 
-								},
-								error : function(xhr, status, error) {
-									console.error('Error:', xhr.responseText);
-								}
-							});
+					// 응답받은 데이터로 테이블 채우기
+					response.forEach(function(user) {
+						let row = '<tr>' + '<td>'
+								+ user.username + '</td>'
+								+ '<td>' + user.name + '</td>'
+								+ '<td>' + user.birthday
+								+ '</td>' + '<td>'
+								+ user.phone_number + '</td>'
+								+ '<td>' + user.gender
+								+ '</td>' + '</tr>';
+						tableBody.append(row);
+					});
+					} else {
+						let noQuestion = '';
+                    	tableBody.append(noQuestion);
+					}
 
-							$.ajax({
-								url : '/api/admin/qnapart',
-								method : 'GET',
-								data : {
-									limit : 5
-								},
-								dataType : 'json',
-								success : function(response) {
-									console.log(response);
+				},
+				error : function(xhr, status, error) {
+					console.error('Error:', xhr.responseText);
+				}
+			});
 
-									// 테이블에 데이터를 추가
-									let tableBody = $('#qList tbody');
-									tableBody.empty(); // 기존 테이블 내용 비우기 (초기화)
+			$.ajax({
+				url : '/api/admin/qnapart',
+				method : 'GET',
+				data : {
+					limit : 5
+				},
+				dataType : 'json',
+				success : function(response) {
+					console.log(response);
 
-									// 응답받은 데이터로 테이블 채우기
-									response.forEach(function(q) {
-										let formattedDate = new Date(q.qdate)
-												.toLocaleDateString('en-CA', {
-													year : '2-digit',
-													month : '2-digit',
-													day : '2-digit'
-												});
+					// 테이블에 데이터를 추가
+					let tableBody = $('#qList tbody');
+					tableBody.empty(); // 기존 테이블 내용 비우기 (초기화)
 
-										let row = '<tr>' + '<td>' + q.qno
-												+ '</td>' + '<td>' + q.qtitle
-												+ '</td>' +
-												//'<td>' + q.qcontent + '</td>' +
-												'<td>' + q.username + '</td>'
-												+ '<td>' + formattedDate
-												+ '</td>' + '</tr>';
-										tableBody.append(row);
-									});
+					// 응답받은 데이터로 테이블 채우기
+					response.forEach(function(q) {
+						let formattedDate = new Date(q.qdate)
+								.toLocaleDateString('en-CA', {
+									year : '2-digit',
+									month : '2-digit',
+									day : '2-digit'
+								});
 
-								},
-								error : function(xhr, status, error) {
-									console.error('Error:', xhr.responseText);
-								}
-							});
+						let row = '<tr>' + '<td>' + q.qno
+								+ '</td>' + '<td>' + q.qtitle
+								+ '</td>' +
+								//'<td>' + q.qcontent + '</td>' +
+								'<td>' + q.username + '</td>'
+								+ '<td>' + formattedDate
+								+ '</td>' + '</tr>';
+						tableBody.append(row);
+					});
 
-						});
+				},
+				error : function(xhr, status, error) {
+					console.error('Error:', xhr.responseText);
+				}
+			});
+
+		});
 	</script>
 
 	</script>
