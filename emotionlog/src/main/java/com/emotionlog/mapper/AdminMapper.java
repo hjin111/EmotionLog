@@ -1,6 +1,7 @@
 package com.emotionlog.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -24,4 +25,6 @@ public interface AdminMapper {
 	public int createAnswer(AboardVO vo);
 	
 	public int deleteAnswer(Long ano);
+
+	public int updateAnswer(Map<String, Object> params);
 }

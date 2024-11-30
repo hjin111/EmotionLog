@@ -1,6 +1,7 @@
 package com.emotionlog.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -190,5 +192,24 @@ public class AdminController {
 	            : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
 	   }
 	
+	
+	// QnA 답변 수정
+	@PutMapping("/qna/answer/{ano}")
+    public ResponseEntity<String> updateAnswer(
+            @PathVariable("ano") Long ano,               // URL에서 ano를 받음
+            @RequestBody Map<String, String> requestData) throws Exception {
+
+        String updatedContent = requestData.get("acontent"); // 요청 바디에서 acontent를 추출
+
+        // 서비스에서 답변 수정 처리
+        int result = service.updateAnswer(ano, updatedContent);
+
+        if (result == 1) {
+            return new ResponseEntity<>("답변이 수정되었습니다.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("수정에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+		
 
 }

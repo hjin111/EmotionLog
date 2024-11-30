@@ -30,4 +30,8 @@ public interface AdminService {
 	// QnA 답변 삭제
 	public int deleteAnswer(Long ano) throws Exception;
 
+	// QnA 답변 수정
+	public int updateAnswer(Long ano, String acontent) throws Exception;
+
+
 }
