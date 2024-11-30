@@ -1,3 +1,5 @@
+<!-- 작성자 : 심세연 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,7 +16,7 @@
 	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<style type="text/css">
+<!-- <style type="text/css">
 @font-face {
 	font-family: 'Pretendard-Regular';
 	src:
@@ -27,7 +29,7 @@
 body {
 	font-family: 'Pretendard-Regular';
 }
-</style>
+</style> -->
 
 </head>
 <body>
@@ -35,10 +37,14 @@ body {
 	<main style="margin: 5vh 10vw">
 		<section class="card" style="margin-bottom: 3vh">
 			<div class="card-body" style="padding: 3vw">
-				<!-- <h2 class="card-header">QnA 게시판	</h2> -->
-				<h2 class="card-title" style="margin-bottom: 2vh">${qDetail.qtitle}</h2>
+				<div style="display: flex; justify-content: space-between;">
+					<h2 class="card-title" style="margin-bottom: 2vh">${qDetail.qtitle}</h2>
+					<a href="/api/admin/qna" style="text-decoration: none; color: inherit;">
+						<i class="fa-solid fa-list-ul"></i>
+					</a>
+				</div>
 				<p class="card-subtitle">${qDetail.username}</p>
-				<!-- <i class="fa-regular fa-calendar"></i> -->
+				
 				<p>
 					<i class="fa-regular fa-calendar"></i>
 					<fmt:formatDate value="${qDetail.qdate}" pattern="yyyy-MM-dd" />
