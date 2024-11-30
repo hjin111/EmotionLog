@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +25,7 @@ import com.emotionlog.domain.DiaryCountsVO;
 import com.emotionlog.domain.QboardVO;
 import com.emotionlog.domain.UsersVO;
 import com.emotionlog.service.AdminService;
+import com.emotionlog.service.UsersService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,6 +37,8 @@ import lombok.extern.log4j.Log4j;
 public class AdminController {
 
 	private AdminService service;
+	private AuthenticationManager authenticationManager;
+	private UsersService usersService;
 
 	// 관리자 페이지 접속
 	@GetMapping("")
@@ -72,6 +79,22 @@ public class AdminController {
 		// 데이터를 정상적으로 가져온 경우 200 OK와 데이터 반환
 		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
+	
+	
+	// 프로필 조회
+	@GetMapping("/profile")
+	@ResponseBody
+	public ResponseEntity<UsersVO> getProfileAjax() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	User user = (User) authentication.getPrincipal();
+    	
+    	String username = user.getUsername();
+    	UsersVO profile = usersService.readMypage(username);
+		return new ResponseEntity<>(profile, HttpStatus.OK);
+		
+	}
+	
+	
 
 	// 날짜별 작성된 일기 수 조회
 	@GetMapping("/diary-counts")
@@ -121,6 +144,11 @@ public class AdminController {
 		try {
 			qDetail = service.getQboardDetails(qno);
 			model.addAttribute("qDetail", qDetail);
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    	User user = (User) authentication.getPrincipal();
+	    	String username = user.getUsername();
+	    	model.addAttribute("username", username);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
