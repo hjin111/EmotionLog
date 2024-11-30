@@ -40,7 +40,7 @@
 			<article class="card"
 				style="flex: 1 1 calc(50% - 10px); background-color: white;">
 
-				<h2 class="card-header">지난 7일간 일기 통계</h2>
+				<h2 class="card-header">지난 7일간 사용자 일기 통계</h2>
 
 				<canvas id="diaryChart" class="card-body"></canvas>
 			</article>
@@ -83,8 +83,8 @@
 						<table id="userList" class="table" style="width: 100%">
 							<thead>
 								<tr>
-									<th scope="col">이름</th>
 									<th scope="col">아이디</th>
+									<th scope="col">이름</th>
 									<th scope="col">생일</th>
 									<th scope="col">전화번호</th>
 									<th scope="col">성별</th>
@@ -237,6 +237,7 @@
 
 					// 응답받은 데이터로 테이블 채우기
 					response.forEach(function(user) {
+		                
 						let row = '<tr>' + '<td>'
 								+ user.username + '</td>'
 								+ '<td>' + user.name + '</td>'
@@ -257,6 +258,8 @@
 					console.error('Error:', xhr.responseText);
 				}
 			});
+			
+		
 
 			$.ajax({
 				url : '/api/admin/qnapart',
@@ -281,13 +284,14 @@
 									day : '2-digit'
 								});
 
-						let row = '<tr>' + '<td>' + q.qno
-								+ '</td>' + '<td>' + q.qtitle
-								+ '</td>' +
-								//'<td>' + q.qcontent + '</td>' +
-								'<td>' + q.username + '</td>'
-								+ '<td>' + formattedDate
-								+ '</td>' + '</tr>';
+						let row = `
+						    <tr>
+						        <td>\${q.qno}</td>
+						        <td><a href="/api/admin/qna/\${q.qno}" class="move" style="text-decoration: none; color: inherit;">\${q.qtitle}</a></td>
+						        <td>\${q.username}</td>
+						        <td>\${formattedDate}</td>
+						    </tr>
+						`
 						tableBody.append(row);
 					});
 

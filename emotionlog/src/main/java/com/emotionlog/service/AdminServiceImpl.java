@@ -1,6 +1,8 @@
 package com.emotionlog.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,15 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteAnswer(Long ano) throws Exception {
 		
 		return mapper.deleteAnswer(ano);
+	}
+
+	@Override
+	public int updateAnswer(Long ano, String acontent) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+        params.put("ano", ano);  // ano 파라미터
+        params.put("acontent", acontent);  // acontent 파라미터
+        
+		return mapper.updateAnswer(params);
 	}
 
 

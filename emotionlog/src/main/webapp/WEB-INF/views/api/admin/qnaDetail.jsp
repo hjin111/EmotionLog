@@ -102,9 +102,14 @@ body {
                             	<div class="card" style="background-color: whitesmoke; padding: 3vw; border: 0">
                             	<div style="display: flex; justify-content: space-between; margin-bottom: 2vh">
                             		<h3 class="card-title" style="margin: 0" >\${answer.atitle}</h3>
-	                             	<button id="deleteAnswer" data-ano="\${answer.ano}" style="border: 0; background-color: transparent; padding: 0;">
-	                             		<i class="fa-solid fa-trash-can" style="color: grey"></i>
-	                             	</button>
+                            		<div>
+                                    <button id="editAnswer" data-ano="\${answer.ano}" style="border: 0; background-color: transparent; padding: 0; margin-right: 10px;">
+                                        <i class="fa-solid fa-pen" style="color: grey"></i>
+                                    </button>
+                                    <button id="deleteAnswer" data-ano="\${answer.ano}" style="border: 0; background-color: transparent; padding: 0;">
+                                        <i class="fa-solid fa-trash-can" style="color: grey"></i>
+                                    </button>
+                                	</div>
                             
                             	</div>
 	                                    <p class="card-subtitle">\${answer.username}</p>
@@ -112,11 +117,15 @@ body {
 	                                    	<i class="fa-regular fa-calendar"></i>
 	                                    \${formattedDate}
 	                                    </p>
-	                                    <p class="card-text" >\${answer.acontent}</p>
+	                                   
+	                                    <textarea id="commentContent" readonly="readonly" style="all: unset; display: block; width: 100%; height: auto; background: none; border: none; outline: none; box-shadow: none;" >\${answer.acontent}</textarea>
+	                                    <button id="cancelEdit" data-ano="\${answer.ano}" class="btn btn-light" style="display: none;">취소</button>
+	                                    <button id="saveEdit" data-ano="\${answer.ano}" class="btn btn-light" style="display: none;">저장</button>
+
 	                             </div>
                             `;
                         });
-                        
+                        /* <p class="card-text" >\${answer.acontent}</p> */
                         
                         $('#answersContainer').append(answersHtml);  // 댓글을 삽입할 영역에 추가
                     } else {
@@ -168,6 +177,58 @@ body {
            
         });
         
+        // 수정
+        $(document).on("click", "#editAnswer", function () {
+            const ano = $(this).data("ano");
+            
+            // 수정 전 원래 내용 저장 (data 속성에 저장)
+            const originalContent = $("#commentContent").val();
+            $("#cancelEdit").data("originalContent", originalContent); // originalContent를 취소 버튼에 저장
+            
+            // 기존 답변 내용을 담고 있는 textarea를 수정 가능하도록 
+            $("#commentContent" ).removeAttr("readonly").css("background", "white");
+            
+            // 수정 버튼 숨기고, 취소 및 저장 버튼 표시
+            $(this).hide();
+            $("#cancelEdit").show();
+            $("#saveEdit").show();
+        });
+        // 취소
+        $(document).on("click", "#cancelEdit" , function () {
+            // 원래 내용 가져오기
+            const originalContent = $(this).data("originalContent");
+            
+            // 수정된 내용이 아닌 원래 내용을 텍스트 영역에 설정
+            $("#commentContent" ).val(originalContent).attr("readonly", "readonly").css("background", "none");
+            
+            // 취소 버튼 숨기고, 수정 버튼 표시
+            $(this).hide();
+            $("#saveEdit").hide();
+            $("#editAnswer").show();
+        });
+        
+     // 저장 버튼 클릭 시
+        $(document).on("click", "#saveEdit", function () {
+            const ano = $(this).data("ano");
+            const updatedContent = $("#commentContent").val(); // 수정된 내용 가져오기
+            
+            $.ajax({
+                type: "PUT",
+                url: "/api/admin/qna/answer/" + ano,
+                data: JSON.stringify({ acontent: updatedContent }),
+                contentType: "application/json",
+                success: function (response) {
+                    // 성공적으로 저장되면, 수정된 내용 반영
+                    /* alert("답변이 수정되었습니다."); */
+                    location.reload(); // 페이지 새로고침하여 업데이트된 내용 반영
+                },
+                error: function (error) {
+                    console.error("수정 실패:", error);
+                    alert("수정에 실패했습니다. 다시 시도해주세요.");
+                }
+            });
+        });
+        
         // 동적으로 생성된 요소에 이벤트 부여
         $(document).on("click", "#deleteAnswer", function (e) {
         	e.preventDefault();
@@ -180,7 +241,7 @@ body {
                 dataType: "text", // 서버에서 plain text("success")를 반환하므로
                 success: function (response) {
                     if (response === "success") {
-                        alert("답변이 삭제되었습니다.");
+                        /* alert("답변이 삭제되었습니다."); */
                         location.reload(); // 삭제 후 새로고침
                     } else {
                         alert("삭제에 실패했습니다.");
