@@ -37,7 +37,7 @@
                             <tr>
                                 <td><c:out value="${qna.qno}" /></td>
                                 <td>
-                                    <a href="/detail/${qna.qno}">
+                                    <a href="/qna/detail/?qno=${qna.qno}">
                                         <c:out value="${qna.qtitle}" />
                                     </a>
                                 </td>

@@ -42,7 +42,7 @@
 				</div>
 				
 				<button class="btn btn-default" 
-				        onclick="location.href='/qna/updateForm?qno=<c:out value="${qBoard.qno}" />'">
+				        onclick="location.href='/qna/update?qno=<c:out value="${qBoard.qno}" />'">
 					Update
 				</button>
 				<button class="btn btn-info" onclick="location.href='/qna/list'">List</button>

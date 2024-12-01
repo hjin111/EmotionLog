@@ -44,8 +44,8 @@ public class QnAServiceImpl implements QnAService {
     public QboardVO detailQnA(Long qno) throws Exception{
         log.info("Detail..."+qno);
         QboardVO qBoard = qmapper.readQnA(qno);
-        if(qmapper.updateQnA(qBoard)==0)
-        	throw new RuntimeException(qBoard.getQno() + "번 게시물이 수정되었습니다.");
+        if(qBoard==null)
+        	throw new RuntimeException(qBoard.getQno() + "번 게시물이 존재하지 않습니다.");
     	return qmapper.readQnA(qno);
     }
 
