@@ -125,18 +125,18 @@
 ### 1️⃣ 회원가입/로그인
 <details>
   <summary>(1) 회원가입</summary>
-  <br>
-  * 이메일 인증을 통해 회원가입<br>
-    <img src="https://github.com/user-attachments/assets/731144a2-68cc-40fb-89da-97a3f85bdb51" width=700><br>
-    <img src="https://github.com/user-attachments/assets/6b0a5ecc-dba2-4421-b738-fd6bc329676d" width=700>
-    <br><br> 
+    <br>
+  * 🖥️ 화면 <br> 
+    <img src="" width=700>
+    <br><br>
 </details>
 
 <details>
   <summary>(2) 아이디 중복확인</summary>
-  <br>
-  * 이메일 찾기<br>
-    <img src="https://github.com/user-attachments/assets/11ff4999-a218-4a74-8487-f0816c13b6b9" width=700>
+<br>
+  
+  * 🖥️ 화면 <br>  
+    <img src="" width=700>
     <br><br>
 </details>
 
@@ -144,8 +144,8 @@
   <summary>(3) 로그인</summary>
   <br>
   
-  * QnA 작성 및 조회<br> 
-  <img src="https://github.com/user-attachments/assets/6882017d-9372-466b-a43e-be3acd2c2930" width=700>
+ * 🖥️ 화면 <br>  
+  <img src="" width=700>
     <br><br>
 </details>
 
@@ -153,8 +153,8 @@
   <summary>(4) 아이디 찾기</summary>
   <br>
 
-  * 내가 예약한 Dining 목록/상세내역 조회 및 예약 삭제<br>
-  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  * 🖥️ 화면 <br> 
+  <img src="" width=700>
   <br><br>
 </details>
 
@@ -162,24 +162,16 @@
   <summary>(5) 비밀번호 변경</summary>
   <br>
 
-  * 내가 예약한 Dining 목록/상세내역 조회 및 예약 삭제<br>
-  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  * 🖥️ 화면 <br> 
+  <img src="" width=700>
   <br><br>
 </details>
 
 <details>
   <summary>(6) 마이페이지</summary>
   <br>
-  * 사용자 정보 조회<br>
-  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
-  <br><br>
-  <br>
-  * 사용자 정보 수정<br>
-  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
-  <br><br>
-  <br>
-  * 사용자 계정 삭제<br>
-  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  * 🖥️ 화면 <br> 
+  <img src="" width=700>
   <br><br>
 </details>
 
