@@ -126,16 +126,15 @@
 <details>
   <summary>(1) 회원가입</summary>
     <br>
-  * 🖥️ 화면 <br> 
+  * 회원가입 <br> 
     <img src="https://github.com/user-attachments/assets/f8c0234f-6ca1-41df-b847-a81a5ac1df93" width=700>
     <br><br>
 </details>
 
 <details>
   <summary>(2) 아이디 중복확인</summary>
-<br>
-  
-  * 🖥️ 화면 <br>  
+  <br>
+  * 아이디 중복확인 <br>  
     <img src="https://github.com/user-attachments/assets/2f0a6a8a-8d05-40b1-8e9f-2a0655efbf9e" width=700>
     <br><br>
 </details>
@@ -143,8 +142,7 @@
 <details>  
   <summary>(3) 로그인</summary>
   <br>
-  
- * 🖥️ 화면 <br>  
+ * 로그인 <br>  
   <img src="https://github.com/user-attachments/assets/60822ab3-5249-44de-a25e-4710b6a2cb6d" width=700>
     <br><br>
 </details>
@@ -152,8 +150,7 @@
 <details>
   <summary>(4) 아이디 찾기</summary>
   <br>
-
-  * 🖥️ 화면 <br> 
+  * 아이디 찾기 <br> 
   <img src="https://github.com/user-attachments/assets/8eb81e75-2147-48b0-b60e-35b18fff8738" width=700>
   <br><br>
 </details>
@@ -161,8 +158,7 @@
 <details>
   <summary>(5) 비밀번호 변경</summary>
   <br>
-
-  * 🖥️ 화면 <br> 
+  * 비밀번호 변경 <br> 
   <img src="https://github.com/user-attachments/assets/06f1461d-fc7e-4e7b-9312-f2a9d4a25e70" width=700>
   <br><br>
 </details>
@@ -170,17 +166,24 @@
 <details>
   <summary>(6) 마이페이지</summary>
   <br>
-  * 🖥️ 화면 <br> 
-  <img src="" width=700>
+  * 사용자 정보 조회 <br> 
+  <img src="https://github.com/user-attachments/assets/95f0fa83-c7c6-4762-917a-cedec9f9fa84" width=700>
+  <br><br>
+  <br>
+  * 사용자 정보 수정 <br> 
+  <img src="https://github.com/user-attachments/assets/0065cce3-c871-46c0-a6dd-c6ff1cebbc2b" width=700>
+  <br><br>
+  <br>
+  * 사용자 계정 삭제 <br> 
+  <img src="https://github.com/user-attachments/assets/5813b474-9f66-486e-821e-e722e8726a3f" width=700>
   <br><br>
 </details>
 
 <details>
   <summary>(7) 로그아웃</summary>
   <br>
-
-  * 내가 예약한 Dining 목록/상세내역 조회 및 예약 삭제<br>
-  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  * 로그아웃<br>
+  <img src="https://github.com/user-attachments/assets/1a37904e-12a8-4dce-868c-d78e0c4ce900" width=700>
   <br><br>
 </details>
 
