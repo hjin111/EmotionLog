@@ -122,67 +122,76 @@
 <br><br><br> 
 
 ## 🧪 테스트 결과 
-### 1️⃣ 고객 페이지
+### 1️⃣ 회원가입/로그인
 <details>
   <summary>(1) 회원가입</summary>
   <br>
-
   * 이메일 인증을 통해 회원가입<br>
     <img src="https://github.com/user-attachments/assets/731144a2-68cc-40fb-89da-97a3f85bdb51" width=700><br>
     <img src="https://github.com/user-attachments/assets/6b0a5ecc-dba2-4421-b738-fd6bc329676d" width=700>
-    <br><br>
-    
+    <br><br> 
 </details>
+
 <details>
-  <summary>(2) 이메일 및 비밀번호 찾기</summary>
+  <summary>(2) 아이디 중복확인</summary>
   <br>
-  
   * 이메일 찾기<br>
     <img src="https://github.com/user-attachments/assets/11ff4999-a218-4a74-8487-f0816c13b6b9" width=700>
     <br><br>
-    
-  * 비밀번호 찾기<br>
-    <img src="https://github.com/user-attachments/assets/0abe1a7f-6481-4126-be3e-746c76499666" width=700>
-    <br><br>
 </details>
-<details>
-  <summary>(3) QnA CRUD</summary>
+
+<details>  
+  <summary>(3) 로그인</summary>
   <br>
   
   * QnA 작성 및 조회<br> 
   <img src="https://github.com/user-attachments/assets/6882017d-9372-466b-a43e-be3acd2c2930" width=700>
     <br><br>
-    
-  * QnA 수정 및 삭제<br>
-  <img src="https://github.com/user-attachments/assets/5adf8b5c-bb2d-4cfb-8e1e-db90d0b395d4" width=700>
-  <img src="https://github.com/user-attachments/assets/2df897e5-2cc2-4546-8b89-3eaab102b6a7" width=700>
-    <br><br>
 </details>
+
 <details>
-  <summary>(4) My Page</summary>
+  <summary>(4) 아이디 찾기</summary>
   <br>
 
   * 내가 예약한 Dining 목록/상세내역 조회 및 예약 삭제<br>
   <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
   <br><br>
-  
-  * 내가 예약한 Room 목록/상세내역 조회 및 예약 삭제<br>
-  <img src="https://github.com/user-attachments/assets/2db27547-f063-4762-8466-300ce9a8296a" width=700>
-  <br><br>
-
-  * 비밀번호 변경 - 변경하는 비밀번호가 일치하지 않을 때<br>
-  <img src="https://github.com/user-attachments/assets/be07c9b0-695a-49a3-9a2a-2d90c968aebb" width=700>
-  <br><br>
-
-  * 비밀번호 변경에 성공<br>
-  <img src="https://github.com/user-attachments/assets/3efce678-76fc-4c77-ac71-81199e30e114" width=700>
-  <br><br>
-
-  * 회원 탈퇴하기 <br>
-  <img src="https://github.com/user-attachments/assets/c8686ae7-45dc-49b3-beb5-c5982d2674ce" width=700>
-    <br><br>
-  
 </details>
+
+<details>
+  <summary>(5) 비밀번호 변경</summary>
+  <br>
+
+  * 내가 예약한 Dining 목록/상세내역 조회 및 예약 삭제<br>
+  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  <br><br>
+</details>
+
+<details>
+  <summary>(6) 마이페이지</summary>
+  <br>
+  * 사용자 정보 조회<br>
+  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  <br><br>
+  <br>
+  * 사용자 정보 수정<br>
+  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  <br><br>
+  <br>
+  * 사용자 계정 삭제<br>
+  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  <br><br>
+</details>
+
+<details>
+  <summary>(7) 로그아웃</summary>
+  <br>
+
+  * 내가 예약한 Dining 목록/상세내역 조회 및 예약 삭제<br>
+  <img src="https://github.com/user-attachments/assets/6d83b8bc-1be0-44cd-b16d-1e5907c5bba3" width=700>
+  <br><br>
+</details>
+
 
 ### 2️⃣ 고객 페이지 + 관리자 페이지 
 <details>
