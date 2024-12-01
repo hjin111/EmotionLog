@@ -291,15 +291,10 @@
     <br><br>
 </details>
 
-### 4️⃣ Rabbit mq를 활용한 대기열 구현  
+### 4️⃣ Q&A 게시판  
 
 <details>
-  <summary>✈️ 객실 예약 시도</summary>
-  <br>
-
-  * 💡 설명 
-  <img src="https://github.com/user-attachments/assets/4c1ea456-e666-4c0f-bea7-bd6d1d2efea4" width=700>
-  <img src="https://github.com/user-attachments/assets/71caf0f2-9c8a-4a44-9e2c-6abc7546144c" width=700>
+  <summary>(1) </summary>
   <br>
 
   * 🖥️ 화면 
