@@ -126,7 +126,7 @@
 <details>
   <summary>(1) 회원가입</summary>
     <br>
-  * 회원가입 <br> 
+    *  회원가입 <br> 
     <img src="https://github.com/user-attachments/assets/f8c0234f-6ca1-41df-b847-a81a5ac1df93" width=700>
     <br><br>
 </details>
@@ -192,7 +192,6 @@
 <details>
   <summary>(1) 일기 전체 목록 </summary>
   <br>
-  
   * 월 별로 작성한 일기 목록들을 달력 형태로 조회<br>
   <img src="https://github.com/user-attachments/assets/880f6a50-0ded-44fa-b768-7501104d5198" width=700>
     <br><br>
@@ -201,7 +200,6 @@
 <details>
   <summary>(2) 일기 등록 </summary>
   <br>
-  
   * 등록일 기준으로 제목, 내용, 감정 등록<br>
   <img src="https://github.com/user-attachments/assets/ff7ccf50-f85a-48f8-add4-04a8c7202d0b" width=700>
   <br><br>
