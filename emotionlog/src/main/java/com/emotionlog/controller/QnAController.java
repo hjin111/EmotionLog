@@ -82,7 +82,7 @@ public class QnAController {
             return "redirect:/api/qna/detail?qno=" + qBoard.getQno();
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/api/qna/create"; // 에러 발생 시 작성 폼으로 리다이렉트
+            return "redirect:/api/qna/list"; // 에러 발생 시 작성 폼으로 리다이렉트
         }
     }
     
