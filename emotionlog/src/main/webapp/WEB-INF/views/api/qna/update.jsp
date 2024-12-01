@@ -24,7 +24,7 @@
                         <h2 class="card-title mb-0">QnA 수정 폼</h2>
                     </div>
                     <div class="card-body">
-                        <form id="updateForm" action="/qna/update" method="post">
+                        <form id="updateForm" action="/api/qna/update" method="post">
                             <input type="hidden" name="qno" value="${qBoard.qno}">
 
                             <div class="form-group">
@@ -41,7 +41,7 @@
                                 <button type="submit" class="btn btn-primary mr-2">
                                     <i class="fas fa-save"></i> 수정
                                 </button>
-                                <a href="/qna/list" class="btn btn-secondary">
+                                <a href="/api/qna/list" class="btn btn-secondary">
                                     <i class="fas fa-list"></i> 목록으로 돌아가기
                                 </a>
                             </div>
@@ -51,7 +51,7 @@
 
                     <!-- Delete 기능 추가 -->
                     <div class="card-footer bg-light">
-                        <form id="deleteForm" action="/qna/delete" method="post" onsubmit="return confirm('QnA 등록글을 삭제하시겠습니까?');">
+                        <form id="deleteForm" action="/api/qna/delete" method="post" onsubmit="return confirm('QnA 등록글을 삭제하시겠습니까?');">
                             <input type="hidden" name="qno" value="${qBoard.qno}">
                             <button type="submit" class="btn btn-danger">
                                 <i class="fas fa-trash-alt"></i> 삭제

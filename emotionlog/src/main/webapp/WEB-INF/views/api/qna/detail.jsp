@@ -38,10 +38,10 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <a href="/qna/update?qno=<c:out value='${qBoard.qno}' />" class="btn btn-primary mr-2">
+                        <a href="/api/qna/update?qno=<c:out value='${qBoard.qno}' />" class="btn btn-primary mr-2">
                             <i class="fas fa-edit"></i> 수정
                         </a>
-                        <a href="/qna/list" class="btn btn-secondary">
+                        <a href="/api/qna/list" class="btn btn-secondary">
                             <i class="fas fa-list"></i> 목록으로 돌아가기
                         </a>
                     </div>

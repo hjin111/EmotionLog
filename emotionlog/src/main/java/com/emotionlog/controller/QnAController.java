@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
-@RequestMapping("/qna/*")
+@RequestMapping("/api/qna/*")
 @AllArgsConstructor
 public class QnAController {
 
@@ -79,10 +79,10 @@ public class QnAController {
             log.info("Create: " + qBoard);
             qservice.createQnA(qBoard);
             rttr.addFlashAttribute("result", qBoard.getQno()); // addFlashAttribute에 공백 사용 X
-            return "redirect:/qna/list"; // 등록 후 목록 페이지로 리다이렉트
+            return "redirect:/api/qna/detail?qno=" + qBoard.getQno();
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/qna/create"; // 에러 발생 시 작성 폼으로 리다이렉트
+            return "redirect:/api/qna/create"; // 에러 발생 시 작성 폼으로 리다이렉트
         }
     }
     
@@ -119,10 +119,10 @@ public class QnAController {
             log.info("Update: " + qBoard);
             qservice.updateQnA(qBoard);
             rttr.addFlashAttribute("result", "success");
-            return "redirect:/qna/list"; // 수정 후 목록 페이지로 리다이렉트
+            return "redirect:/api/qna/list"; // 수정 후 목록 페이지로 리다이렉트
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/qna/update?qno=" + qBoard.getQno(); // 에러 발생 시 수정 폼으로 리다이렉트
+            return "redirect:/api/qna/update?qno=" + qBoard.getQno(); // 에러 발생 시 수정 폼으로 리다이렉트
         }
     }
 
@@ -154,7 +154,7 @@ public class QnAController {
             log.info("Delete: " + qno);
             qservice.deleteQnA(qno);
             rttr.addFlashAttribute("result", "success");
-            return "redirect:/qna/list";
+            return "redirect:/api/qna/list";
         } catch(Exception e) {
             e.printStackTrace();
             return null;

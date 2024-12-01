@@ -22,7 +22,7 @@
                     <div class="panel-heading">
                         QnA 리스트
                         <!-- 수정된 버튼: <a> 태그 사용 및 Bootstrap 클래스 개선 -->
-                        <a href="/qna/create" class="btn btn-primary btn-sm pull-right">
+                        <a href="/api/qna/create" class="btn btn-primary btn-sm pull-right">
                             <i class="fa fa-plus"></i> 새 QnA 등록
                         </a>
                     </div>
@@ -43,7 +43,7 @@
                                     <tr>
                                         <td><c:out value="${qna.qno}" /></td>
                                         <td>
-                                            <a href="/qna/detail?qno=${qna.qno}" style="text-decoration: none;">
+                                            <a href="/api/qna/detail?qno=${qna.qno}" style="text-decoration: none;">
                                                 <c:out value="${qna.qtitle}" />
                                             </a>
                                         </td>
