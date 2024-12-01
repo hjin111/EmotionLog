@@ -251,7 +251,7 @@
   <br>
 
   * 관리자 메인 페이지
-   <img src="https://github.com/user-attachments/assets/2e83f59f-dac5-4901-b15f-e8e0997c7844" width=700>
+   <img src="https://github.com/user-attachments/assets/437db41d-ca91-40d9-aeed-8058a37f11ce" width=700>
     <br><br>
 
 </details>
@@ -260,7 +260,7 @@
   <br>
   
   * 전체 목록 조회 페이지 <br>
-  <img src="https://github.com/user-attachments/assets/99115b4a-0442-4c53-b731-4974de06be23" width=700>
+  <img src="https://github.com/user-attachments/assets/cd1f4853-4dbb-4bc9-bcfc-36aa5cb0e563" width=700>
     <br><br>
 
 </details>
@@ -269,7 +269,7 @@
   <br>
   
   * 문의 답변<br>
-  <img src="https://github.com/user-attachments/assets/df672833-b420-4c46-a79f-fc061f83ac13" width=700>
+  <img src="https://github.com/user-attachments/assets/7c1f3c31-a9ad-4a97-a875-e47b1e8ffadb" width=700>
     <br><br>
     
 </details>
@@ -278,7 +278,7 @@
   <br>
   
   * 답변 수정<br>
-  <img src="https://github.com/user-attachments/assets/94b33c24-7bab-4deb-84e1-bbcb357d681d" width=700>
+  <img src="https://github.com/user-attachments/assets/62247e63-76d0-4004-9b00-3250d195308f" width=700>
     <br><br>
 </details>
 
@@ -287,7 +287,7 @@
   <br>
   
   * 답변 삭제<br>
-  <img src="https://github.com/user-attachments/assets/94b33c24-7bab-4deb-84e1-bbcb357d681d" width=700>
+  <img src="https://github.com/user-attachments/assets/39bd67a0-5aa6-4ad2-b790-c505f67743ce" width=700>
     <br><br>
 </details>
 
