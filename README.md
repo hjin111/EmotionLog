@@ -193,52 +193,53 @@
 </details>
 
 
-### 2️⃣ 고객 페이지 + 관리자 페이지 
+### 2️⃣ 감정 일기 / 댓
 <details>
-  <summary>(1) Room(객실) 예약 </summary>
+  <summary>(1) 일기 전체 목록 </summary>
   <br>
-
-  * 💡 로직 설명 <br>
-  <img src="https://github.com/user-attachments/assets/a29fff66-792b-4a58-89a8-7723560955b6" width=700>
   
-  * 홈페이지를 통해 고객이 객실 예약을 진행<br>
+  * 월 별로 작성한 일기 목록들을 달력 형태로 조회<br>
   <img src="https://github.com/user-attachments/assets/9651c2f9-b69d-4fa3-b548-41541554972e" width=700>
     <br><br>
-    
-  * 관리자 페이지에서 객실 예약이 들어오면 실시간 알림(SSE) 조회<br>
-  <img src="https://github.com/user-attachments/assets/8ca28e96-601f-46f8-861d-92e5c5cdee57" width=700>
-    <br><br>
 
-  * 💡 예약 완료 <br>
-  <img src="https://github.com/user-attachments/assets/47a475f2-339d-480c-a869-8d4d007dd240" width=700>
-  <br><br>
-    
-  * ➕ 여러 개의 객실 예약이 들어온 경우 실시간 알림(SSE) 조회
-  <img src="https://github.com/user-attachments/assets/5863d170-7e02-4840-a0a1-80da30f9ce88" width=700>
-    <br><br>
 </details>
 <details>
-  <summary>(2) Dining 예약 </summary>
+  <summary>(2) 일기 등록 </summary>
   <br>
   
-  * 홈페이지를 통해 고객이 다이닝 예약을 진행 > 관리자 페이지에서 실시간 알림 (SSE) 조회<br>
+  * 등록일 기준으로 제목, 내용, 감정 등록<br>
   <img src="https://github.com/user-attachments/assets/4068b2b0-b224-43b3-bbb0-a9ec2297a14b" width=700>
   <br><br>
-
-  * 💡 부서마다 예약 알림 접근 제한 - ex) KorDinig의 예약이 들어왔을 때 ChiDining 부서의 직원에게는 알림이 가지 않음<br>
-  <img src="https://github.com/user-attachments/assets/6aa7dd0e-38f8-400f-9f7d-fb8bd625a046" width=700>
+* 달력에 일별 나타나는 내용<br>
+  <img src="https://github.com/user-attachments/assets/4068b2b0-b224-43b3-bbb0-a9ec2297a14b" width=700>
   <br><br>
+  
 </details>
 <details>
-  <summary>(3) QnA에 답변 달기 </summary>
+  <summary>(3) 일기 조회 수정 및 삭제 </summary>
   <br>
   
-  * 관리자 페이지를 통해 들어온 QnA에 답변 달기 <br>
+  * 일기의 제목, 내용, 감정을 수정, 일기 삭제 <br>
   <img src="https://github.com/user-attachments/assets/2c683c20-20ec-4f31-9f13-97c699b77cfe" width=700>
     <br><br>
-    
-  * 답변이 달리면 해당 고객의 페이지에 실시간 알림 숫자 업데이트<br>
-  <img src="https://github.com/user-attachments/assets/be2034e9-8d3a-4ee2-9b05-cea62f6565b2" width=700>
+</details>
+
+
+<details>
+  <summary>(3) 댓글 목록 및 등록 </summary>
+  <br>
+  
+  * 일기의 댓글 목록, 댓글 등록 <br>
+  <img src="https://github.com/user-attachments/assets/2c683c20-20ec-4f31-9f13-97c699b77cfe" width=700>
+    <br><br>
+</details>
+
+<details>
+  <summary>(4) 댓글 조회, 수정 및 삭제 </summary>
+  <br>
+  
+  * 댓글 조회, 수정 및 삭제 <br>
+  <img src="https://github.com/user-attachments/assets/2c683c20-20ec-4f31-9f13-97c699b77cfe" width=700>
     <br><br>
 </details>
 
