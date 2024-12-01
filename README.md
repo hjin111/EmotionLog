@@ -117,7 +117,7 @@
 <br><br><br>
 
 ## ☘️ ERD
-![image]([https://github.com/user-attachments/assets/db16a88c-34f4-4a73-a77b-285334358f28](https://github.com/user-attachments/assets/453e7644-16e1-4053-84f2-261af5076fc2))
+![image](https://github.com/user-attachments/assets/453e7644-16e1-4053-84f2-261af5076fc2)
 
 <br><br><br> 
 
