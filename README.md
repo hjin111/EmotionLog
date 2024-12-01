@@ -294,13 +294,44 @@
 ### 4️⃣ Q&A 게시판  
 
 <details>
-  <summary>(1) </summary>
+  <summary>(1) QnA 등록 </summary>
   <br>
 
   * 🖥️ 화면 
-  <img src="https://github.com/user-attachments/assets/27f607ac-370e-4291-a282-8a968ee1d5e9" width=700>  
+  <img src="" width=700>  
 </details>
 
 
+<details>
+  <summary>(2) QnA 조회 </summary>
+  <br>
+
+  * 🖥️ 화면 
+  <img src="" width=700>  
+</details>
+
+<details>
+  <summary>(3) QnA 수정 </summary>
+  <br>
+
+  * 🖥️ 화면 
+  <img src="" width=700>  
+</details>
+
+<details>
+  <summary>(4) QnA 삭제 </summary>
+  <br>
+
+  * 🖥️ 화면 
+  <img src="" width=700>  
+</details>
+
+<details>
+  <summary>(5) QnA 예외처리 </summary>
+  <br>
+
+  * 🖥️ 화면 
+  <img src="" width=700>  
+</details>
 
 
