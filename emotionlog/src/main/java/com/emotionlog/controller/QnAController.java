@@ -86,16 +86,22 @@ public class QnAController {
 	// QnA 수정
 	@PostMapping(value = "/update")
 	public String updateQnA(QboardVO qBoard, RedirectAttributes rttr) {
-		try {
-			log.info("Update: " + qBoard);
-			qservice.updateQnA(qBoard);
-			rttr.addFlashAttribute("result", "success");
-			return "redirect:/api/qna/list";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}	
+	    try {
+	        // 현재 인증된 사용자의 username을 가져옴
+	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        String username = auth.getName();
+	        qBoard.setUsername(username);
+
+	        log.info("Update: " + qBoard);
+	        qservice.updateQnA(qBoard);
+	        rttr.addFlashAttribute("result", "success");
+	        return "redirect:/qna/list"; // 수정: /api/qna/list -> /qna/list
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "redirect:/qna/update?qno=" + qBoard.getQno(); // 에러 발생 시 수정 폼으로 리다이렉트
+	    }
+	}
+
 	
 	// QnA 조회 - 단 건
 	@GetMapping(value = "/detail")
