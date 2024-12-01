@@ -211,7 +211,7 @@
   <img src="https://github.com/user-attachments/assets/b437bf85-30f5-43d7-a21f-3bbb4fcf3057" width=700>
   <br><br>
 * 달력에 일별 나타나는 내용<br>
-  <img src="https://github.com/user-attachments/assets/4068b2b0-b224-43b3-bbb0-a9ec2297a14b" width=700>
+  <img src="https://github.com/user-attachments/assets/1cfc8ba7-9d76-4959-8f41-5189c61fdc3e" width=700>
   <br><br>
   
 </details>
