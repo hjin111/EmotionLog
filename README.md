@@ -208,7 +208,7 @@
   <br>
   
   * 등록일 기준으로 제목, 내용, 감정 등록<br>
-  <img src="https://github.com/user-attachments/assets/b437bf85-30f5-43d7-a21f-3bbb4fcf3057" width=700>
+  <img src="https://github.com/user-attachments/assets/ff7ccf50-f85a-48f8-add4-04a8c7202d0b" width=700>
   <br><br>
   * 달력에 일별 나타나는 내용<br>
   <img src="https://github.com/user-attachments/assets/1cfc8ba7-9d76-4959-8f41-5189c61fdc3e" width=700>
