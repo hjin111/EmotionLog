@@ -117,7 +117,7 @@
                 <input type="text" id="password" name="password" required>
             </div>
             <div class="form-group">
-                <label for="gender">성별</label>
+                <label for="gender">성별</label> 
                 <select id="gender" name="gender">
                     <option value="M">남성</option>
                     <option value="F">여성</option>

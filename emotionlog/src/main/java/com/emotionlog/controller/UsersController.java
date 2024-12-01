@@ -39,7 +39,7 @@ public class UsersController {
 	// logger.info("Authenticated User: " + authentication.getName()); 이거 찍을려고 주입한거임
 	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 	
-	// 회원가입
+	// 회원가입 - 폼
 	@GetMapping("/join")
 	 public String joinForm(Model model) {
         model.addAttribute("user", new UsersVO()); // 새로운 UsersVO 객체를 모델에 추가하여 폼에 전달
@@ -61,12 +61,14 @@ public class UsersController {
         return "redirect:/api/users/login"; 
     }
     
-        
+    
+    // 로그인 - 폼
     @GetMapping("/login")
     public String loginForm() {
         return "/api/users/login";
     }
     
+    // 로그인 처리
     @PostMapping("/login")
     public String usersLogin(@RequestParam String username, @RequestParam String password, Model model) {
         try {
@@ -96,6 +98,7 @@ public class UsersController {
         }
     }
 
+    // 로그인 성공
     @GetMapping("/success")
     public String usersLoginSuccess(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -186,6 +189,7 @@ public class UsersController {
     }
     
     
+    // 아이디 찾기 - 폼
     @GetMapping("/findusername")
     public String findUsername() {
         return "/api/users/findusername";
@@ -215,6 +219,7 @@ public class UsersController {
 		}
     }
     
+    // 아이디 찾기 성공
     @GetMapping("/findusersuccess")
     public String findUserSuccess() {
         return "/api/users/findusersuccess";  
@@ -256,6 +261,7 @@ public class UsersController {
         return "redirect:/api/users/pwsuccess"; 
     }
     
+    // 비밀번호 변경 성공
     @GetMapping("/pwsuccess")
     public String findPwSuccess() {
         return "/api/users/pwsuccess";  

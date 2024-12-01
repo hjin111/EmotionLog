@@ -8,6 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                  <li class="nav-item"><a class="nav-link" href="/api/users/mypage" style="font-size: 22px; color: #fff;">Mypage</a></li>
+				  <li class="nav-item"><a class="nav-link" href="/api/qna/list" style="font-size: 22px; color: #fff;">QnA</a></li>
 				<!-- 수정된 로그아웃 부분: form으로 변경 -->
 				<li class="nav-item">
 					<form action="/api/users/logout" method="post"
