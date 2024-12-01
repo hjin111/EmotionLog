@@ -1,3 +1,4 @@
+// 작성자 : 이혜진
 package com.emotionlog.mapper;
 
 import java.util.List;
