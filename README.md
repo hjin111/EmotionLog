@@ -231,7 +231,7 @@
   <br>
   
   * 일기의 댓글 목록, 댓글 등록 <br>
-  <img src="" width=700>
+  <img src="https://github.com/user-attachments/assets/2a9fb667-babd-4bb8-882f-d7b535672733" width=700>
     <br><br>
 </details>
 
