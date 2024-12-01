@@ -221,26 +221,26 @@
   <br>
   
   * 일기의 제목, 내용, 감정을 수정, 일기 삭제 <br>
-  <img src="https://github.com/user-attachments/assets/2c683c20-20ec-4f31-9f13-97c699b77cfe" width=700>
+  <img src="https://github.com/user-attachments/assets/0d430f34-855b-43cc-ab9e-7c1b415f2694" width=700>
     <br><br>
 </details>
 
 
 <details>
-  <summary>(3) 댓글 목록 및 등록 </summary>
+  <summary>(4) 댓글 목록 및 등록 </summary>
   <br>
   
   * 일기의 댓글 목록, 댓글 등록 <br>
-  <img src="https://github.com/user-attachments/assets/2c683c20-20ec-4f31-9f13-97c699b77cfe" width=700>
+  <img src="" width=700>
     <br><br>
 </details>
 
 <details>
-  <summary>(4) 댓글 조회, 수정 및 삭제 </summary>
+  <summary>(5) 댓글 조회, 수정 및 삭제 </summary>
   <br>
   
   * 댓글 조회, 수정 및 삭제 <br>
-  <img src="https://github.com/user-attachments/assets/2c683c20-20ec-4f31-9f13-97c699b77cfe" width=700>
+  <img src="" width=700>
     <br><br>
 </details>
 
