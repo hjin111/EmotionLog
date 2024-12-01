@@ -1,17 +1,17 @@
-![image](https://github.com/user-attachments/assets/80fc49d7-565c-4d10-9104-88b5792414ab)
+![image](https://github.com/user-attachments/assets/70621949-b091-4097-b4a5-a466ae590497)
 <div align=center>
   
-  **인사이드아웃**
+  **인사이드아웃🌈**
 </div>
 
 <br><br>
 ## 👥 팀원 소개
 <div align=center>
   
-  **🐷 박혜정 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/bibiana1202)**<br>
-  **🐯 심세연 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/seyeonsim)**<br>
-  **🐯 신유진 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/newneeew)**<br>
-  **🐉 이혜진 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/hjin111)**<br>
+  **💙 박혜정 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/bibiana1202)**<br>
+  **❤️ 심세연 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/seyeonsim)**<br>
+  **💛 신유진 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/newneeew)**<br>
+  **💚 이혜진 [![Github](https://img.shields.io/badge/Github-Link-1f425f.svg)](https://github.com/hjin111)**<br>
 </div>
 <br><br><br>
 
@@ -24,7 +24,8 @@
 
   이를 해결하기 위해 감정일기 플랫폼을 만들고자 합니다.
   감정일기를 통해 사용자는 감정을 기록하며
-  자기 성찰과 스트레스 해소에 도움을 받을수 있어 우울증 해소와 정신 건강 증진에 기여할 수 있습니다. 😊 
+  자기 성찰과 스트레스 해소에 도움을 받을수 있어
+  우울증 해소와 정신 건강 증진에 기여할 수 있습니다. 😊 
 ```
 
 <br><br><br>
@@ -97,26 +98,21 @@
 ## ⚙️ 기술 스택
 
 **Frontend**<br>
-<img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <br>
 
 **Backend**<br>
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"> 
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
-<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white">
-<img src="https://img.shields.io/badge/rabbitmq-%23FF6600.svg?&style=for-the-badge&logo=rabbitmq&logoColor=white">
 <br><br>
 **Database**<br>
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
-<img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white">
-<img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white">
+<img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">  
+<img src="https://img.shields.io/badge/MyBatis-000000?style=for-the-badge&logo=MyBatis&logoColor=white"> 
 <br><br>
 **Tools**<br>
-<img src="https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white">
-<img src="https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg">
+![Eclipse IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
