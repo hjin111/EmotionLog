@@ -199,7 +199,7 @@
   <br>
   
   * 월 별로 작성한 일기 목록들을 달력 형태로 조회<br>
-  <img src="https://github.com/user-attachments/assets/5eda0c07-b5cb-4700-ab7e-40d0ae9cd6ce" width=700>
+  <img src="https://github.com/user-attachments/assets/880f6a50-0ded-44fa-b768-7501104d5198" width=700>
     <br><br>
 
 </details>
@@ -210,7 +210,7 @@
   * 등록일 기준으로 제목, 내용, 감정 등록<br>
   <img src="https://github.com/user-attachments/assets/b437bf85-30f5-43d7-a21f-3bbb4fcf3057" width=700>
   <br><br>
-* 달력에 일별 나타나는 내용<br>
+  * 달력에 일별 나타나는 내용<br>
   <img src="https://github.com/user-attachments/assets/1cfc8ba7-9d76-4959-8f41-5189c61fdc3e" width=700>
   <br><br>
   
