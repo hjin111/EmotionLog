@@ -240,7 +240,7 @@
   <br>
   
   * 댓글 조회, 수정 및 삭제 <br>
-  <img src="" width=700>
+  <img src="https://github.com/user-attachments/assets/70dc75b4-5069-4081-8f3e-71dfdf59035c" width=700>
     <br><br>
 </details>
 
