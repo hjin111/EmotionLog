@@ -7,23 +7,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%@ include file="../includes/header.jsp" %>
+    <%@ include file="../includes/navbar.jsp" %>
 
 <body>
-    <%@ include file="../includes/navbar.jsp" %>
+    
     <div class="container">
-        <h1>Create QnA</h1>
+        <h1>QnA 등록</h1>
         <form id="qnaForm" action="/qna/create" method="post">
             <div class="form-group">
-                <label for="qtitle">Title:</label>
-                <input type="text" id="qtitle" name="qtitle" class="form-control" placeholder="Enter the title" required>
+                <label for="qtitle">제목:</label>
+                <input type="text" id="qtitle" name="qtitle" class="form-control" placeholder="제목을 입력하세요" required>
             </div>
             <div class="form-group">
-                <label for="qcontent">Content:</label>
-                <textarea id="qcontent" name="qcontent" class="form-control" rows="5" placeholder="Enter the content" required></textarea>
+                <label for="qcontent">내용:</label>
+                <textarea id="qcontent" name="qcontent" class="form-control" rows="5" placeholder="내용을 입력하세요" required></textarea>
             </div>
             <div class="form-group">
-                <button type="button" id="submitBtn" class="btn btn-primary">Submit</button>
-                <a href="/qna/list" class="btn btn-secondary">Back to List</a>
+                <button type="button" id="submitBtn" class="btn btn-primary">등록</button>
+                <a href="/qna/list" class="btn btn-secondary">목록으로 돌아가기</a>
             </div>
         </form>
     </div>
