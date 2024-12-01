@@ -210,6 +210,7 @@
   * 등록일 기준으로 제목, 내용, 감정 등록<br>
   <img src="https://github.com/user-attachments/assets/ff7ccf50-f85a-48f8-add4-04a8c7202d0b" width=700>
   <br><br>
+  
   * 달력에 일별 나타나는 내용<br>
   <img src="https://github.com/user-attachments/assets/1cfc8ba7-9d76-4959-8f41-5189c61fdc3e" width=700>
   <br><br>
@@ -246,74 +247,47 @@
 
 ### 3️⃣ 관리자 페이지 
 <details>
-  <summary>(0) 😊 모든 직원의 공통 작업 </summary>
+  <summary>(1) 관리자 메인 페이지 </summary>
   <br>
 
-  * 로그인 및 본인의 정보 확인
+  * 관리자 메인 페이지
    <img src="https://github.com/user-attachments/assets/2e83f59f-dac5-4901-b15f-e8e0997c7844" width=700>
     <br><br>
-    
-  * 비밀번호 변경<br>
-  <img src="https://github.com/user-attachments/assets/69818d09-b57f-40b7-b5ea-5dce928e0a23" width=700>
-    <br><br>
-    
-  * 고객의 목록 및 상세 내역 조회<br>
-  <img src="https://github.com/user-attachments/assets/d0417a88-56ac-4f9c-af1e-c1c613f87028" width=700>
-    <br><br>
 
 </details>
 <details>
-  <summary>(1) Office 부서 직원 [최상위 직원] </summary>
+  <summary>(2) 전체 목록 조회 페이지 </summary>
   <br>
   
-  * 모든 직원들의 목록 조회 (검색 기능)<br>
+  * 전체 목록 조회 페이지 <br>
   <img src="https://github.com/user-attachments/assets/99115b4a-0442-4c53-b731-4974de06be23" width=700>
     <br><br>
-    
-  * 직원의 상세 내역 조회 및 직급 변경 / 퇴사처리<br>
-  <img src="https://github.com/user-attachments/assets/4d1335e9-86b2-4c48-9d88-da6b229cc0e4" width=700>
-    <br><br>
-    
-  * 새로 입사한 직원을 등록 : 초기 비밀번호 12341234<br>
-  <img src="https://github.com/user-attachments/assets/d27e50be-3a29-4de3-aff7-c98c9b53c20f" width=700>
-    <br><br>
 
-    
-  * ➕ Room/Dining 예약 내역 조회 불가 (권한 없음) : Office관리자는 Room 예약 내역 조회 기능에 접근할 수 없음<br>
-  <img src="https://github.com/user-attachments/assets/0a8d9e14-0882-4e3a-8a42-ffadd2d65a13" width=700>
-    <br><br>
 </details>
 <details>
-  <summary>(2) Room(객실) 부서 직원 </summary>
+  <summary>(3) 문의 답변 </summary>
   <br>
   
-  * 조회하고자 하는 고객의 이메일을 검색하여 객실 예약 내역 조회<br>
+  * 문의 답변<br>
   <img src="https://github.com/user-attachments/assets/df672833-b420-4c46-a79f-fc061f83ac13" width=700>
     <br><br>
     
-  * 객실 예약 수정 / 삭제<br>
-  <img src="https://github.com/user-attachments/assets/04a468a8-468a-4439-8f5e-3945eb4a8075" width=700>
-    <br><br>
-    
-  * 객실의 base price 변경 <br>
-  <img src="https://github.com/user-attachments/assets/1f65f519-85a7-4ee0-97da-3804d2a349e5" width=700>
-    <br><br>
 </details>
 <details>
-  <summary>(3) Dining 부서 직원 </summary>
+  <summary>(4) 답변 수정 </summary>
   <br>
   
-  * 조회하고자 하는 고객의 이메일을 검색하여 다이닝 예약 내역 조회<br>
+  * 답변 수정<br>
   <img src="https://github.com/user-attachments/assets/94b33c24-7bab-4deb-84e1-bbcb357d681d" width=700>
     <br><br>
-    
-  * 다이닝 예약 상세 내역 조회 / 수정 / 삭제<br>
-  <img src="https://github.com/user-attachments/assets/8ecb40d4-e2fb-4391-a68b-0c4fad933368" width=700>
-    <br><br>
-    
-  * 각 다이닝별 메뉴 추가 / 가격 수정 / 삭제<br>
-  <img src="https://github.com/user-attachments/assets/64feb06a-90a7-4183-9586-bc633e5f7557" width=700>
-  <img src="https://github.com/user-attachments/assets/1b795823-d14c-4458-ac3c-27197c176051" width=700>
+</details>
+
+<details>
+  <summary>(5) 답변 삭제 </summary>
+  <br>
+  
+  * 답변 삭제<br>
+  <img src="https://github.com/user-attachments/assets/94b33c24-7bab-4deb-84e1-bbcb357d681d" width=700>
     <br><br>
 </details>
 
