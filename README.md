@@ -108,11 +108,11 @@
 <br><br><br>
 
 ## 🌵 WBS
-![image](https://github.com/user-attachments/assets/b62cbf6f-c7f1-4a00-aa94-06701a09f7af)
+![image](https://github.com/user-attachments/assets/567e872c-f350-46cb-87fb-5017b6cbd8c4)
 
 <div align=center>
 
-  [⬆️WBS바로가기](https://docs.google.com/spreadsheets/d/1X0fafalLJS0A_FwmI4IMyJMZsv2F3uoe/edit?usp=sharing&ouid=106399302288862850251&rtpof=true&sd=true)
+  [⬆️WBS바로가기](https://docs.google.com/spreadsheets/d/1KG-nACUmJLYxgZEtqr_lwpZiwZvqmnKEgIeqwX3E3Xk/edit?usp=sharing)
 </div>
 <br><br><br>
 
