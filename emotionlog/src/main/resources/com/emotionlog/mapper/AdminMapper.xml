@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emotionlog.mapper.AdminMapper">
+<!-- 작성자 : 심세연  -->
+
+	
+	<!-- 전체 회원 리스트 조회 -->
+	<select id="getUserList" parameterType="int" resultType="UsersVO">
+	<![CDATA[
+	    SELECT * FROM (
+	        SELECT * FROM users
+	    ) WHERE ROWNUM <= #{limit}
+	    ]]>
+	</select>
+
+
+	<!-- 날짜별 작성된 일기 수 조회 -->
+	<select id="getDiaryCountsByDateRange" resultType="DiaryCountsVO">
+	<![CDATA[
+	SELECT 
+	    TO_CHAR(dates.regdate, 'YYYY-MM-DD') AS regdateStr,
+	    NVL(COUNT(d.dno), 0) AS dailyCount
+	FROM 
+	    (SELECT TRUNC(SYSDATE) - LEVEL + 1 AS regdate 
+	     FROM DUAL
+	     CONNECT BY LEVEL <= 7) dates
+	LEFT JOIN diary d
+	ON TRUNC(d.regdate) = dates.regdate
+	GROUP BY dates.regdate
+	ORDER BY dates.regdate 
+
+        ]]>
+	</select>
+	
+	<!-- 미답변 문의 리스트 조회 -->
+	<select id="getQboardList" parameterType="int" resultType="QboardVO">
+	<![CDATA[
+	SELECT q.*
+	FROM (
+	    SELECT q.*
+	    FROM qboard q
+	    LEFT JOIN aboard a ON q.qno = a.qno
+	    WHERE a.qno IS NULL
+	) q
+	WHERE ROWNUM <= #{limit}
+	    ]]>
+	
+	</select>
+	
+
+	<!-- QnA 문의 상세 조회 -->
+	<select id="getQboardDetails" resultType="QboardVO">
+	SELECT * FROM qboard
+	WHERE qno = #{qno}
+	</select>
+	 
+	<!-- QnA 답변 조회 -->
+	<select id="getAnswer" resultType="AboardVO">
+	SELECT * FROM aboard
+	WHERE qno = #{qno}
+	</select>
+	
+	<!-- QnA 답변 작성 -->
+	<insert id="createAnswer">
+	INSERT INTO aboard (ano, atitle, acontent, adate, username, qno)
+	VALUES (seq_aboard.nextval, #{atitle}, #{acontent}, SYSDATE,#{username}, #{qno})
+	</insert>
+	
+	<delete id="deleteAnswer">
+	DELETE FROM aboard
+	WHERE ano = #{ano}
+	
+	</delete>
+	
+	<update id="updateAnswer">
+        UPDATE aboard
+        SET acontent = #{acontent}
+        WHERE ano = #{ano}
+    </update>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<!-- BCryptPasswordEncoder Bean 정의 -->
+    <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <!-- Spring Security 설정 -->
+    <security:http>
+	    <security:intercept-url pattern="/api/diary/**" access="hasAuthority('ROLE_USER')"/>
+	    <security:intercept-url pattern="/api/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
+
+
+		<!-- 로그인 페이지 설정 -->
+		<security:form-login login-page="/api/users/login" default-target-url="/api/users/success" />
+
+        <!-- CSRF 비활성화 -->
+        <security:csrf disabled="true"/>
+
+		
+		<security:logout logout-url="/api/users/logout"  
+						 logout-success-url="/" 
+						 invalidate-session="true"
+						 delete-cookies="JSESSIONID"/>
+		
+		<!-- <security:access-denied-handler error-page="/accessError"/>
+		<security:access-denied-handler ref="customAccessDenied"/> -->
+	</security:http>
+	
+	
+	
+	 <!-- 명시적인 authentication-manager 설정 -->
+    <security:authentication-manager id="authenticationManager">
+        <security:authentication-provider user-service-ref="usersServiceImpl">
+         	
+            <!-- <security:jdbc-user-service data-source-ref="dataSource"/> -->
+            <security:password-encoder ref="bcryptPasswordEncoder"/>
+            
+        </security:authentication-provider>
+    </security:authentication-manager>
+	
+</beans>

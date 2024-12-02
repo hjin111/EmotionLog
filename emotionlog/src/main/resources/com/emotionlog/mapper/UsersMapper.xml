@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emotionlog.mapper.UsersMapper">
+	
+	<!-- 사용자 삽입 쿼리 -->
+	<insert id="insert">
+		insert into users (username, name, birthday, phone_number, password, gender)
+		values (#{username}, #{name}, #{birthday}, #{phone_number}, #{password}, #{gender})
+	</insert>
+	
+<!-- 	<insert id="insert">
+		<selectKey keyProperty="username" order="BEFORE" resultType="long">
+			select seq_users.nextval from dual
+		</selectKey>
+		
+		insert into users (username, name, birthday, phone_number, password, gender)
+		values (#{username}, #{name}, #{birthday}, #{phone_number}, #{password}, #{gender})
+		
+	</insert> -->
+	
+	<!-- 권한 삽입 쿼리 -->
+	<insert id="insertAuthority">
+		insert into authorities (username, authority)
+        values (#{username}, #{authority})
+	</insert>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" resultType="int" parameterType="string">
+	    SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+	    FROM Users
+	    WHERE username = #{username}
+	</select>
+
+	
+	
+	<!-- 사용자 정보 조회(로그인시 사용) -->
+    <select id="read" resultType="com.emotionlog.domain.UsersVO" parameterType="string">
+        SELECT u.username, u.password, u.enabled, a.authority
+        FROM users u
+        LEFT JOIN authorities a ON u.username = a.username
+        WHERE u.username = #{username}
+    </select>
+    
+    <!-- 사용자 정보 조회(마이페이지 사용) -->	
+    <select id="readMypage" resultType="com.emotionlog.domain.UsersVO" parameterType="string">
+    	SELECT username, name, birthday, password, phone_number, gender
+    	FROM users
+    	WHERE username = #{username}
+    </select>	
+    
+    <!-- 사용자 정보 수정 -->
+    <update id="update" >
+    	UPDATE users
+    	SET name = #{name},
+        phone_number = #{phone_number},
+        gender = #{gender},
+        birthday = TO_DATE(#{birthday}, 'YYYY-MM-DD')
+    	WHERE username = #{username}
+    </update>
+    
+   	<!-- 권한 정보 삭제 -->
+	<delete id="deleteAuthority" parameterType="string">
+	    DELETE FROM authorities WHERE username = #{username}
+	</delete>
+
+	<!-- 사용자 정보 삭제 -->
+	<delete id="delete" parameterType="string">
+	    DELETE FROM users WHERE username = #{username}
+	</delete>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findUsername" resultType="string">
+		SELECT username
+		FROM users
+		WHERE name = #{name} AND phone_number = #{phone_number}
+	</select>
+
+	<!-- 아이디와 전화번호로 사용자 찾기 -->
+	<select id="findByUser" parameterType="map"
+		resultType="UsersVO">
+		SELECT * FROM users
+		WHERE username = #{username} AND phone_number = #{phone_number}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword" parameterType="map">
+		UPDATE users
+		SET password = #{newPassword}
+		WHERE username = #{username}
+	</update>
+    
+</mapper>
